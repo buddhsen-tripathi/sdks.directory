@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { SdkGrid } from "../components/SdkGrid";
 import { TechIcon } from "../components/TechIcon";
+import { DropdownSelect } from "../components/ui/dropdown-select";
 import { Section, SectionHead } from "../components/ui/section";
 import { categories, languages, searchSdks } from "../data";
 import type { CategoryId, LanguageId } from "../types/catalog";
@@ -39,6 +40,31 @@ export function BrowsePage() {
     return list;
   }, [query, language, category]);
 
+  const languageOptions = useMemo(
+    () => [
+      { value: "" as const, label: "All languages" },
+      ...languages.map((lang) => ({
+        value: lang.id,
+        label: lang.name,
+        icon: (
+          <TechIcon languageId={lang.id} size={14} color={lang.color} />
+        ),
+      })),
+    ],
+    [],
+  );
+
+  const categoryOptions = useMemo(
+    () => [
+      { value: "" as const, label: "All categories" },
+      ...categories.map((cat) => ({
+        value: cat.id,
+        label: cat.name,
+      })),
+    ],
+    [],
+  );
+
   return (
     <Section className="min-h-[60vh] pt-12">
       <SectionHead
@@ -56,37 +82,29 @@ export function BrowsePage() {
           aria-label="Filter SDKs"
           className={fieldClass}
         />
-        <select
+        <DropdownSelect
           value={language}
-          onChange={(e) => setLanguage(e.target.value as LanguageId | "")}
+          onChange={setLanguage}
+          options={languageOptions}
+          placeholder="All languages"
           aria-label="Filter by language"
-          className={fieldClass}
-        >
-          <option value="">All languages</option>
-          {languages.map((lang) => (
-            <option key={lang.id} value={lang.id}>
-              {lang.name}
-            </option>
-          ))}
-        </select>
-        <select
+        />
+        <DropdownSelect
           value={category}
-          onChange={(e) => setCategory(e.target.value as CategoryId | "")}
+          onChange={setCategory}
+          options={categoryOptions}
+          placeholder="All categories"
           aria-label="Filter by category"
-          className={fieldClass}
-        >
-          <option value="">All categories</option>
-          {categories.map((cat) => (
-            <option key={cat.id} value={cat.id}>
-              {cat.name}
-            </option>
-          ))}
-        </select>
+        />
       </div>
 
       {language ? (
         <div className="mb-4 inline-flex items-center gap-2 rounded-sm bg-surface-card px-3 py-1.5 text-sm text-body ring-1 ring-hairline">
-          <TechIcon languageId={language} size={14} color={languages.find((l) => l.id === language)?.color} />
+          <TechIcon
+            languageId={language}
+            size={14}
+            color={languages.find((l) => l.id === language)?.color}
+          />
           Filtering {languages.find((l) => l.id === language)?.name}
         </div>
       ) : null}

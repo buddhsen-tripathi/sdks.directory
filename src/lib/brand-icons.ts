@@ -75,10 +75,17 @@ const lobeBySlug: Record<string, LobeIcon> = {
   "ai-sdk": Vercel as LobeIcon,
   github: Github as LobeIcon,
   huggingface: HuggingFace as LobeIcon,
+  "huggingface-skills": HuggingFace as LobeIcon,
   langchain: LangChain as LobeIcon,
   llamaindex: LlamaIndex as LobeIcon,
   crewai: CrewAI as LobeIcon,
   notion: Notion as LobeIcon,
+  "agent-sdk-dev": Anthropic as LobeIcon,
+  "mcp-server-dev": Anthropic as LobeIcon,
+  "frontend-design": Anthropic as LobeIcon,
+  "code-review": Anthropic as LobeIcon,
+  "feature-dev": Anthropic as LobeIcon,
+  "skill-creator": Anthropic as LobeIcon,
 };
 
 /** Brands without a Lobe icon, via Simple Icons when available. */
@@ -118,6 +125,7 @@ const simpleBySlug: Record<string, IconType> = {
   vercel: SiVercel,
   cloudflare: SiCloudflare,
   "google-cloud": SiGooglecloud,
+  context7: SiUpstash,
 };
 
 export function resolveSdkBrandIcon(sdk: SdkEntry) {

@@ -37,7 +37,7 @@ Do **not** vendor browsable skill trees under `catalog/` — the API snapshot is
 
 When adding an SDK, add `skills: [{ name, url, install? }]` if a public skill exists, then re-run `sync:skills`.
 
-## MCPs (future `mcps.ts`)
+## MCPs (`mcps.ts`)
 
 Canonical ingest: **Official MCP Registry**
 
@@ -47,9 +47,9 @@ curl "https://registry.modelcontextprotocol.io/v0.1/servers?limit=100&version=la
 
 Docs: https://modelcontextprotocol.io/registry/about · OpenAPI in `modelcontextprotocol/registry`.
 
-Enrich later: Glama, Smithery, Docker MCP Catalog. We are an aggregator/subregistry — not a raw dump.
+Curate into `mcps.ts` — prefer vendor-official servers. Enrich later: Glama, Smithery, Docker MCP Catalog. We are an aggregator/subregistry — not a raw dump.
 
-## Plugins (future `plugins.ts`)
+## Plugins (`plugins.ts`)
 
 Installable agent packages (skills + MCP + rules), not the dead 2023 ChatGPT plugin store.
 
@@ -60,8 +60,10 @@ Installable agent packages (skills + MCP + rules), not the dead 2023 ChatGPT plu
 | skills.sh / SkillsMP | https://skills.sh · https://skillsmp.com |
 | Copilot plugins | `github/awesome-copilot` marketplace.json |
 
+Seed today is Claude official/partner plugins (`platforms: ["claude"]`). Add Cursor/Copilot entries with the matching platform tag.
+
 ## Contribute
 
-1. Edit `sdks.ts` (or future `plugins.ts` / `mcps.ts`) in a PR.
+1. Edit `sdks.ts`, `plugins.ts`, or `mcps.ts` in a PR.
 2. Keep descriptions short and agent-usable.
-3. Prefer package + docs + GitHub + skill links over marketing copy.
+3. Prefer package + docs + GitHub + install hints over marketing copy.

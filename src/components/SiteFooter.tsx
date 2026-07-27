@@ -4,8 +4,8 @@ import { GitHubStarsLink } from "@/components/GitHubStarsLink";
 
 const nav = [
   { to: "/browse", label: "SDKs" },
-  { to: "/plugins", label: "Plugins", soon: true },
-  { to: "/mcps", label: "MCPs", soon: true },
+  { to: "/plugins", label: "Plugins" },
+  { to: "/mcps", label: "MCPs" },
 ] as const;
 
 export function SiteFooter() {
@@ -27,7 +27,7 @@ export function SiteFooter() {
           <div className="max-w-md">
             <SiteLogo size={32} />
             <p className="mt-4 text-lg font-medium leading-snug tracking-tight text-ink md:text-xl">
-              Official SDKs, packages, and agent skills.
+              Official SDKs, plugins, and MCP servers.
             </p>
           </div>
 
@@ -48,20 +48,9 @@ export function SiteFooter() {
                 ) : null}
                 <Link
                   to={item.to}
-                  className="inline-flex items-center gap-2 text-sm font-medium text-body no-underline transition-colors hover:text-primary"
+                  className="text-sm font-medium text-body no-underline transition-colors hover:text-primary"
                 >
                   {item.label}
-                  {"soon" in item && item.soon ? (
-                    <span
-                      className={
-                        item.to === "/mcps"
-                          ? "rounded-sm border border-accent-cyan/35 bg-accent-cyan/10 px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wide text-accent-cyan"
-                          : "rounded-sm border border-primary/35 bg-primary/10 px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wide text-primary"
-                      }
-                    >
-                      soon
-                    </span>
-                  ) : null}
                 </Link>
               </span>
             ))}

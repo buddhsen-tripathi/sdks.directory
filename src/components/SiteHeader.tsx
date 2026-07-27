@@ -54,7 +54,7 @@ export function SiteHeader() {
             role="search"
           >
             <label htmlFor={inputId} className="sr-only">
-              Search SDKs
+              Search directory
             </label>
             <div className="relative">
               <MagnifyingGlass

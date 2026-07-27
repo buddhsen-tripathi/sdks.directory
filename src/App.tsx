@@ -1,10 +1,15 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { SiteLayout } from "./components/SiteLayout";
 import { BrowsePage } from "./pages/BrowsePage";
+import {
+  McpDetailPage,
+  PluginDetailPage,
+} from "./pages/CatalogDetailPage";
 import { HomePage } from "./pages/HomePage";
 import { LanguagePage } from "./pages/LanguagePage";
 import { LanguagesPage } from "./pages/LanguagesPage";
-import { McpsPage, PluginsPage } from "./pages/ComingSoonPage";
+import { McpsPage } from "./pages/McpsPage";
+import { PluginsPage } from "./pages/PluginsPage";
 import { SdkDetailPage } from "./pages/SdkDetailPage";
 import { SearchPage } from "./pages/SearchPage";
 
@@ -16,7 +21,9 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/browse" element={<BrowsePage />} />
           <Route path="/plugins" element={<PluginsPage />} />
+          <Route path="/plugin/:slug" element={<PluginDetailPage />} />
           <Route path="/mcps" element={<McpsPage />} />
+          <Route path="/mcp/:slug" element={<McpDetailPage />} />
           <Route path="/languages" element={<LanguagesPage />} />
           <Route path="/languages/:langId" element={<LanguagePage />} />
           <Route path="/sdk/:slug" element={<SdkDetailPage />} />

@@ -1,14 +1,25 @@
 import { categories } from "./categories";
 import { languages } from "./languages";
+import { mcps } from "./mcps";
+import { plugins } from "./plugins";
 import { sdks } from "./sdks";
+import { searchCatalog } from "../lib/catalog";
 import type { LanguageId, SdkEntry } from "../types/catalog";
 
-export { categories, languages, sdks };
+export { categories, languages, mcps, plugins, sdks };
 export { getCategory } from "./categories";
 export { getLanguage } from "./languages";
 
 export function getSdkBySlug(slug: string): SdkEntry | undefined {
   return sdks.find((sdk) => sdk.slug === slug);
+}
+
+export function getPluginBySlug(slug: string): SdkEntry | undefined {
+  return plugins.find((plugin) => plugin.slug === slug);
+}
+
+export function getMcpBySlug(slug: string): SdkEntry | undefined {
+  return mcps.find((mcp) => mcp.slug === slug);
 }
 
 export function getSdksByLanguage(languageId: LanguageId): SdkEntry[] {
@@ -19,6 +30,18 @@ export function getSdksByLanguage(languageId: LanguageId): SdkEntry[] {
 
 export function getFeaturedSdks(): SdkEntry[] {
   return sdks.filter((sdk) => sdk.featured).sort((a, b) => a.name.localeCompare(b.name));
+}
+
+export function getFeaturedPlugins(): SdkEntry[] {
+  return plugins
+    .filter((plugin) => plugin.featured)
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
+export function getFeaturedMcps(): SdkEntry[] {
+  return mcps
+    .filter((mcp) => mcp.featured)
+    .sort((a, b) => a.name.localeCompare(b.name));
 }
 
 export function getLanguageCounts(): Record<string, number> {
@@ -105,6 +128,14 @@ export function searchSdks(query: string, languageId?: LanguageId): SdkEntry[] {
     .filter((row) => row.score > 0)
     .sort((a, b) => b.score - a.score || a.sdk.name.localeCompare(b.sdk.name))
     .map((row) => row.sdk);
+}
+
+export function searchPlugins(query: string): SdkEntry[] {
+  return searchCatalog(plugins, query);
+}
+
+export function searchMcps(query: string): SdkEntry[] {
+  return searchCatalog(mcps, query);
 }
 
 function resolveLanguageToken(token: string): LanguageId | undefined {

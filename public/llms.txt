@@ -1,6 +1,6 @@
 # sdks.directory
 
-> Official SDKs, packages, and agent skills. Skill responses include full SKILL.md content.
+> Official SDKs, agent plugins, MCP servers, and skills. Skill responses include full SKILL.md content.
 
 ## For agents
 
@@ -54,10 +54,23 @@ GET /api/sdks?withSkills=1&q=auth
 GET /api/sdks?language=python&category=ai
 ```
 
+### Plugins and MCPs
+
+Same `SdkEntry` shape as SDKs (`kind: "plugin" | "mcp"`).
+
+```
+GET /api/plugins?q=stripe&platform=claude
+GET /api/plugins/cloudflare
+GET /api/mcps?category=database
+GET /api/mcps/github
+```
+
 ## Human site
 
-Browse SDKs at `/`, `/browse`, `/sdk/{slug}`. Plugins and MCPs are coming soon.
+- SDKs: `/`, `/browse`, `/sdk/{slug}`
+- Plugins: `/plugins`, `/plugin/{slug}`
+- MCPs: `/mcps`, `/mcp/{slug}`
 
 ## Notes
 
-Skill bodies are snapshotted from upstream (skills.sh / GitHub). Use `/api/skills/{sdk}/{name}` for the SKILL.md text; `url` is the upstream source.
+Skill bodies are snapshotted from upstream (skills.sh / GitHub). Use `/api/skills/{sdk}/{name}` for the SKILL.md text; `url` is the upstream source. Plugins and MCPs are curated seeds — not a raw registry dump.

@@ -1,12 +1,12 @@
 # sdks.directory
 
-Official SDKs, packages, and agent skills — indexed for humans and tools. Language is a filter, not the product.
+Official SDKs, agent plugins, and MCP servers — indexed for humans and tools. Language is a filter, not the product.
 
-Live today: **SDKs**. **Plugins** and **MCPs** share the same directory shape and ship next (`/plugins`, `/mcps`).
+Live: **SDKs**, **Plugins** (`/plugins`), and **MCPs** (`/mcps`) share one catalog entry shape.
 
 ## Why it exists
 
-One place to look up client libraries — auth, payments, models, databases, observability — with an edge API that returns the same data the UI uses, including skill bodies.
+One place to look up client libraries, installable agent plugins, and Model Context Protocol servers — with an edge API that returns the same data the UI uses, including skill bodies.
 
 ## Stack
 
@@ -38,7 +38,7 @@ bun run deploy    # Cloudflare Workers
 
 ```
 src/
-  data/              # SDKs, languages, categories (+ SOURCES.md)
+  data/              # SDKs, plugins, MCPs, languages, categories (+ SOURCES.md)
   components/        # chrome, cards, grids
   pages/             # routes
   types/catalog.ts   # shared catalog types
@@ -52,23 +52,26 @@ public/              # favicon and static assets
 | File | Role |
 |------|------|
 | [`src/data/sdks.ts`](src/data/sdks.ts) | SDK entries (optional `skills[]` for agent skill links) |
+| [`src/data/plugins.ts`](src/data/plugins.ts) | Agent plugins (Claude / Cursor / Copilot) |
+| [`src/data/mcps.ts`](src/data/mcps.ts) | Curated MCP servers |
 | [`src/data/languages.ts`](src/data/languages.ts) | Language index |
 | [`src/data/categories.ts`](src/data/categories.ts) | Category index |
 | [`src/data/index.ts`](src/data/index.ts) | Search / featured helpers |
 | [`src/data/SOURCES.md`](src/data/SOURCES.md) | Where to discover more SDKs / plugins / MCPs / skills |
 
-Add or edit an SDK in `sdks.ts`, then open a PR. Types are in `src/types/catalog.ts`.
+Add or edit an entry in the matching data file, then open a PR. Types are in `src/types/catalog.ts`.
 
 ## Routes
 
 | Path | Purpose |
 |------|---------|
-| `/` | Home — search, featured SDKs, language filters |
+| `/` | Home — search, featured SDKs / plugins / MCPs |
 | `/browse` | Full SDK catalog with filters |
 | `/search` | Search results |
 | `/sdk/:slug` | SDK detail |
+| `/plugins`, `/plugin/:slug` | Plugin catalog + detail |
+| `/mcps`, `/mcp/:slug` | MCP catalog + detail |
 | `/languages`, `/languages/:id` | Language filters |
-| `/plugins`, `/mcps` | Coming soon |
 
 ## API
 
@@ -81,6 +84,10 @@ Same seed data as the SPA (Worker first for `/api/*`). Skill **bodies** are snap
 | `GET /api/health` | Health check |
 | `GET /api/sdks` | List / filter (`?language=&category=&q=&withSkills=1&include=body`) |
 | `GET /api/sdks/:slug` | Single SDK; pass `?include=body` for skill contents |
+| `GET /api/plugins` | List / filter (`?category=&platform=&q=`) |
+| `GET /api/plugins/:slug` | Single plugin |
+| `GET /api/mcps` | List / filter (`?category=&q=`) |
+| `GET /api/mcps/:slug` | Single MCP server |
 | `GET /api/skills` | Flattened skills (`?sdk=&language=&q=&withContent=1&include=body`) |
 | `GET /api/skills/:sdk/:name` | **Preferred** — single skill with `content` (full SKILL.md) |
 | `GET /api/skills/:sdk/:name.md` | Raw markdown (`Accept: text/markdown` also works) |
@@ -96,10 +103,10 @@ bun run sync:skills
 
 ## Roadmap
 
-1. **SDKs** — curated seed, browse, search, detail (current)
-2. Contribution flow and coverage checks
-3. **Plugins** directory
-4. **MCPs** directory (official registry ingest)
+1. **SDKs** — curated seed, browse, search, detail
+2. **Plugins** + **MCPs** directories (current)
+3. Contribution flow and coverage checks
+4. Deeper Official MCP Registry ingest
 5. Optional D1-backed catalog (API stays stable)
 
 ## License

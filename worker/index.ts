@@ -1,5 +1,7 @@
 import { categories } from "../src/data/categories";
 import { languages } from "../src/data/languages";
+import { mcps } from "../src/data/mcps";
+import { plugins } from "../src/data/plugins";
 import { sdks } from "../src/data/sdks";
 import {
   enrichSkill,
@@ -7,6 +9,7 @@ import {
   skillBodiesMeta,
   skillKey,
 } from "./skills";
+import type { SdkEntry } from "../src/types/catalog";
 
 /**
  * Edge API for the catalog. Seed data mirrors the SPA; skill bodies are
@@ -30,71 +33,27 @@ export default {
     }
 
     if (url.pathname === "/api/sdks") {
-      const language = url.searchParams.get("language");
-      const category = url.searchParams.get("category");
-      const q = (url.searchParams.get("q") ?? "").trim().toLowerCase();
-      const withSkills = url.searchParams.get("withSkills");
-      const includeBody = wantsBody(url);
-
-      let results = sdks;
-
-      if (language) {
-        results = results.filter((sdk) =>
-          sdk.languages.includes(language as never),
-        );
-      }
-      if (category) {
-        results = results.filter((sdk) =>
-          sdk.categories.includes(category as never),
-        );
-      }
-      if (withSkills === "1" || withSkills === "true") {
-        results = results.filter((sdk) => (sdk.skills?.length ?? 0) > 0);
-      }
-      if (q) {
-        results = results.filter((sdk) => {
-          const blob = [
-            sdk.name,
-            sdk.vendor,
-            sdk.description,
-            sdk.slug,
-            ...(sdk.tags ?? []),
-            ...(sdk.skills?.map((s) => s.name) ?? []),
-            ...(sdk.packages?.map((p) => p.name) ?? []),
-          ]
-            .join(" ")
-            .toLowerCase();
-          return blob.includes(q);
-        });
-      }
-
-      return json({
-        count: results.length,
-        items: results.map((sdk) => ({
-          ...sdk,
-          skills: sdk.skills?.map((skill) =>
-            enrichSkill(skill, sdk.slug, { includeBody }),
-          ),
-        })),
-      });
+      return json(listCatalog(sdks, url));
     }
 
     if (url.pathname.startsWith("/api/sdks/")) {
-      const slug = url.pathname.replace("/api/sdks/", "").replace(/\/$/, "");
-      if (slug.includes("/")) {
-        return json({ error: "not_found" }, 404);
-      }
-      const sdk = sdks.find((item) => item.slug === slug);
-      if (!sdk) {
-        return json({ error: "not_found" }, 404);
-      }
-      const includeBody = wantsBody(url, true);
-      return json({
-        ...sdk,
-        skills: sdk.skills?.map((skill) =>
-          enrichSkill(skill, sdk.slug, { includeBody }),
-        ),
-      });
+      return detailCatalog(sdks, url, "sdk");
+    }
+
+    if (url.pathname === "/api/plugins") {
+      return json(listCatalog(plugins, url, { language: false }));
+    }
+
+    if (url.pathname.startsWith("/api/plugins/")) {
+      return detailCatalog(plugins, url, "plugin");
+    }
+
+    if (url.pathname === "/api/mcps") {
+      return json(listCatalog(mcps, url, { language: false }));
+    }
+
+    if (url.pathname.startsWith("/api/mcps/")) {
+      return detailCatalog(mcps, url, "mcp");
     }
 
     if (url.pathname === "/api/skills") {
@@ -152,11 +111,15 @@ export default {
     if (skillMatch) {
       const sdkSlug = decodeURIComponent(skillMatch[1]);
       const skillName = decodeURIComponent(skillMatch[2]);
-      const asMarkdown = Boolean(skillMatch[3]) || accept.includes("text/markdown");
+      const asMarkdown =
+        Boolean(skillMatch[3]) || accept.includes("text/markdown");
       const sdk = sdks.find((item) => item.slug === sdkSlug);
       const skill = sdk?.skills?.find((s) => s.name === skillName);
       if (!sdk || !skill) {
-        return json({ error: "not_found", key: skillKey(sdkSlug, skillName) }, 404);
+        return json(
+          { error: "not_found", key: skillKey(sdkSlug, skillName) },
+          404,
+        );
       }
 
       const body = getSkillBody(sdkSlug, skillName);
@@ -204,6 +167,8 @@ export default {
         missingSkills: sdks
           .filter((s) => !(s.skills?.length ?? 0))
           .map((s) => s.slug),
+        plugins: plugins.length,
+        mcps: mcps.length,
       });
     }
 
@@ -223,6 +188,93 @@ export default {
   },
 } satisfies ExportedHandler<Env>;
 
+function listCatalog(
+  items: SdkEntry[],
+  url: URL,
+  opts: { language?: boolean } = {},
+) {
+  const language = url.searchParams.get("language");
+  const category = url.searchParams.get("category");
+  const platform = url.searchParams.get("platform");
+  const q = (url.searchParams.get("q") ?? "").trim().toLowerCase();
+  const withSkills = url.searchParams.get("withSkills");
+  const includeBody = wantsBody(url);
+
+  let results = items;
+
+  if (opts.language !== false && language) {
+    results = results.filter((item) =>
+      item.languages.includes(language as never),
+    );
+  }
+  if (category) {
+    results = results.filter((item) =>
+      item.categories.includes(category as never),
+    );
+  }
+  if (platform) {
+    results = results.filter((item) =>
+      item.platforms?.includes(platform as never),
+    );
+  }
+  if (withSkills === "1" || withSkills === "true") {
+    results = results.filter((item) => (item.skills?.length ?? 0) > 0);
+  }
+  if (q) {
+    results = results.filter((item) => {
+      const blob = [
+        item.name,
+        item.vendor,
+        item.description,
+        item.slug,
+        item.registryName ?? "",
+        item.install ?? "",
+        ...(item.tags ?? []),
+        ...(item.platforms ?? []),
+        ...(item.skills?.map((s) => s.name) ?? []),
+        ...(item.packages?.map((p) => p.name) ?? []),
+      ]
+        .join(" ")
+        .toLowerCase();
+      return blob.includes(q);
+    });
+  }
+
+  return {
+    count: results.length,
+    items: results.map((item) => ({
+      ...item,
+      skills: item.skills?.map((skill) =>
+        enrichSkill(skill, item.slug, { includeBody }),
+      ),
+    })),
+  };
+}
+
+function detailCatalog(items: SdkEntry[], url: URL, kind: string): Response {
+  const prefix =
+    kind === "sdk"
+      ? "/api/sdks/"
+      : kind === "plugin"
+        ? "/api/plugins/"
+        : "/api/mcps/";
+  const slug = url.pathname.replace(prefix, "").replace(/\/$/, "");
+  if (slug.includes("/")) {
+    return json({ error: "not_found" }, 404);
+  }
+  const item = items.find((entry) => entry.slug === slug);
+  if (!item) {
+    return json({ error: "not_found" }, 404);
+  }
+  const includeBody = wantsBody(url, true);
+  return json({
+    ...item,
+    skills: item.skills?.map((skill) =>
+      enrichSkill(skill, item.slug, { includeBody }),
+    ),
+  });
+}
+
 function wantsBody(url: URL, defaultOnDetail = false): boolean {
   const v = url.searchParams.get("include");
   if (v === "body" || v === "content") return true;
@@ -234,13 +286,17 @@ function agentDiscovery(origin: string) {
   return {
     name: "sdks.directory",
     description:
-      "sdks.directory — official SDKs, packages, and agent skills. Skill endpoints return SKILL.md content inline.",
+      "sdks.directory — official SDKs, agent plugins, MCP servers, and skills. Skill endpoints return SKILL.md content inline.",
     documentation: `${origin}/llms.txt`,
     endpoints: {
       discovery: `${origin}/api`,
       health: `${origin}/api/health`,
       sdks: `${origin}/api/sdks?q=&language=&category=&withSkills=1&include=body`,
       sdk: `${origin}/api/sdks/{slug}?include=body`,
+      plugins: `${origin}/api/plugins?q=&category=&platform=`,
+      plugin: `${origin}/api/plugins/{slug}`,
+      mcps: `${origin}/api/mcps?q=&category=`,
+      mcp: `${origin}/api/mcps/{slug}`,
       skills: `${origin}/api/skills?sdk=&q=&withContent=1&include=body`,
       skill: `${origin}/api/skills/{sdk}/{name}`,
       skillMarkdown: `${origin}/api/skills/{sdk}/{name}.md`,
@@ -253,6 +309,7 @@ function agentDiscovery(origin: string) {
       "Use Accept: text/markdown or .md suffix for raw skill text.",
       "List endpoints omit bodies by default; pass include=body when you need them.",
       "Attribution: skill.url is the upstream source; content is a snapshot for agent use.",
+      "Plugins and MCPs share the SdkEntry shape (kind: plugin | mcp).",
     ],
     skillBodies: skillBodiesMeta(),
   };

@@ -1,5 +1,8 @@
-/** Catalog verticals. SDKs first; plugins & MCPs share this shape later. */
+/** Catalog verticals — SDKs, agent plugins, and MCP servers share one entry shape. */
 export type CatalogKind = "sdk" | "plugin" | "mcp";
+
+/** Agent plugin marketplaces / hosts. */
+export type PluginPlatform = "claude" | "cursor" | "copilot";
 
 export type LanguageId =
   | "python"
@@ -82,8 +85,17 @@ export interface SdkEntry {
   docsUrl?: string;
   githubUrl?: string;
   packages?: PackageRef[];
-  /** Agent skills that teach correct use of this SDK */
+  /** Agent skills that teach correct use of this SDK / plugin */
   skills?: SkillRef[];
+  /**
+   * Install hint for plugins/MCPs, e.g.
+   * `/plugin install stripe@claude-plugins-official` or `npx @playwright/mcp`.
+   */
+  install?: string;
+  /** Plugin hosts when kind is "plugin". */
+  platforms?: PluginPlatform[];
+  /** Official MCP Registry server name when known (e.g. `com.stripe/mcp`). */
+  registryName?: string;
   tags?: string[];
   featured?: boolean;
   official?: boolean;
