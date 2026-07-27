@@ -18,6 +18,16 @@ Agents need reliable client libraries — auth, payments, models, databases, obs
 | Catalog | Version-controlled TypeScript in `src/data/` |
 | Package manager | Bun |
 
+## Catalog research data
+
+Expandable discovery notes, collected agent skills, and contribution templates live in [`catalog/`](catalog/):
+
+- [`catalog/sources/`](catalog/sources/) — where to list SDKs, plugins, MCPs, and skills at scale  
+- [`catalog/skills/`](catalog/skills/) — `SKILL.md` files linked to catalog SDKs  
+- [`catalog/CONTRIBUTING.md`](catalog/CONTRIBUTING.md) — how to add entries, skills, or sources  
+
+The app runtime seed remains in [`src/data/`](src/data/).
+
 ## Develop
 
 ```bash
