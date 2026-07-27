@@ -162,6 +162,36 @@ export function SdkDetailPage() {
           </div>
         ) : null}
 
+        {sdk.skills && sdk.skills.length > 0 ? (
+          <div className="rounded-sm bg-surface-card p-5 ring-1 ring-hairline md:col-span-2">
+            <h2 className="mb-4 text-base font-semibold text-ink">
+              Agent skills
+            </h2>
+            <ul className="space-y-3">
+              {sdk.skills.map((skill) => (
+                <li
+                  key={skill.url}
+                  className="flex flex-wrap items-baseline gap-x-3 gap-y-1"
+                >
+                  <a
+                    href={skill.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-medium text-ink hover:text-primary"
+                  >
+                    {skill.name}
+                  </a>
+                  {skill.install ? (
+                    <code className="font-mono text-[12px] text-muted">
+                      {skill.install}
+                    </code>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
+
         {sdk.tags && sdk.tags.length > 0 ? (
           <div className="rounded-sm bg-surface-card p-5 ring-1 ring-hairline md:col-span-2">
             <h2 className="mb-3 text-base font-semibold text-ink">Tags</h2>

@@ -43,6 +43,13 @@ export const sdks: SdkEntry[] = [
       },
     ],
     tags: ["payments", "billing", "checkout"],
+    skills: [
+      {
+        name: "stripe-best-practices",
+        url: "https://github.com/stripe/ai/tree/main/skills/stripe-best-practices",
+        install: "npx skills add https://docs.stripe.com --skill stripe-best-practices",
+      },
+    ],
     featured: true,
     official: true,
   },
@@ -226,6 +233,21 @@ export const sdks: SdkEntry[] = [
       },
     ],
     tags: ["workers", "edge", "r2"],
+    skills: [
+      {
+        name: "cloudflare",
+        url: "https://github.com/cloudflare/skills",
+        install: "npx skills add https://github.com/cloudflare/skills",
+      },
+      {
+        name: "wrangler",
+        url: "https://github.com/cloudflare/skills/tree/main/skills/wrangler",
+      },
+      {
+        name: "agents-sdk",
+        url: "https://github.com/cloudflare/skills/tree/main/skills/agents-sdk",
+      },
+    ],
     featured: true,
     official: true,
   },
@@ -301,6 +323,13 @@ export const sdks: SdkEntry[] = [
       },
     ],
     tags: ["postgres", "baas"],
+    skills: [
+      {
+        name: "supabase",
+        url: "https://github.com/supabase/agent-skills",
+        install: "npx skills add supabase/agent-skills",
+      },
+    ],
     featured: true,
     official: true,
   },
@@ -375,6 +404,13 @@ export const sdks: SdkEntry[] = [
       },
     ],
     tags: ["llm", "streaming", "agents"],
+    skills: [
+      {
+        name: "ai-sdk",
+        url: "https://skills.sh/vercel/ai/ai-sdk",
+        install: "npx skills add vercel/ai",
+      },
+    ],
     featured: true,
     official: true,
   },
@@ -494,6 +530,13 @@ export const sdks: SdkEntry[] = [
       },
     ],
     tags: ["auth", "sessions", "oauth"],
+    skills: [
+      {
+        name: "better-auth-best-practices",
+        url: "https://github.com/better-auth/skills",
+        install: "npx skills add better-auth/skills",
+      },
+    ],
     official: true,
   },
   {
@@ -624,6 +667,13 @@ export const sdks: SdkEntry[] = [
       },
     ],
     tags: ["postgres", "serverless"],
+    skills: [
+      {
+        name: "neon-postgres",
+        url: "https://github.com/neondatabase/agent-skills",
+        install: "npx skills add neondatabase/agent-skills",
+      },
+    ],
     featured: true,
     official: true,
   },
@@ -647,6 +697,13 @@ export const sdks: SdkEntry[] = [
       },
     ],
     tags: ["orm", "postgres", "mysql"],
+    skills: [
+      {
+        name: "prisma-client-api",
+        url: "https://github.com/prisma/skills/tree/main/prisma-client-api",
+        install: "npx skills add prisma/skills",
+      },
+    ],
     featured: true,
     official: true,
   },
@@ -1045,6 +1102,12 @@ export const sdks: SdkEntry[] = [
       },
     ],
     tags: ["gemini", "llm"],
+    skills: [
+      {
+        name: "gemini-api-dev",
+        url: "https://ai.google.dev/gemini-api/docs",
+      },
+    ],
     featured: true,
     official: true,
   },

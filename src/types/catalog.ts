@@ -44,6 +44,14 @@ export interface PackageRef {
   url: string;
 }
 
+/** Agent skill linked to an SDK (upstream SKILL.md / skills.sh). */
+export interface SkillRef {
+  name: string;
+  url: string;
+  /** Optional install hint, e.g. `npx skills add cloudflare/skills` */
+  install?: string;
+}
+
 export interface SdkEntry {
   id: string;
   kind: CatalogKind;
@@ -57,6 +65,8 @@ export interface SdkEntry {
   docsUrl?: string;
   githubUrl?: string;
   packages?: PackageRef[];
+  /** Agent skills that teach correct use of this SDK */
+  skills?: SkillRef[];
   tags?: string[];
   featured?: boolean;
   official?: boolean;

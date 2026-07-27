@@ -57,6 +57,7 @@ export function searchSdks(query: string, languageId?: LanguageId): SdkEntry[] {
         ...sdk.categories,
         ...sdk.languages,
         ...(sdk.packages?.map((pkg) => pkg.name) ?? []),
+        ...(sdk.skills?.map((skill) => skill.name) ?? []),
       ]
         .join(" ")
         .toLowerCase();

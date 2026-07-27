@@ -18,16 +18,6 @@ Agents need reliable client libraries — auth, payments, models, databases, obs
 | Catalog | Version-controlled TypeScript in `src/data/` |
 | Package manager | Bun |
 
-## Catalog research data
-
-Expandable discovery notes, collected agent skills, and contribution templates live in [`catalog/`](catalog/):
-
-- [`catalog/sources/`](catalog/sources/) — where to list SDKs, plugins, MCPs, and skills at scale  
-- [`catalog/skills/`](catalog/skills/) — `SKILL.md` files linked to catalog SDKs  
-- [`catalog/CONTRIBUTING.md`](catalog/CONTRIBUTING.md) — how to add entries, skills, or sources  
-
-The app runtime seed remains in [`src/data/`](src/data/).
-
 ## Develop
 
 ```bash
@@ -48,7 +38,7 @@ bun run deploy    # Cloudflare Workers
 
 ```
 src/
-  data/              # SDKs, languages, categories
+  data/              # SDKs, languages, categories (+ SOURCES.md)
   components/        # chrome, cards, grids
   pages/             # routes
   types/catalog.ts   # shared catalog types
@@ -61,10 +51,11 @@ public/              # favicon and static assets
 
 | File | Role |
 |------|------|
-| [`src/data/sdks.ts`](src/data/sdks.ts) | SDK entries |
+| [`src/data/sdks.ts`](src/data/sdks.ts) | SDK entries (optional `skills[]` for agent skill links) |
 | [`src/data/languages.ts`](src/data/languages.ts) | Language index |
 | [`src/data/categories.ts`](src/data/categories.ts) | Category index |
 | [`src/data/index.ts`](src/data/index.ts) | Search / featured helpers |
+| [`src/data/SOURCES.md`](src/data/SOURCES.md) | Where to discover more SDKs / plugins / MCPs / skills |
 
 Add or edit an SDK in `sdks.ts`, then open a PR. Types are in `src/types/catalog.ts`.
 
@@ -96,7 +87,7 @@ Same seed data as the SPA (Worker first for `/api/*`).
 1. **SDKs** — curated seed, browse, search, detail (current)
 2. Contribution flow and coverage checks
 3. **Plugins** directory
-4. **MCPs** directory
+4. **MCPs** directory (official registry ingest)
 5. Optional D1-backed catalog (API stays stable)
 
 ## License
