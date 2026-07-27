@@ -114,6 +114,13 @@ export const sdks: SdkEntry[] = [
       },
     ],
     tags: ["claude", "llm", "agents"],
+    skills: [
+      {
+        name: "claude-api",
+        url: "https://skills.sh/anthropics/skills/claude-api",
+        install: "npx skills add anthropics/skills --skill claude-api",
+      },
+    ],
     featured: true,
     official: true,
   },
@@ -191,6 +198,14 @@ export const sdks: SdkEntry[] = [
     docsUrl: "https://cloud.google.com/docs",
     githubUrl: "https://github.com/googleapis",
     tags: ["gcp", "google"],
+    skills: [
+      {
+        name: "google-cloud-recipe-onboarding",
+        url: "https://skills.sh/google/skills/google-cloud-recipe-onboarding",
+        install:
+          "npx skills add google/skills --skill google-cloud-recipe-onboarding",
+      },
+    ],
     featured: true,
     official: true,
   },
