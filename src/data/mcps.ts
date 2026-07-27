@@ -307,32 +307,6 @@ export const mcps: SdkEntry[] = [
     official: true,
   },
   {
-    id: "mcp-postgres",
-    kind: "mcp",
-    name: "Postgres",
-    slug: "postgres",
-    description:
-      "Reference Postgres MCP: run SQL queries against a connected database.",
-    vendor: "Model Context Protocol",
-    languages: [],
-    categories: ["database"],
-    homepage: "https://github.com/modelcontextprotocol/servers",
-    docsUrl:
-      "https://github.com/modelcontextprotocol/servers/tree/main/src/postgres",
-    githubUrl:
-      "https://github.com/modelcontextprotocol/servers/tree/main/src/postgres",
-    packages: [
-      {
-        registry: "npm",
-        name: "@modelcontextprotocol/server-postgres",
-        url: "https://www.npmjs.com/package/@modelcontextprotocol/server-postgres",
-      },
-    ],
-    install: "npx @modelcontextprotocol/server-postgres postgresql://…",
-    tags: ["stdio", "reference", "sql"],
-    official: true,
-  },
-  {
     id: "mcp-figma",
     kind: "mcp",
     name: "Figma",
@@ -567,8 +541,8 @@ export const mcps: SdkEntry[] = [
     vendor: "Firecrawl",
     languages: [],
     categories: ["devtools"],
-    homepage: "https://docs.firecrawl.dev/mcp",
-    docsUrl: "https://docs.firecrawl.dev/mcp",
+    homepage: "https://docs.firecrawl.dev/mcp-server",
+    docsUrl: "https://docs.firecrawl.dev/mcp-server",
     githubUrl: "https://github.com/firecrawl/firecrawl-mcp-server",
     registryName: "io.github.firecrawl/firecrawl-mcp-server",
     packages: [

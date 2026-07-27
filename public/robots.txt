@@ -1,0 +1,16 @@
+# sdks.directory — agents: start at https://sdks.directory/llms.txt and https://sdks.directory/api
+User-agent: *
+Allow: /
+Allow: /api/
+Allow: /llms.txt
+Allow: /openapi.json
+Allow: /sitemap.xml
+Allow: /.well-known/
+
+Sitemap: https://sdks.directory/sitemap.xml
+
+# Prefer the JSON API over scraping the SPA HTML.
+# Discovery: https://sdks.directory/api
+# Search: https://sdks.directory/api/search?q=
+# Skills with bodies: https://sdks.directory/api/skills/{sdk}/{name}
+# Catalog MCP: https://sdks.directory/api/mcp

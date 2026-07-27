@@ -96,6 +96,12 @@ export interface SdkEntry {
   platforms?: PluginPlatform[];
   /** Official MCP Registry server name when known (e.g. `com.stripe/mcp`). */
   registryName?: string;
+  /** MCP transport when kind is "mcp" (or derived at the API layer). */
+  transport?: "stdio" | "http" | "sse";
+  /** How agents typically authenticate to this MCP. */
+  auth?: "none" | "api_key" | "oauth";
+  /** Canonical remote MCP URL when transport is http/sse. */
+  remoteUrl?: string;
   tags?: string[];
   featured?: boolean;
   official?: boolean;

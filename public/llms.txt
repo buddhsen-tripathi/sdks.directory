@@ -7,16 +7,20 @@
 Start here:
 
 - Discovery JSON: `/api`
+- OpenAPI: `/openapi.json`
+- Unified search: `/api/search?q=`
+- Catalog MCP: `/api/mcp`
+- MCP card: `/.well-known/mcp.json`
 - Health: `/api/health`
 - Coverage: `/api/coverage`
 
-### Fetch an SDK with skill content
+### Search everything
 
 ```
-GET /api/sdks/stripe?include=body
+GET /api/search?q=stripe&limit=20
 ```
 
-Each item in `skills[]` includes `content` (full SKILL.md text) when a snapshot exists, plus `url` / `install` for attribution.
+Returns ranked SDKs, plugins, MCPs, and skills in one payload.
 
 ### Fetch a single skill (preferred)
 
@@ -47,23 +51,27 @@ GET /api/skills?sdk=neon&include=body
 
 List endpoints omit bodies by default (smaller payloads). Pass `include=body` when you need them.
 
-### List SDKs
+### SDKs / plugins / MCPs
 
 ```
 GET /api/sdks?withSkills=1&q=auth
-GET /api/sdks?language=python&category=ai
-```
-
-### Plugins and MCPs
-
-Same `SdkEntry` shape as SDKs (`kind: "plugin" | "mcp"`).
-
-```
+GET /api/sdks/stripe?view=agent
 GET /api/plugins?q=stripe&platform=claude
-GET /api/plugins/cloudflare
 GET /api/mcps?category=database
 GET /api/mcps/github
 ```
+
+`view=agent` on SDK detail includes skill bodies (one-shot happy path). MCP entries include derived `transport`, `auth`, and `remoteUrl` when known.
+
+### Catalog MCP tools
+
+POST JSON-RPC to `/api/mcp`:
+
+- `search_catalog`
+- `get_sdk`
+- `get_skill`
+- `get_plugin`
+- `get_mcp`
 
 ## Human site
 

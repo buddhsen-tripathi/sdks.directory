@@ -3,6 +3,15 @@ import { languages } from "../src/data/languages";
 import { mcps } from "../src/data/mcps";
 import { plugins } from "../src/data/plugins";
 import { sdks } from "../src/data/sdks";
+import { searchCatalog, withAgentFields } from "./catalog";
+import {
+  llmsTxt,
+  robotsTxt,
+  sitemapXml,
+  wellKnownMcp,
+} from "./discovery";
+import { handleMcpRequest } from "./mcp";
+import { openApiDocument } from "./openapi";
 import {
   enrichSkill,
   getSkillBody,
@@ -19,17 +28,51 @@ export default {
   async fetch(request): Promise<Response> {
     const url = new URL(request.url);
     const accept = request.headers.get("Accept") ?? "";
+    const origin = url.origin;
 
     if (request.method === "OPTIONS") {
-      return new Response(null, { headers: corsHeaders() });
+      return new Response(null, { headers: corsHeaders(true) });
+    }
+
+    // Agent discovery surfaces (must not fall through to SPA HTML)
+    if (url.pathname === "/robots.txt") {
+      return text(robotsTxt(origin), "text/plain; charset=utf-8");
+    }
+    if (url.pathname === "/llms.txt" || url.pathname === "/.well-known/llms.txt") {
+      return text(llmsTxt(origin), "text/plain; charset=utf-8");
+    }
+    if (url.pathname === "/sitemap.xml") {
+      return text(sitemapXml(origin), "application/xml; charset=utf-8");
+    }
+    if (
+      url.pathname === "/.well-known/mcp.json" ||
+      url.pathname === "/.well-known/mcp/server-card.json"
+    ) {
+      return json(wellKnownMcp(origin));
+    }
+    if (url.pathname === "/openapi.json") {
+      return json(openApiDocument(origin));
+    }
+
+    if (url.pathname === "/api/mcp" || url.pathname === "/api/mcp/") {
+      return handleMcpRequest(request, origin);
     }
 
     if (url.pathname === "/api" || url.pathname === "/api/") {
-      return json(agentDiscovery(url.origin));
+      return json(agentDiscovery(origin));
     }
 
     if (url.pathname === "/api/health") {
       return json({ ok: true, service: "sdks.directory" });
+    }
+
+    if (url.pathname === "/api/search") {
+      const q = url.searchParams.get("q") ?? "";
+      const limit = Number(url.searchParams.get("limit") ?? 25);
+      if (!q.trim()) {
+        return json({ error: "missing_query", hint: "Pass ?q=" }, 400);
+      }
+      return json(searchCatalog(origin, q, Number.isFinite(limit) ? limit : 25));
     }
 
     if (url.pathname === "/api/sdks") {
@@ -41,7 +84,7 @@ export default {
     }
 
     if (url.pathname === "/api/plugins") {
-      return json(listCatalog(plugins, url, { language: false }));
+      return json(listCatalog(plugins, url, { language: false, enrichAgent: true }));
     }
 
     if (url.pathname.startsWith("/api/plugins/")) {
@@ -49,7 +92,7 @@ export default {
     }
 
     if (url.pathname === "/api/mcps") {
-      return json(listCatalog(mcps, url, { language: false }));
+      return json(listCatalog(mcps, url, { language: false, enrichAgent: true }));
     }
 
     if (url.pathname.startsWith("/api/mcps/")) {
@@ -103,8 +146,6 @@ export default {
       });
     }
 
-    // GET /api/skills/:sdk/:name  — full skill payload (content by default)
-    // GET /api/skills/:sdk/:name.md — raw SKILL.md
     const skillMatch = url.pathname.match(
       /^\/api\/skills\/([^/]+)\/([^/]+?)(\.md)?\/?$/,
     );
@@ -141,6 +182,7 @@ export default {
             ...corsHeaders(),
             "Content-Type": "text/markdown; charset=utf-8",
             "Cache-Control": "public, max-age=300",
+            ETag: `"skill-${sdkSlug}-${skillName}-${body.fetchedAt}"`,
           },
         });
       }
@@ -157,6 +199,7 @@ export default {
       ).length;
       const bodies = skillBodiesMeta();
       return json({
+        generatedAt: bodies.generatedAt,
         total,
         withSkills,
         withPackages,
@@ -191,7 +234,7 @@ export default {
 function listCatalog(
   items: SdkEntry[],
   url: URL,
-  opts: { language?: boolean } = {},
+  opts: { language?: boolean; enrichAgent?: boolean } = {},
 ) {
   const language = url.searchParams.get("language");
   const category = url.searchParams.get("category");
@@ -242,12 +285,17 @@ function listCatalog(
 
   return {
     count: results.length,
-    items: results.map((item) => ({
-      ...item,
-      skills: item.skills?.map((skill) =>
-        enrichSkill(skill, item.slug, { includeBody }),
-      ),
-    })),
+    generatedAt: skillBodiesMeta().generatedAt,
+    items: results.map((item) => {
+      const base =
+        opts.enrichAgent || item.kind === "mcp" ? withAgentFields(item) : item;
+      return {
+        ...base,
+        skills: base.skills?.map((skill) =>
+          enrichSkill(skill, item.slug, { includeBody }),
+        ),
+      };
+    }),
   };
 }
 
@@ -266,10 +314,13 @@ function detailCatalog(items: SdkEntry[], url: URL, kind: string): Response {
   if (!item) {
     return json({ error: "not_found" }, 404);
   }
-  const includeBody = wantsBody(url, true);
+  const agent = wantsAgentView(url) || kind !== "sdk";
+  const includeBody = wantsBody(url, true) || (kind === "sdk" && wantsAgentView(url));
+  const base = agent ? withAgentFields(item) : item;
   return json({
-    ...item,
-    skills: item.skills?.map((skill) =>
+    ...base,
+    generatedAt: skillBodiesMeta().generatedAt,
+    skills: base.skills?.map((skill) =>
       enrichSkill(skill, item.slug, { includeBody }),
     ),
   });
@@ -282,51 +333,91 @@ function wantsBody(url: URL, defaultOnDetail = false): boolean {
   return defaultOnDetail;
 }
 
+function wantsAgentView(url: URL): boolean {
+  const view = url.searchParams.get("view");
+  return view === "agent" || view === "1";
+}
+
 function agentDiscovery(origin: string) {
   return {
     name: "sdks.directory",
     description:
       "sdks.directory — official SDKs, agent plugins, MCP servers, and skills. Skill endpoints return SKILL.md content inline.",
     documentation: `${origin}/llms.txt`,
+    openapi: `${origin}/openapi.json`,
+    mcp: `${origin}/api/mcp`,
     endpoints: {
       discovery: `${origin}/api`,
       health: `${origin}/api/health`,
+      search: `${origin}/api/search?q=&limit=25`,
       sdks: `${origin}/api/sdks?q=&language=&category=&withSkills=1&include=body`,
-      sdk: `${origin}/api/sdks/{slug}?include=body`,
+      sdk: `${origin}/api/sdks/{slug}?view=agent`,
       plugins: `${origin}/api/plugins?q=&category=&platform=`,
       plugin: `${origin}/api/plugins/{slug}`,
       mcps: `${origin}/api/mcps?q=&category=`,
-      mcp: `${origin}/api/mcps/{slug}`,
+      mcpEntry: `${origin}/api/mcps/{slug}`,
       skills: `${origin}/api/skills?sdk=&q=&withContent=1&include=body`,
       skill: `${origin}/api/skills/{sdk}/{name}`,
       skillMarkdown: `${origin}/api/skills/{sdk}/{name}.md`,
       coverage: `${origin}/api/coverage`,
       languages: `${origin}/api/languages`,
       categories: `${origin}/api/categories`,
+      catalogMcp: `${origin}/api/mcp`,
+      openapi: `${origin}/openapi.json`,
     },
     agentHints: [
+      "Start with GET /api/search?q= to find SDKs, plugins, MCPs, and skills in one call.",
       "Prefer GET /api/skills/{sdk}/{name} — response includes `content` (full SKILL.md).",
+      "Use GET /api/sdks/{slug}?view=agent for one-shot SDK + skill bodies.",
+      "Connect the catalog MCP at POST /api/mcp (tools: search_catalog, get_sdk, get_skill, get_plugin, get_mcp).",
       "Use Accept: text/markdown or .md suffix for raw skill text.",
-      "List endpoints omit bodies by default; pass include=body when you need them.",
       "Attribution: skill.url is the upstream source; content is a snapshot for agent use.",
-      "Plugins and MCPs share the SdkEntry shape (kind: plugin | mcp).",
     ],
     skillBodies: skillBodiesMeta(),
   };
 }
 
 function json(data: unknown, status = 200): Response {
-  return Response.json(data, {
+  const body = JSON.stringify(data);
+  const etag = `"${fnv1a(body)}"`;
+  return new Response(body, {
     status,
-    headers: corsHeaders(),
+    headers: {
+      ...corsHeaders(),
+      "Content-Type": "application/json; charset=utf-8",
+      ETag: etag,
+    },
   });
 }
 
-function corsHeaders(): HeadersInit {
+function text(body: string, contentType: string): Response {
+  return new Response(body, {
+    headers: {
+      ...corsHeaders(),
+      "Content-Type": contentType,
+      "Cache-Control": "public, max-age=300",
+    },
+  });
+}
+
+function corsHeaders(mcp = false): HeadersInit {
   return {
     "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type, Accept",
+    "Access-Control-Allow-Methods": mcp
+      ? "GET, POST, OPTIONS"
+      : "GET, OPTIONS",
+    "Access-Control-Allow-Headers": mcp
+      ? "Content-Type, Accept, MCP-Protocol-Version"
+      : "Content-Type, Accept",
     "Cache-Control": "public, max-age=60",
   };
+}
+
+function fnv1a(input: string): string {
+  let hash = 0x811c9dc5;
+  for (let i = 0; i < input.length; i++) {
+    hash ^= input.charCodeAt(i);
+    hash = Math.imul(hash, 0x01000193);
+  }
+  return (hash >>> 0).toString(16);
 }

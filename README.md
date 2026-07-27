@@ -43,7 +43,12 @@ src/
   pages/             # routes
   types/catalog.ts   # shared catalog types
 worker/
-  index.ts           # /api/* handlers
+  index.ts           # /api/* + agent discovery handlers
+  catalog.ts         # search + MCP field enrichment
+  mcp.ts             # catalog MCP (JSON-RPC)
+  openapi.ts
+  discovery.ts       # robots, llms, sitemap, well-known
+  skills.ts          # skill body enrichment
 public/              # favicon and static assets
 ```
 
@@ -75,18 +80,24 @@ Add or edit an entry in the matching data file, then open a PR. Types are in `sr
 
 ## API
 
-Same seed data as the SPA (Worker first for `/api/*`). Skill **bodies** are snapshotted so agents get full `SKILL.md` text from the API.
+Same seed data as the SPA (Worker first for `/api/*` and agent discovery files). Skill **bodies** are snapshotted so agents get full `SKILL.md` text from the API.
 
 | Endpoint | Description |
 |----------|-------------|
 | `GET /api` | Agent discovery (endpoints + hints) |
-| `GET /llms.txt` | Short agent instructions |
+| `GET /api/search?q=` | Unified search across SDKs, plugins, MCPs, skills |
+| `GET /llms.txt` | Short agent instructions (also `/.well-known/llms.txt`) |
+| `GET /openapi.json` | OpenAPI 3.1 description of the API |
+| `GET /.well-known/mcp.json` | Catalog MCP server card |
+| `POST /api/mcp` | Catalog MCP (JSON-RPC tools) |
+| `GET /robots.txt` | Allows `/api/` and points at the sitemap |
+| `GET /sitemap.xml` | HTML + API resource sitemap |
 | `GET /api/health` | Health check |
 | `GET /api/sdks` | List / filter (`?language=&category=&q=&withSkills=1&include=body`) |
-| `GET /api/sdks/:slug` | Single SDK; pass `?include=body` for skill contents |
+| `GET /api/sdks/:slug` | Single SDK; `?view=agent` includes skill bodies |
 | `GET /api/plugins` | List / filter (`?category=&platform=&q=`) |
 | `GET /api/plugins/:slug` | Single plugin |
-| `GET /api/mcps` | List / filter (`?category=&q=`) |
+| `GET /api/mcps` | List / filter (`?category=&q=`) — includes `transport` / `auth` / `remoteUrl` when known |
 | `GET /api/mcps/:slug` | Single MCP server |
 | `GET /api/skills` | Flattened skills (`?sdk=&language=&q=&withContent=1&include=body`) |
 | `GET /api/skills/:sdk/:name` | **Preferred** — single skill with `content` (full SKILL.md) |
@@ -101,13 +112,16 @@ Refresh skill snapshots after linking new skills:
 bun run sync:skills
 ```
 
+Sitemap and robots are regenerated on every build (`bun run generate:sitemap`) into `public/` so crawlers get real XML even when the Worker is not first.
+
 ## Roadmap
 
 1. **SDKs** — curated seed, browse, search, detail
-2. **Plugins** + **MCPs** directories (current)
-3. Contribution flow and coverage checks
-4. Deeper Official MCP Registry ingest
-5. Optional D1-backed catalog (API stays stable)
+2. **Plugins** + **MCPs** directories
+3. Agent discovery (search, OpenAPI, catalog MCP) — current
+4. Contribution flow and coverage checks
+5. Deeper Official MCP Registry ingest
+6. Optional D1-backed catalog (API stays stable)
 
 ## License
 
