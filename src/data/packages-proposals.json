@@ -1,0 +1,810 @@
+{
+  "generatedAt": "2026-07-27T08:44:50Z",
+  "proposals": [
+    {
+      "slug": "datadog",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "dd-trace",
+          "url": "https://www.npmjs.com/package/dd-trace"
+        },
+        {
+          "registry": "npm",
+          "name": "@datadog/datadog-api-client",
+          "url": "https://www.npmjs.com/package/@datadog/datadog-api-client"
+        },
+        {
+          "registry": "pypi",
+          "name": "ddtrace",
+          "url": "https://pypi.org/project/ddtrace/"
+        },
+        {
+          "registry": "pypi",
+          "name": "datadog",
+          "url": "https://pypi.org/project/datadog/"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official Datadog packages: dd-trace/ddtrace for APM; @datadog/datadog-api-client and datadog for API/metrics clients."
+    },
+    {
+      "slug": "sentry",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "@sentry/node",
+          "url": "https://www.npmjs.com/package/@sentry/node"
+        },
+        {
+          "registry": "npm",
+          "name": "@sentry/browser",
+          "url": "https://www.npmjs.com/package/@sentry/browser"
+        },
+        {
+          "registry": "pypi",
+          "name": "sentry-sdk",
+          "url": "https://pypi.org/project/sentry-sdk/"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official Sentry SDKs from getsentry. Framework-specific packages (@sentry/react, etc.) omitted to keep the seed set small."
+    },
+    {
+      "slug": "auth0",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "auth0",
+          "url": "https://www.npmjs.com/package/auth0"
+        },
+        {
+          "registry": "npm",
+          "name": "@auth0/auth0-spa-js",
+          "url": "https://www.npmjs.com/package/@auth0/auth0-spa-js"
+        },
+        {
+          "registry": "pypi",
+          "name": "auth0-python",
+          "url": "https://pypi.org/project/auth0-python/"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official Auth0 Node Management SDK (auth0), SPA SDK, and auth0-python. Avoid unscoped pypi:auth0 (unrelated stale package)."
+    },
+    {
+      "slug": "sendgrid",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "@sendgrid/mail",
+          "url": "https://www.npmjs.com/package/@sendgrid/mail"
+        },
+        {
+          "registry": "pypi",
+          "name": "sendgrid",
+          "url": "https://pypi.org/project/sendgrid/"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official Twilio SendGrid mail libraries."
+    },
+    {
+      "slug": "posthog",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "posthog-js",
+          "url": "https://www.npmjs.com/package/posthog-js"
+        },
+        {
+          "registry": "npm",
+          "name": "posthog-node",
+          "url": "https://www.npmjs.com/package/posthog-node"
+        },
+        {
+          "registry": "pypi",
+          "name": "posthog",
+          "url": "https://pypi.org/project/posthog/"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official PostHog browser (posthog-js), Node (posthog-node), and Python clients."
+    },
+    {
+      "slug": "segment",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "@segment/analytics-node",
+          "url": "https://www.npmjs.com/package/@segment/analytics-node"
+        },
+        {
+          "registry": "npm",
+          "name": "@segment/analytics-next",
+          "url": "https://www.npmjs.com/package/@segment/analytics-next"
+        },
+        {
+          "registry": "pypi",
+          "name": "analytics-python",
+          "url": "https://pypi.org/project/analytics-python/"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official Segment Analytics.js 2.0 packages and analytics-python (Segment-published)."
+    },
+    {
+      "slug": "mongodb",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "mongodb",
+          "url": "https://www.npmjs.com/package/mongodb"
+        },
+        {
+          "registry": "pypi",
+          "name": "pymongo",
+          "url": "https://pypi.org/project/pymongo/"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official MongoDB Node driver and PyMongo."
+    },
+    {
+      "slug": "pinecone",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "@pinecone-database/pinecone",
+          "url": "https://www.npmjs.com/package/@pinecone-database/pinecone"
+        },
+        {
+          "registry": "pypi",
+          "name": "pinecone",
+          "url": "https://pypi.org/project/pinecone/"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official Pinecone TypeScript and Python SDKs."
+    },
+    {
+      "slug": "algolia",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "algoliasearch",
+          "url": "https://www.npmjs.com/package/algoliasearch"
+        },
+        {
+          "registry": "pypi",
+          "name": "algoliasearch",
+          "url": "https://pypi.org/project/algoliasearch/"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official Algolia API clients."
+    },
+    {
+      "slug": "mapbox",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "mapbox-gl",
+          "url": "https://www.npmjs.com/package/mapbox-gl"
+        },
+        {
+          "registry": "npm",
+          "name": "@mapbox/mapbox-sdk",
+          "url": "https://www.npmjs.com/package/@mapbox/mapbox-sdk"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official Mapbox GL JS and Mapbox service SDK. Catalog languages are JS/mobile; skipped older mapbox-sdk-py."
+    },
+    {
+      "slug": "cloudinary",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "cloudinary",
+          "url": "https://www.npmjs.com/package/cloudinary"
+        },
+        {
+          "registry": "pypi",
+          "name": "cloudinary",
+          "url": "https://pypi.org/project/cloudinary/"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official Cloudinary Node and Python SDKs."
+    },
+    {
+      "slug": "mux",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "@mux/mux-node",
+          "url": "https://www.npmjs.com/package/@mux/mux-node"
+        },
+        {
+          "registry": "pypi",
+          "name": "mux-python",
+          "url": "https://pypi.org/project/mux-python/"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official Mux API clients."
+    },
+    {
+      "slug": "gitlab",
+      "addPackages": [
+        {
+          "registry": "rubygems",
+          "name": "gitlab",
+          "url": "https://rubygems.org/gems/gitlab"
+        },
+        {
+          "registry": "pypi",
+          "name": "python-gitlab",
+          "url": "https://pypi.org/project/python-gitlab/"
+        },
+        {
+          "registry": "npm",
+          "name": "@gitbeaker/rest",
+          "url": "https://www.npmjs.com/package/@gitbeaker/rest"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "No first-party GitLab-published multi-lang SDKs; these are the community clients GitLab docs commonly reference (Ruby NARKOZ/gitlab, python-gitlab, gitbeaker)."
+    },
+    {
+      "slug": "docker",
+      "addPackages": [
+        {
+          "registry": "pypi",
+          "name": "docker",
+          "url": "https://pypi.org/project/docker/"
+        },
+        {
+          "registry": "go",
+          "name": "github.com/docker/docker",
+          "url": "https://pkg.go.dev/github.com/docker/docker"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official docker-py and Moby/Docker Go client module. No first-party npm SDK from Docker Inc (dockerode is popular but third-party \u2014 omitted)."
+    },
+    {
+      "slug": "kubernetes",
+      "addPackages": [
+        {
+          "registry": "go",
+          "name": "k8s.io/client-go",
+          "url": "https://pkg.go.dev/k8s.io/client-go"
+        },
+        {
+          "registry": "pypi",
+          "name": "kubernetes",
+          "url": "https://pypi.org/project/kubernetes/"
+        },
+        {
+          "registry": "npm",
+          "name": "@kubernetes/client-node",
+          "url": "https://www.npmjs.com/package/@kubernetes/client-node"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official kubernetes-client libraries (client-go, python, javascript)."
+    },
+    {
+      "slug": "terraform",
+      "addPackages": [
+        {
+          "registry": "go",
+          "name": "github.com/hashicorp/terraform-plugin-framework",
+          "url": "https://pkg.go.dev/github.com/hashicorp/terraform-plugin-framework"
+        },
+        {
+          "registry": "go",
+          "name": "github.com/hashicorp/terraform-plugin-sdk/v2",
+          "url": "https://pkg.go.dev/github.com/hashicorp/terraform-plugin-sdk/v2"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official HashiCorp provider SDKs; plugin-framework is current (matches entry githubUrl); plugin-sdk/v2 still widely used."
+    },
+    {
+      "slug": "pulumi",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "@pulumi/pulumi",
+          "url": "https://www.npmjs.com/package/@pulumi/pulumi"
+        },
+        {
+          "registry": "pypi",
+          "name": "pulumi",
+          "url": "https://pypi.org/project/pulumi/"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official Pulumi Node and Python SDKs."
+    },
+    {
+      "slug": "llamaindex",
+      "addPackages": [
+        {
+          "registry": "pypi",
+          "name": "llama-index",
+          "url": "https://pypi.org/project/llama-index/"
+        },
+        {
+          "registry": "npm",
+          "name": "llamaindex",
+          "url": "https://www.npmjs.com/package/llamaindex"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official LlamaIndex Python and TypeScript packages."
+    },
+    {
+      "slug": "plaid",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "plaid",
+          "url": "https://www.npmjs.com/package/plaid"
+        },
+        {
+          "registry": "pypi",
+          "name": "plaid-python",
+          "url": "https://pypi.org/project/plaid-python/"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official Plaid clients. Avoid unscoped pypi:plaid (unrelated package)."
+    },
+    {
+      "slug": "square",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "square",
+          "url": "https://www.npmjs.com/package/square"
+        },
+        {
+          "registry": "pypi",
+          "name": "squareup",
+          "url": "https://pypi.org/project/squareup/"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official Square Node SDK (square) and Python SDK (squareup)."
+    },
+    {
+      "slug": "shopify",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "@shopify/shopify-api",
+          "url": "https://www.npmjs.com/package/@shopify/shopify-api"
+        },
+        {
+          "registry": "pypi",
+          "name": "ShopifyAPI",
+          "url": "https://pypi.org/project/ShopifyAPI/"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official Shopify API libraries for Node and Python."
+    },
+    {
+      "slug": "slack",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "@slack/web-api",
+          "url": "https://www.npmjs.com/package/@slack/web-api"
+        },
+        {
+          "registry": "npm",
+          "name": "@slack/bolt",
+          "url": "https://www.npmjs.com/package/@slack/bolt"
+        },
+        {
+          "registry": "pypi",
+          "name": "slack-sdk",
+          "url": "https://pypi.org/project/slack-sdk/"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official Slack Web API + Bolt (Node) and slack-sdk (Python)."
+    },
+    {
+      "slug": "discord",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "discord.js",
+          "url": "https://www.npmjs.com/package/discord.js"
+        },
+        {
+          "registry": "pypi",
+          "name": "discord.py",
+          "url": "https://pypi.org/project/discord.py/"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Discord does not ship first-party SDKs; discord.js and discord.py are the canonical community libraries referenced in Discord docs (entry description acknowledges community libs)."
+    },
+    {
+      "slug": "stripe-terminal",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "@stripe/terminal-js",
+          "url": "https://www.npmjs.com/package/@stripe/terminal-js"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official Stripe Terminal JS loader. Native SDKs are platform-native (iOS/Android) rather than npm/pypi."
+    },
+    {
+      "slug": "launchdarkly",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "@launchdarkly/node-server-sdk",
+          "url": "https://www.npmjs.com/package/@launchdarkly/node-server-sdk"
+        },
+        {
+          "registry": "pypi",
+          "name": "launchdarkly-server-sdk",
+          "url": "https://pypi.org/project/launchdarkly-server-sdk/"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official LaunchDarkly server SDKs. Prefer scoped @launchdarkly/node-server-sdk over legacy launchdarkly-node-server-sdk."
+    },
+    {
+      "slug": "workos",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "@workos-inc/node",
+          "url": "https://www.npmjs.com/package/@workos-inc/node"
+        },
+        {
+          "registry": "pypi",
+          "name": "workos",
+          "url": "https://pypi.org/project/workos/"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official WorkOS Node and Python clients."
+    },
+    {
+      "slug": "airtable",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "airtable",
+          "url": "https://www.npmjs.com/package/airtable"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official Airtable JavaScript library (catalog languages are JS/TS only)."
+    },
+    {
+      "slug": "openai-agents",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "@openai/agents",
+          "url": "https://www.npmjs.com/package/@openai/agents"
+        },
+        {
+          "registry": "pypi",
+          "name": "openai-agents",
+          "url": "https://pypi.org/project/openai-agents/"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official OpenAI Agents SDK for JS/TS and Python."
+    },
+    {
+      "slug": "meilisearch",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "meilisearch",
+          "url": "https://www.npmjs.com/package/meilisearch"
+        },
+        {
+          "registry": "pypi",
+          "name": "meilisearch",
+          "url": "https://pypi.org/project/meilisearch/"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official Meilisearch JS and Python clients."
+    },
+    {
+      "slug": "turso",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "@libsql/client",
+          "url": "https://www.npmjs.com/package/@libsql/client"
+        },
+        {
+          "registry": "pypi",
+          "name": "libsql",
+          "url": "https://pypi.org/project/libsql/"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official Turso/libSQL JS client (@libsql/client). pypi:libsql exists as Turso Python binding (sparse PyPI metadata)."
+    },
+    {
+      "slug": "firebase",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "firebase",
+          "url": "https://www.npmjs.com/package/firebase"
+        },
+        {
+          "registry": "npm",
+          "name": "firebase-admin",
+          "url": "https://www.npmjs.com/package/firebase-admin"
+        },
+        {
+          "registry": "pypi",
+          "name": "firebase-admin",
+          "url": "https://pypi.org/project/firebase-admin/"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official Firebase JS client + Admin SDKs (Node/Python)."
+    },
+    {
+      "slug": "azure",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "@azure/identity",
+          "url": "https://www.npmjs.com/package/@azure/identity"
+        },
+        {
+          "registry": "pypi",
+          "name": "azure-identity",
+          "url": "https://pypi.org/project/azure-identity/"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Azure is a large SDK family; seed with official identity packages (same pattern as catalog aws \u2192 client-s3/boto3). Service clients are @azure/* and azure-*."
+    },
+    {
+      "slug": "google-cloud",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "@google-cloud/storage",
+          "url": "https://www.npmjs.com/package/@google-cloud/storage"
+        },
+        {
+          "registry": "pypi",
+          "name": "google-cloud-storage",
+          "url": "https://pypi.org/project/google-cloud-storage/"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Google Cloud is a large client-library family; seed with official Storage clients as representative entry points (avoid obsolete meta package pypi:google-cloud)."
+    },
+    {
+      "slug": "planetscale",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "@planetscale/database",
+          "url": "https://www.npmjs.com/package/@planetscale/database"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official PlanetScale serverless driver. Other languages typically use standard MySQL drivers against PlanetScale."
+    },
+    {
+      "slug": "google-maps",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "@googlemaps/js-api-loader",
+          "url": "https://www.npmjs.com/package/@googlemaps/js-api-loader"
+        },
+        {
+          "registry": "npm",
+          "name": "@googlemaps/google-maps-services-js",
+          "url": "https://www.npmjs.com/package/@googlemaps/google-maps-services-js"
+        },
+        {
+          "registry": "pypi",
+          "name": "googlemaps",
+          "url": "https://pypi.org/project/googlemaps/"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official Google Maps JS API loader, Node web-services client, and Python client."
+    },
+    {
+      "slug": "clerk",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "@clerk/backend",
+          "url": "https://www.npmjs.com/package/@clerk/backend"
+        },
+        {
+          "registry": "pypi",
+          "name": "clerk-backend-api",
+          "url": "https://pypi.org/project/clerk-backend-api/"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Already has @clerk/clerk-js. Add official backend Node SDK and Clerk Python backend API client."
+    },
+    {
+      "slug": "resend",
+      "addPackages": [
+        {
+          "registry": "pypi",
+          "name": "resend",
+          "url": "https://pypi.org/project/resend/"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Already has npm:resend. Add official Resend Python SDK."
+    },
+    {
+      "slug": "neon",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "@neondatabase/api-client",
+          "url": "https://www.npmjs.com/package/@neondatabase/api-client"
+        },
+        {
+          "registry": "pypi",
+          "name": "neon-api",
+          "url": "https://pypi.org/project/neon-api/"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Already has @neondatabase/serverless (DB driver). Add official Neon platform API clients. Python DB access uses standard Postgres drivers (no Neon-specific DB driver on PyPI)."
+    },
+    {
+      "slug": "github",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "octokit",
+          "url": "https://www.npmjs.com/package/octokit"
+        },
+        {
+          "registry": "pypi",
+          "name": "PyGithub",
+          "url": "https://pypi.org/project/PyGithub/"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Already has @octokit/rest. octokit is the official all-in-one JS SDK. PyGithub is the canonical community Python client (GitHub does not publish a first-party Python SDK)."
+    },
+    {
+      "slug": "huggingface",
+      "addPackages": [
+        {
+          "registry": "npm",
+          "name": "@huggingface/inference",
+          "url": "https://www.npmjs.com/package/@huggingface/inference"
+        },
+        {
+          "registry": "pypi",
+          "name": "huggingface_hub",
+          "url": "https://pypi.org/project/huggingface_hub/"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Already has pypi:transformers. Add official HF JS inference client and huggingface_hub."
+    },
+    {
+      "slug": "upstash",
+      "addPackages": [
+        {
+          "registry": "pypi",
+          "name": "upstash-redis",
+          "url": "https://pypi.org/project/upstash-redis/"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Already has @upstash/redis. Add official Upstash Redis Python SDK."
+    }
+  ],
+  "skipped": {
+    "solid_primary_coverage": [
+      {
+        "slug": "stripe",
+        "reason": "Has official npm:stripe + pypi:stripe"
+      },
+      {
+        "slug": "openai",
+        "reason": "Has official npm:openai + pypi:openai"
+      },
+      {
+        "slug": "anthropic",
+        "reason": "Has official npm:@anthropic-ai/sdk + pypi:anthropic"
+      },
+      {
+        "slug": "aws",
+        "reason": "Has representative official npm:@aws-sdk/client-s3 + pypi:boto3"
+      },
+      {
+        "slug": "cloudflare",
+        "reason": "Has official npm:cloudflare + pypi:cloudflare"
+      },
+      {
+        "slug": "twilio",
+        "reason": "Has official npm:twilio + pypi:twilio"
+      },
+      {
+        "slug": "supabase",
+        "reason": "Has official npm:@supabase/supabase-js + pypi:supabase"
+      },
+      {
+        "slug": "redis",
+        "reason": "Has official npm:redis + pypi:redis"
+      },
+      {
+        "slug": "langchain",
+        "reason": "Has official pypi:langchain + npm:langchain"
+      },
+      {
+        "slug": "google-genai",
+        "reason": "Has official pypi:google-genai + npm:@google/genai"
+      }
+    ],
+    "single_stack_already_covered": [
+      {
+        "slug": "vercel",
+        "reason": "TS-only; has @vercel/sdk"
+      },
+      {
+        "slug": "ai-sdk",
+        "reason": "TS-only; has ai"
+      },
+      {
+        "slug": "better-auth",
+        "reason": "TS-only; has better-auth"
+      },
+      {
+        "slug": "prisma",
+        "reason": "TS-only; has @prisma/client"
+      },
+      {
+        "slug": "drizzle",
+        "reason": "TS-only; has drizzle-orm"
+      },
+      {
+        "slug": "linear",
+        "reason": "TS-only; has @linear/sdk"
+      },
+      {
+        "slug": "crewai",
+        "reason": "Python-only; has crewai"
+      },
+      {
+        "slug": "notion",
+        "reason": "Official JS client present; no official Python package to add"
+      }
+    ]
+  }
+}

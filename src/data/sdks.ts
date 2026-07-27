@@ -198,6 +198,18 @@ export const sdks: SdkEntry[] = [
     docsUrl: "https://cloud.google.com/docs",
     githubUrl: "https://github.com/googleapis",
     tags: ["gcp", "google"],
+    packages: [
+      {
+        registry: "npm",
+        name: "@google-cloud/storage",
+        url: "https://www.npmjs.com/package/@google-cloud/storage",
+      },
+      {
+        registry: "pypi",
+        name: "google-cloud-storage",
+        url: "https://pypi.org/project/google-cloud-storage/",
+      }
+    ],
     skills: [
       {
         name: "google-cloud-recipe-onboarding",
@@ -233,6 +245,18 @@ export const sdks: SdkEntry[] = [
     docsUrl: "https://learn.microsoft.com/en-us/azure/developer/",
     githubUrl: "https://github.com/Azure",
     tags: ["azure", "microsoft"],
+    packages: [
+      {
+        registry: "npm",
+        name: "@azure/identity",
+        url: "https://www.npmjs.com/package/@azure/identity",
+      },
+      {
+        registry: "pypi",
+        name: "azure-identity",
+        url: "https://pypi.org/project/azure-identity/",
+      }
+    ],
     skills: [
       {
         name: "azure-ai",
@@ -401,6 +425,23 @@ export const sdks: SdkEntry[] = [
     docsUrl: "https://firebase.google.com/docs",
     githubUrl: "https://github.com/firebase",
     tags: ["firestore", "baas"],
+    packages: [
+      {
+        registry: "npm",
+        name: "firebase",
+        url: "https://www.npmjs.com/package/firebase",
+      },
+      {
+        registry: "npm",
+        name: "firebase-admin",
+        url: "https://www.npmjs.com/package/firebase-admin",
+      },
+      {
+        registry: "pypi",
+        name: "firebase-admin",
+        url: "https://pypi.org/project/firebase-admin/",
+      }
+    ],
     skills: [
       {
         name: "firebase-basics",
@@ -499,6 +540,23 @@ export const sdks: SdkEntry[] = [
     docsUrl: "https://docs.sentry.io",
     githubUrl: "https://github.com/getsentry",
     tags: ["errors", "apm", "tracing"],
+    packages: [
+      {
+        registry: "npm",
+        name: "@sentry/node",
+        url: "https://www.npmjs.com/package/@sentry/node",
+      },
+      {
+        registry: "npm",
+        name: "@sentry/browser",
+        url: "https://www.npmjs.com/package/@sentry/browser",
+      },
+      {
+        registry: "pypi",
+        name: "sentry-sdk",
+        url: "https://pypi.org/project/sentry-sdk/",
+      }
+    ],
     skills: [
       {
         name: "sentry-sdk-setup",
@@ -556,6 +614,23 @@ export const sdks: SdkEntry[] = [
     docsUrl: "https://auth0.com/docs",
     githubUrl: "https://github.com/auth0",
     tags: ["oauth", "oidc", "sso"],
+    packages: [
+      {
+        registry: "npm",
+        name: "auth0",
+        url: "https://www.npmjs.com/package/auth0",
+      },
+      {
+        registry: "npm",
+        name: "@auth0/auth0-spa-js",
+        url: "https://www.npmjs.com/package/@auth0/auth0-spa-js",
+      },
+      {
+        registry: "pypi",
+        name: "auth0-python",
+        url: "https://pypi.org/project/auth0-python/",
+      }
+    ],
     skills: [
       {
         name: "auth0-quickstart",
@@ -855,6 +930,18 @@ export const sdks: SdkEntry[] = [
     docsUrl: "https://www.mongodb.com/docs/drivers/",
     githubUrl: "https://github.com/mongodb",
     tags: ["nosql", "document"],
+    packages: [
+      {
+        registry: "npm",
+        name: "mongodb",
+        url: "https://www.npmjs.com/package/mongodb",
+      },
+      {
+        registry: "pypi",
+        name: "pymongo",
+        url: "https://pypi.org/project/pymongo/",
+      }
+    ],
     skills: [
       {
         name: "mongodb-connection",
