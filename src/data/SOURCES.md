@@ -16,7 +16,13 @@ Avoid blind `*-sdk` dumps. Join languages via GitHub org + docs, not package-nam
 
 ## Agent skills (on each `SdkEntry.skills`)
 
-Link upstream skills — do **not** vendor `SKILL.md` trees into the repo.
+Keep **refs** in `sdks.ts` (`name`, `url`, `install?`). Snapshot **bodies** into `skill-bodies.json` so `/api/skills/:sdk/:name` returns full `SKILL.md` without a second hop for agents.
+
+```bash
+bun run sync:skills   # resume-safe; prefers GitHub raw over skills.sh download
+```
+
+Do **not** vendor browsable skill trees under `catalog/` — the API snapshot is the agent delivery channel; `url` stays the attribution/source.
 
 | Registry | URL |
 |----------|-----|
@@ -29,7 +35,7 @@ Link upstream skills — do **not** vendor `SKILL.md` trees into the repo.
 | Better Auth | https://github.com/better-auth/skills |
 | Vercel AI SDK | https://skills.sh/vercel/ai/ai-sdk |
 
-When adding an SDK, add `skills: [{ name, url, install? }]` if a public skill exists.
+When adding an SDK, add `skills: [{ name, url, install? }]` if a public skill exists, then re-run `sync:skills`.
 
 ## MCPs (future `mcps.ts`)
 

@@ -11,7 +11,8 @@
     "lint": "oxlint",
     "preview": "bun run build && vite preview",
     "deploy": "bun run build && wrangler deploy",
-    "cf-typegen": "wrangler types"
+    "cf-typegen": "wrangler types",
+    "sync:skills": "bun run scripts/sync-skill-bodies.ts"
   },
   "dependencies": {
     "@cloudflare/vite-plugin": "^1.47.0",
