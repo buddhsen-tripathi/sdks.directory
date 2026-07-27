@@ -46,9 +46,9 @@ export function BrowsePage() {
         title="Browse SDKs"
         description={
           <>
-            Filter by language and category.{" "}
+            Search the full index. Language and category are filters.{" "}
             <Link to="/languages" className="text-ink hover:text-primary">
-              Or jump to a language →
+              Language filters →
             </Link>
           </>
         }

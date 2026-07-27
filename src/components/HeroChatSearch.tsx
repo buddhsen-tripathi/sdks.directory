@@ -1,27 +1,25 @@
 import { useId, useState, type FormEvent, type KeyboardEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowUp, MagnifyingGlass, Sparkle } from "@phosphor-icons/react";
+import { motion, useReducedMotion } from "motion/react";
+import { ArrowUp, MagnifyingGlass } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const suggestions = [
-  "Stripe SDK for Python",
-  "Auth0 in TypeScript",
-  "AWS S3 client for Go",
-  "Anthropic Messages API",
-  "Supabase JS client",
+  "stripe",
+  "anthropic python",
+  "auth0 typescript",
+  "aws s3 go",
+  "supabase js",
 ];
 
-export function HeroChatSearch({
-  sdkCount,
-  langCount,
-}: {
-  sdkCount: number;
-  langCount: number;
-}) {
+const ease = [0.22, 1, 0.36, 1] as const;
+
+export function HeroChatSearch() {
   const navigate = useNavigate();
   const inputId = useId();
   const [query, setQuery] = useState("");
+  const reduce = useReducedMotion();
 
   function submit(value = query) {
     const q = value.trim();
@@ -40,46 +38,63 @@ export function HeroChatSearch({
     }
   }
 
+  const enter = reduce
+    ? undefined
+    : {
+        initial: { opacity: 0, y: 16 },
+        animate: { opacity: 1, y: 0 },
+      };
+
   return (
-    <section className="relative overflow-hidden border-b border-hairline">
+    <section className="relative overflow-hidden">
       <div className="spotlight-glow pointer-events-none absolute inset-0" />
 
-      <div className="relative mx-auto flex w-full max-w-[720px] flex-col items-center px-5 pb-14 pt-16 md:px-6 md:pb-20 md:pt-24">
-        <img
+      <div className="relative mx-auto flex w-full max-w-[720px] flex-col items-center px-5 pb-10 pt-16 md:px-6 md:pb-12 md:pt-20">
+        <motion.img
           src="/favicon.svg"
           alt=""
-          width={48}
-          height={48}
-          className="animate-rise mb-6 rounded-[10px] shadow-[0_0_0_1px_rgb(255_255_255/0.08)]"
+          width={44}
+          height={44}
+          className="mb-5 rounded-[8px]"
           decoding="async"
+          {...enter}
+          transition={{ duration: 0.5, ease }}
         />
 
-        <h1 className="animate-rise text-center text-display-lg text-ink [animation-delay:40ms]">
-          Find the SDK for your stack
-        </h1>
-        <p className="animate-rise mt-3 max-w-lg text-center text-base leading-relaxed text-body md:text-lg [animation-delay:80ms]">
-          Ask in plain language or search by package. {sdkCount} SDKs across{" "}
-          {langCount} runtimes.
-        </p>
+        <motion.h1
+          className="text-center text-display-lg text-ink"
+          {...enter}
+          transition={{ duration: 0.55, ease, delay: 0.05 }}
+        >
+          SDKs for AI agents
+        </motion.h1>
+        <motion.p
+          className="mt-3 max-w-md text-center text-base leading-relaxed text-body md:text-lg"
+          {...enter}
+          transition={{ duration: 0.55, ease, delay: 0.1 }}
+        >
+          Look up official clients by name, package, or vendor.
+        </motion.p>
 
-        <form
+        <motion.form
           onSubmit={onSubmit}
           className={cn(
-            "animate-rise mt-8 w-full [animation-delay:120ms]",
-            "rounded-sm border border-hairline-strong bg-surface-card p-3",
+            "mt-8 w-full rounded-sm border border-hairline-strong bg-surface-card p-3",
             "shadow-[0_12px_40px_-24px_rgb(15_15_15/0.18)] dark:shadow-[0_20px_50px_-28px_rgb(0_7_205/0.45)]",
             "focus-within:border-primary/50 focus-within:ring-2 focus-within:ring-primary/25",
           )}
           role="search"
+          {...enter}
+          transition={{ duration: 0.55, ease, delay: 0.16 }}
         >
           <label htmlFor={inputId} className="sr-only">
-            Ask or search the SDK directory
+            Search SDKs
           </label>
 
           <div className="flex items-start gap-3 px-2 pt-1">
-            <Sparkle
-              weight="duotone"
-              className="mt-2.5 h-5 w-5 shrink-0 text-primary"
+            <MagnifyingGlass
+              weight="bold"
+              className="mt-2.5 h-5 w-5 shrink-0 text-muted"
               aria-hidden
             />
             <textarea
@@ -89,30 +104,25 @@ export function HeroChatSearch({
               onKeyDown={onKeyDown}
               rows={2}
               autoFocus
-              placeholder="What SDK do you need? e.g. payments in Go, Claude for Python…"
+              placeholder="stripe · anthropic · auth0 typescript…"
               className="min-h-[64px] w-full resize-none bg-transparent py-2 text-[15px] leading-relaxed text-ink placeholder:text-muted-soft focus-visible:outline-none"
             />
           </div>
 
           <div className="mt-2 flex items-center justify-between gap-3 border-t border-hairline px-1 pt-3">
-            <div className="flex items-center gap-1.5 text-xs text-muted-soft">
-              <MagnifyingGlass weight="bold" className="h-3.5 w-3.5" />
-              <span className="hidden sm:inline">Enter to search</span>
-              <span className="sm:hidden">Search catalog</span>
-            </div>
-            <Button
-              type="submit"
-              size="sm"
-              className="gap-1.5"
-              aria-label="Search"
-            >
+            <p className="text-xs text-muted-soft">Enter to search</p>
+            <Button type="submit" size="sm" className="gap-1.5" aria-label="Search">
               Search
               <ArrowUp weight="bold" className="h-3.5 w-3.5" />
             </Button>
           </div>
-        </form>
+        </motion.form>
 
-        <div className="animate-rise mt-5 flex w-full flex-wrap justify-center gap-2 [animation-delay:160ms]">
+        <motion.div
+          className="mt-5 flex w-full flex-wrap justify-center gap-2"
+          {...enter}
+          transition={{ duration: 0.55, ease, delay: 0.22 }}
+        >
           {suggestions.map((suggestion) => (
             <button
               key={suggestion}
@@ -121,12 +131,12 @@ export function HeroChatSearch({
                 setQuery(suggestion);
                 submit(suggestion);
               }}
-              className="rounded-sm border border-hairline bg-surface-card px-3 py-1.5 text-xs font-medium text-body transition-colors hover:border-hairline-strong hover:bg-surface-card-elevated hover:text-ink"
+              className="rounded-sm border border-hairline bg-surface-card px-3 py-1.5 font-mono text-xs text-body transition-colors hover:border-hairline-strong hover:bg-surface-card-elevated hover:text-ink"
             >
               {suggestion}
             </button>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
