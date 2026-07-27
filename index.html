@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (() => {
+        try {
+          const key = "sdks.directory.theme";
+          const stored = localStorage.getItem(key);
+          const theme =
+            stored === "light" || stored === "dark"
+              ? stored
+              : window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light";
+          document.documentElement.classList.toggle("dark", theme === "dark");
+          document.documentElement.classList.toggle("light", theme === "light");
+          document.documentElement.style.colorScheme = theme;
+        } catch {}
+      })();
+    </script>
+    <meta
+      name="description"
+      content="sdks.directory: a language-first catalog of SDKs. Find official clients for Python, Node, Go, Rust, and more."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="theme-color" content="#000000" />
+    <meta property="og:title" content="sdks.directory" />
+    <meta
+      property="og:description"
+      content="Every SDK, by language. A curated directory starting with SDKs. Plugins and MCPs next."
+    />
+    <meta property="og:type" content="website" />
+    <title>sdks.directory · every SDK, by language</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
