@@ -1,10 +1,10 @@
 import { useId, useState, type FormEvent } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { MagnifyingGlass } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { SiteLogo } from "@/components/SiteLogo";
-import { Button } from "@/components/ui/button";
+import { GitHubStarsLink } from "@/components/GitHubStarsLink";
 
 export function SiteHeader() {
   const navigate = useNavigate();
@@ -20,13 +20,14 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 h-16 bg-canvas/90 backdrop-blur-md">
       <div className="mx-auto flex h-full w-full max-w-[1200px] items-center gap-6 px-5 md:px-6">
-        <SiteLogo />
+        <SiteLogo showWordmark={false} size={32} />
 
         <nav className="hidden items-center gap-1 md:flex" aria-label="Primary">
           {(
             [
-              ["/browse", "Browse"],
-              ["/languages", "Languages"],
+              ["/browse", "SDKs"],
+              ["/plugins", "Plugins"],
+              ["/mcps", "MCPs"],
             ] as const
           ).map(([to, label]) => (
             <NavLink
@@ -44,12 +45,6 @@ export function SiteHeader() {
               {label}
             </NavLink>
           ))}
-          <span className="px-3 py-1.5 text-sm font-medium text-muted-soft">
-            Plugins
-          </span>
-          <span className="px-3 py-1.5 text-sm font-medium text-muted-soft">
-            MCPs
-          </span>
         </nav>
 
         <div className="ml-auto flex items-center gap-2">
@@ -78,9 +73,7 @@ export function SiteHeader() {
             </div>
           </form>
           <ThemeToggle />
-          <Button asChild size="sm" className="hidden sm:inline-flex">
-            <Link to="/browse">Get started</Link>
-          </Button>
+          <GitHubStarsLink />
         </div>
       </div>
     </header>

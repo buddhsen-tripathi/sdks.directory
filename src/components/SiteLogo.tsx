@@ -29,7 +29,7 @@ export function SiteLogo({
       />
       {showWordmark ? (
         <span className="text-[15px] font-medium tracking-tight">
-          sdks<span className="text-primary">.</span>directory
+          sdks.directory
         </span>
       ) : null}
     </Link>
