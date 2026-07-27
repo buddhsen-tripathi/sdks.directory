@@ -580,6 +580,28 @@ export const sdks: SdkEntry[] = [
     docsUrl: "https://docs.datadoghq.com",
     githubUrl: "https://github.com/DataDog",
     tags: ["apm", "metrics", "logs"],
+    packages: [
+      {
+        registry: "npm",
+        name: "dd-trace",
+        url: "https://www.npmjs.com/package/dd-trace",
+      },
+      {
+        registry: "npm",
+        name: "@datadog/datadog-api-client",
+        url: "https://www.npmjs.com/package/@datadog/datadog-api-client",
+      },
+      {
+        registry: "pypi",
+        name: "ddtrace",
+        url: "https://pypi.org/project/ddtrace/",
+      },
+      {
+        registry: "pypi",
+        name: "datadog",
+        url: "https://pypi.org/project/datadog/",
+      }
+    ],
     skills: [
       {
         name: "dd-apm",
@@ -741,6 +763,18 @@ export const sdks: SdkEntry[] = [
     homepage: "https://sendgrid.com",
     docsUrl: "https://docs.sendgrid.com",
     githubUrl: "https://github.com/sendgrid",
+    packages: [
+      {
+        registry: "npm",
+        name: "@sendgrid/mail",
+        url: "https://www.npmjs.com/package/@sendgrid/mail",
+      },
+      {
+        registry: "pypi",
+        name: "sendgrid",
+        url: "https://pypi.org/project/sendgrid/",
+      }
+    ],
     tags: ["email"],
     official: true,
   },
@@ -770,6 +804,23 @@ export const sdks: SdkEntry[] = [
     docsUrl: "https://posthog.com/docs",
     githubUrl: "https://github.com/PostHog",
     tags: ["analytics", "feature-flags"],
+    packages: [
+      {
+        registry: "npm",
+        name: "posthog-js",
+        url: "https://www.npmjs.com/package/posthog-js",
+      },
+      {
+        registry: "npm",
+        name: "posthog-node",
+        url: "https://www.npmjs.com/package/posthog-node",
+      },
+      {
+        registry: "pypi",
+        name: "posthog",
+        url: "https://pypi.org/project/posthog/",
+      }
+    ],
     skills: [
       {
         name: "posthog-instrumentation",
@@ -803,6 +854,23 @@ export const sdks: SdkEntry[] = [
     homepage: "https://segment.com",
     docsUrl: "https://segment.com/docs",
     githubUrl: "https://github.com/segmentio",
+    packages: [
+      {
+        registry: "npm",
+        name: "@segment/analytics-node",
+        url: "https://www.npmjs.com/package/@segment/analytics-node",
+      },
+      {
+        registry: "npm",
+        name: "@segment/analytics-next",
+        url: "https://www.npmjs.com/package/@segment/analytics-next",
+      },
+      {
+        registry: "pypi",
+        name: "analytics-python",
+        url: "https://pypi.org/project/analytics-python/",
+      }
+    ],
     tags: ["cdp", "events"],
     official: true,
   },
@@ -818,6 +886,13 @@ export const sdks: SdkEntry[] = [
     homepage: "https://planetscale.com",
     docsUrl: "https://planetscale.com/docs",
     githubUrl: "https://github.com/planetscale",
+    packages: [
+      {
+        registry: "npm",
+        name: "@planetscale/database",
+        url: "https://www.npmjs.com/package/@planetscale/database",
+      }
+    ],
     tags: ["mysql", "serverless"],
     official: true,
   },
@@ -1010,6 +1085,18 @@ export const sdks: SdkEntry[] = [
     docsUrl: "https://docs.pinecone.io",
     githubUrl: "https://github.com/pinecone-io",
     tags: ["vector", "rag"],
+    packages: [
+      {
+        registry: "npm",
+        name: "@pinecone-database/pinecone",
+        url: "https://www.npmjs.com/package/@pinecone-database/pinecone",
+      },
+      {
+        registry: "pypi",
+        name: "pinecone",
+        url: "https://pypi.org/project/pinecone/",
+      }
+    ],
     skills: [
       {
         name: "pinecone-docs",
@@ -1044,6 +1131,18 @@ export const sdks: SdkEntry[] = [
     homepage: "https://www.algolia.com",
     docsUrl: "https://www.algolia.com/doc/",
     githubUrl: "https://github.com/algolia",
+    packages: [
+      {
+        registry: "npm",
+        name: "algoliasearch",
+        url: "https://www.npmjs.com/package/algoliasearch",
+      },
+      {
+        registry: "pypi",
+        name: "algoliasearch",
+        url: "https://pypi.org/project/algoliasearch/",
+      }
+    ],
     tags: ["search"],
     official: true,
   },
@@ -1059,6 +1158,18 @@ export const sdks: SdkEntry[] = [
     homepage: "https://www.mapbox.com",
     docsUrl: "https://docs.mapbox.com",
     githubUrl: "https://github.com/mapbox",
+    packages: [
+      {
+        registry: "npm",
+        name: "mapbox-gl",
+        url: "https://www.npmjs.com/package/mapbox-gl",
+      },
+      {
+        registry: "npm",
+        name: "@mapbox/mapbox-sdk",
+        url: "https://www.npmjs.com/package/@mapbox/mapbox-sdk",
+      }
+    ],
     tags: ["maps", "geocoding"],
     official: true,
   },
@@ -1074,6 +1185,23 @@ export const sdks: SdkEntry[] = [
     homepage: "https://developers.google.com/maps",
     docsUrl: "https://developers.google.com/maps/documentation",
     githubUrl: "https://github.com/googlemaps",
+    packages: [
+      {
+        registry: "npm",
+        name: "@googlemaps/js-api-loader",
+        url: "https://www.npmjs.com/package/@googlemaps/js-api-loader",
+      },
+      {
+        registry: "npm",
+        name: "@googlemaps/google-maps-services-js",
+        url: "https://www.npmjs.com/package/@googlemaps/google-maps-services-js",
+      },
+      {
+        registry: "pypi",
+        name: "googlemaps",
+        url: "https://pypi.org/project/googlemaps/",
+      }
+    ],
     tags: ["maps", "places"],
     official: true,
   },
@@ -1102,6 +1230,18 @@ export const sdks: SdkEntry[] = [
     homepage: "https://cloudinary.com",
     docsUrl: "https://cloudinary.com/documentation",
     githubUrl: "https://github.com/cloudinary",
+    packages: [
+      {
+        registry: "npm",
+        name: "cloudinary",
+        url: "https://www.npmjs.com/package/cloudinary",
+      },
+      {
+        registry: "pypi",
+        name: "cloudinary",
+        url: "https://pypi.org/project/cloudinary/",
+      }
+    ],
     tags: ["images", "video"],
     official: true,
   },
@@ -1117,6 +1257,18 @@ export const sdks: SdkEntry[] = [
     homepage: "https://www.mux.com",
     docsUrl: "https://docs.mux.com",
     githubUrl: "https://github.com/muxinc",
+    packages: [
+      {
+        registry: "npm",
+        name: "@mux/mux-node",
+        url: "https://www.npmjs.com/package/@mux/mux-node",
+      },
+      {
+        registry: "pypi",
+        name: "mux-python",
+        url: "https://pypi.org/project/mux-python/",
+      }
+    ],
     tags: ["video", "streaming"],
     official: true,
   },
@@ -1155,6 +1307,23 @@ export const sdks: SdkEntry[] = [
     homepage: "https://docs.gitlab.com/ee/api/",
     docsUrl: "https://docs.gitlab.com/ee/api/",
     githubUrl: "https://gitlab.com/gitlab-org",
+    packages: [
+      {
+        registry: "rubygems",
+        name: "gitlab",
+        url: "https://rubygems.org/gems/gitlab",
+      },
+      {
+        registry: "pypi",
+        name: "python-gitlab",
+        url: "https://pypi.org/project/python-gitlab/",
+      },
+      {
+        registry: "npm",
+        name: "@gitbeaker/rest",
+        url: "https://www.npmjs.com/package/@gitbeaker/rest",
+      }
+    ],
     tags: ["ci", "devops"],
     official: true,
   },
@@ -1170,6 +1339,18 @@ export const sdks: SdkEntry[] = [
     homepage: "https://docs.docker.com/engine/api/",
     docsUrl: "https://docs.docker.com/engine/api/",
     githubUrl: "https://github.com/docker",
+    packages: [
+      {
+        registry: "pypi",
+        name: "docker",
+        url: "https://pypi.org/project/docker/",
+      },
+      {
+        registry: "go",
+        name: "github.com/docker/docker",
+        url: "https://pkg.go.dev/github.com/docker/docker",
+      }
+    ],
     tags: ["containers"],
     official: true,
   },
@@ -1185,6 +1366,23 @@ export const sdks: SdkEntry[] = [
     homepage: "https://kubernetes.io/docs/reference/",
     docsUrl: "https://kubernetes.io/docs/reference/using-api/client-libraries/",
     githubUrl: "https://github.com/kubernetes-client",
+    packages: [
+      {
+        registry: "go",
+        name: "k8s.io/client-go",
+        url: "https://pkg.go.dev/k8s.io/client-go",
+      },
+      {
+        registry: "pypi",
+        name: "kubernetes",
+        url: "https://pypi.org/project/kubernetes/",
+      },
+      {
+        registry: "npm",
+        name: "@kubernetes/client-node",
+        url: "https://www.npmjs.com/package/@kubernetes/client-node",
+      }
+    ],
     tags: ["k8s", "orchestration"],
     official: true,
   },
@@ -1200,6 +1398,18 @@ export const sdks: SdkEntry[] = [
     homepage: "https://developer.hashicorp.com/terraform/plugin",
     docsUrl: "https://developer.hashicorp.com/terraform/plugin/framework",
     githubUrl: "https://github.com/hashicorp/terraform-plugin-framework",
+    packages: [
+      {
+        registry: "go",
+        name: "github.com/hashicorp/terraform-plugin-framework",
+        url: "https://pkg.go.dev/github.com/hashicorp/terraform-plugin-framework",
+      },
+      {
+        registry: "go",
+        name: "github.com/hashicorp/terraform-plugin-sdk/v2",
+        url: "https://pkg.go.dev/github.com/hashicorp/terraform-plugin-sdk/v2",
+      }
+    ],
     tags: ["iac", "providers"],
     official: true,
   },
@@ -1215,6 +1425,18 @@ export const sdks: SdkEntry[] = [
     homepage: "https://www.pulumi.com",
     docsUrl: "https://www.pulumi.com/docs/",
     githubUrl: "https://github.com/pulumi/pulumi",
+    packages: [
+      {
+        registry: "npm",
+        name: "@pulumi/pulumi",
+        url: "https://www.npmjs.com/package/@pulumi/pulumi",
+      },
+      {
+        registry: "pypi",
+        name: "pulumi",
+        url: "https://pypi.org/project/pulumi/",
+      }
+    ],
     tags: ["iac"],
     official: true,
   },
@@ -1265,6 +1487,18 @@ export const sdks: SdkEntry[] = [
     homepage: "https://www.llamaindex.ai",
     docsUrl: "https://docs.llamaindex.ai",
     githubUrl: "https://github.com/run-llama",
+    packages: [
+      {
+        registry: "pypi",
+        name: "llama-index",
+        url: "https://pypi.org/project/llama-index/",
+      },
+      {
+        registry: "npm",
+        name: "llamaindex",
+        url: "https://www.npmjs.com/package/llamaindex",
+      }
+    ],
     tags: ["rag", "agents"],
     official: true,
   },
@@ -1344,6 +1578,18 @@ export const sdks: SdkEntry[] = [
     homepage: "https://plaid.com",
     docsUrl: "https://plaid.com/docs",
     githubUrl: "https://github.com/plaid",
+    packages: [
+      {
+        registry: "npm",
+        name: "plaid",
+        url: "https://www.npmjs.com/package/plaid",
+      },
+      {
+        registry: "pypi",
+        name: "plaid-python",
+        url: "https://pypi.org/project/plaid-python/",
+      }
+    ],
     tags: ["fintech", "banking"],
     official: true,
   },
@@ -1359,6 +1605,18 @@ export const sdks: SdkEntry[] = [
     homepage: "https://developer.squareup.com",
     docsUrl: "https://developer.squareup.com/docs",
     githubUrl: "https://github.com/square",
+    packages: [
+      {
+        registry: "npm",
+        name: "square",
+        url: "https://www.npmjs.com/package/square",
+      },
+      {
+        registry: "pypi",
+        name: "squareup",
+        url: "https://pypi.org/project/squareup/",
+      }
+    ],
     tags: ["payments", "pos"],
     official: true,
   },
@@ -1374,6 +1632,18 @@ export const sdks: SdkEntry[] = [
     homepage: "https://shopify.dev",
     docsUrl: "https://shopify.dev/docs",
     githubUrl: "https://github.com/Shopify",
+    packages: [
+      {
+        registry: "npm",
+        name: "@shopify/shopify-api",
+        url: "https://www.npmjs.com/package/@shopify/shopify-api",
+      },
+      {
+        registry: "pypi",
+        name: "ShopifyAPI",
+        url: "https://pypi.org/project/ShopifyAPI/",
+      }
+    ],
     tags: ["ecommerce"],
     official: true,
   },
@@ -1389,6 +1659,23 @@ export const sdks: SdkEntry[] = [
     homepage: "https://api.slack.com",
     docsUrl: "https://api.slack.com/docs",
     githubUrl: "https://github.com/slackapi",
+    packages: [
+      {
+        registry: "npm",
+        name: "@slack/web-api",
+        url: "https://www.npmjs.com/package/@slack/web-api",
+      },
+      {
+        registry: "npm",
+        name: "@slack/bolt",
+        url: "https://www.npmjs.com/package/@slack/bolt",
+      },
+      {
+        registry: "pypi",
+        name: "slack-sdk",
+        url: "https://pypi.org/project/slack-sdk/",
+      }
+    ],
     tags: ["chat", "bots"],
     official: true,
   },
@@ -1404,6 +1691,18 @@ export const sdks: SdkEntry[] = [
     homepage: "https://discord.com/developers/docs",
     docsUrl: "https://discord.com/developers/docs",
     githubUrl: "https://github.com/discord",
+    packages: [
+      {
+        registry: "npm",
+        name: "discord.js",
+        url: "https://www.npmjs.com/package/discord.js",
+      },
+      {
+        registry: "pypi",
+        name: "discord.py",
+        url: "https://pypi.org/project/discord.py/",
+      }
+    ],
     tags: ["bots", "chat"],
     official: true,
   },
@@ -1419,6 +1718,13 @@ export const sdks: SdkEntry[] = [
     homepage: "https://stripe.com/docs/terminal",
     docsUrl: "https://stripe.com/docs/terminal",
     githubUrl: "https://github.com/stripe",
+    packages: [
+      {
+        registry: "npm",
+        name: "@stripe/terminal-js",
+        url: "https://www.npmjs.com/package/@stripe/terminal-js",
+      }
+    ],
     tags: ["pos", "hardware"],
     official: true,
   },
@@ -1449,6 +1755,18 @@ export const sdks: SdkEntry[] = [
     docsUrl: "https://docs.launchdarkly.com",
     githubUrl: "https://github.com/launchdarkly",
     tags: ["feature-flags"],
+    packages: [
+      {
+        registry: "npm",
+        name: "@launchdarkly/node-server-sdk",
+        url: "https://www.npmjs.com/package/@launchdarkly/node-server-sdk",
+      },
+      {
+        registry: "pypi",
+        name: "launchdarkly-server-sdk",
+        url: "https://pypi.org/project/launchdarkly-server-sdk/",
+      }
+    ],
     skills: [
       {
         name: "launchdarkly-flag-discovery",
@@ -1471,6 +1789,18 @@ export const sdks: SdkEntry[] = [
     docsUrl: "https://workos.com/docs",
     githubUrl: "https://github.com/workos",
     tags: ["sso", "enterprise"],
+    packages: [
+      {
+        registry: "npm",
+        name: "@workos-inc/node",
+        url: "https://www.npmjs.com/package/@workos-inc/node",
+      },
+      {
+        registry: "pypi",
+        name: "workos",
+        url: "https://pypi.org/project/workos/",
+      }
+    ],
     skills: [
       {
         name: "workos",
@@ -1543,6 +1873,13 @@ export const sdks: SdkEntry[] = [
     homepage: "https://airtable.com/developers",
     docsUrl: "https://airtable.com/developers/web/api/introduction",
     githubUrl: "https://github.com/Airtable",
+    packages: [
+      {
+        registry: "npm",
+        name: "airtable",
+        url: "https://www.npmjs.com/package/airtable",
+      }
+    ],
     tags: ["spreadsheet", "api"],
     official: true,
   },
@@ -1558,6 +1895,18 @@ export const sdks: SdkEntry[] = [
     homepage: "https://openai.github.io/openai-agents-python/",
     docsUrl: "https://openai.github.io/openai-agents-python/",
     githubUrl: "https://github.com/openai/openai-agents-python",
+    packages: [
+      {
+        registry: "npm",
+        name: "@openai/agents",
+        url: "https://www.npmjs.com/package/@openai/agents",
+      },
+      {
+        registry: "pypi",
+        name: "openai-agents",
+        url: "https://pypi.org/project/openai-agents/",
+      }
+    ],
     tags: ["agents", "tools"],
     official: true,
   },
@@ -1608,6 +1957,18 @@ export const sdks: SdkEntry[] = [
     homepage: "https://www.meilisearch.com",
     docsUrl: "https://www.meilisearch.com/docs",
     githubUrl: "https://github.com/meilisearch",
+    packages: [
+      {
+        registry: "npm",
+        name: "meilisearch",
+        url: "https://www.npmjs.com/package/meilisearch",
+      },
+      {
+        registry: "pypi",
+        name: "meilisearch",
+        url: "https://pypi.org/project/meilisearch/",
+      }
+    ],
     tags: ["search"],
     official: true,
   },
@@ -1645,6 +2006,18 @@ export const sdks: SdkEntry[] = [
     homepage: "https://turso.tech",
     docsUrl: "https://docs.turso.tech",
     githubUrl: "https://github.com/tursodatabase",
+    packages: [
+      {
+        registry: "npm",
+        name: "@libsql/client",
+        url: "https://www.npmjs.com/package/@libsql/client",
+      },
+      {
+        registry: "pypi",
+        name: "libsql",
+        url: "https://pypi.org/project/libsql/",
+      }
+    ],
     tags: ["sqlite", "edge"],
     official: true,
   },
