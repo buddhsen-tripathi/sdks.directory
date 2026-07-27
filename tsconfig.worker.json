@@ -5,6 +5,7 @@
     "lib": ["ES2023"],
     "module": "esnext",
     "moduleResolution": "bundler",
+    "resolveJsonModule": true,
     "types": ["./worker-configuration.d.ts", "vite/client"],
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
@@ -17,5 +18,10 @@
     "noFallthroughCasesInSwitch": true,
     "strict": true
   },
-  "include": ["worker", "src/data/**/*.ts", "src/types/**/*.ts"]
+  "include": [
+    "worker",
+    "src/data/**/*.ts",
+    "src/data/**/*.json",
+    "src/types/**/*.ts"
+  ]
 }
