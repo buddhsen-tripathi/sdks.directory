@@ -5,7 +5,6 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { siteConfig } from "@/config/site";
 
 export type Theme = "light" | "dark";
 
@@ -17,9 +16,11 @@ type ThemeContextValue = {
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
+const STORAGE_KEY = "sdks.directory.theme";
+
 function getInitialTheme(): Theme {
   if (typeof window === "undefined") return "dark";
-  const stored = window.localStorage.getItem(siteConfig.themeStorageKey);
+  const stored = window.localStorage.getItem(STORAGE_KEY);
   if (stored === "light" || stored === "dark") return stored;
   return window.matchMedia("(prefers-color-scheme: dark)").matches
     ? "dark"
@@ -34,7 +35,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     root.classList.toggle("dark", theme === "dark");
     root.classList.toggle("light", theme === "light");
     root.style.colorScheme = theme;
-    window.localStorage.setItem(siteConfig.themeStorageKey, theme);
+    window.localStorage.setItem(STORAGE_KEY, theme);
 
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta) {

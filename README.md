@@ -18,17 +18,6 @@ Agents need reliable client libraries — auth, payments, models, databases, obs
 | Catalog | Version-controlled TypeScript in `src/data/` |
 | Package manager | Bun |
 
-## Site config
-
-Central product config lives in [`src/config/site.ts`](src/config/site.ts):
-
-- Site name, tagline, titles
-- GitHub owner/repo
-- Primary nav (`SDKs` / `Plugins` / `MCPs`)
-- Theme storage key
-
-Prefer importing from there instead of hardcoding strings in components.
-
 ## Develop
 
 ```bash
@@ -49,7 +38,6 @@ bun run deploy    # Cloudflare Workers
 
 ```
 src/
-  config/site.ts     # site-wide constants
   data/              # SDKs, languages, categories
   components/        # chrome, cards, grids
   pages/             # routes

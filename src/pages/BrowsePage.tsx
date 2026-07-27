@@ -3,7 +3,6 @@ import { Link, useSearchParams } from "react-router-dom";
 import { SdkGrid } from "../components/SdkGrid";
 import { TechIcon } from "../components/TechIcon";
 import { Section, SectionHead } from "../components/ui/section";
-import { pageTitle } from "@/config/site";
 import { categories, languages, searchSdks } from "../data";
 import type { CategoryId, LanguageId } from "../types/catalog";
 
@@ -21,7 +20,7 @@ export function BrowsePage() {
   );
 
   useEffect(() => {
-    document.title = pageTitle("Browse SDKs");
+    document.title = "Browse SDKs · sdks.directory";
   }, []);
 
   useEffect(() => {

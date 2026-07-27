@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { siteConfig } from "@/config/site";
 
 export function SiteLogo({
   className,
@@ -18,7 +17,7 @@ export function SiteLogo({
         "inline-flex items-center gap-2.5 text-ink no-underline",
         className,
       )}
-      aria-label={`${siteConfig.name} home`}
+      aria-label="sdks.directory home"
     >
       <img
         src="/favicon.svg"
@@ -30,7 +29,7 @@ export function SiteLogo({
       />
       {showWordmark ? (
         <span className="text-[15px] font-medium tracking-tight">
-          {siteConfig.name}
+          sdks.directory
         </span>
       ) : null}
     </Link>

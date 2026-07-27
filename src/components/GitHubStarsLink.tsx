@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { GithubLogo, Star } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
-import { githubApiRepoUrl, githubRepoUrl } from "@/config/site";
+
+const GITHUB_REPO = "buddhsen-tripathi/sdks.directory";
+const GITHUB_URL = `https://github.com/${GITHUB_REPO}`;
 
 function formatStars(count: number) {
   if (count >= 1000) {
@@ -23,7 +25,7 @@ export function GitHubStarsLink({
   useEffect(() => {
     let cancelled = false;
 
-    fetch(githubApiRepoUrl(), {
+    fetch(`https://api.github.com/repos/${GITHUB_REPO}`, {
       headers: { Accept: "application/vnd.github+json" },
     })
       .then((res) => (res.ok ? res.json() : null))
@@ -43,7 +45,7 @@ export function GitHubStarsLink({
 
   return (
     <Button asChild variant="secondary" size={size} className={className}>
-      <a href={githubRepoUrl()} target="_blank" rel="noreferrer">
+      <a href={GITHUB_URL} target="_blank" rel="noreferrer">
         <GithubLogo weight="fill" className="h-4 w-4" />
         <span className="hidden sm:inline">GitHub</span>
         {stars !== null ? (

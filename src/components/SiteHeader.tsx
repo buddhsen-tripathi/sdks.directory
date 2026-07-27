@@ -5,7 +5,12 @@ import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { SiteLogo } from "@/components/SiteLogo";
 import { GitHubStarsLink } from "@/components/GitHubStarsLink";
-import { siteConfig } from "@/config/site";
+
+const nav = [
+  { to: "/browse", label: "SDKs" },
+  { to: "/plugins", label: "Plugins" },
+  { to: "/mcps", label: "MCPs" },
+] as const;
 
 export function SiteHeader() {
   const navigate = useNavigate();
@@ -24,7 +29,7 @@ export function SiteHeader() {
         <SiteLogo showWordmark={false} size={32} />
 
         <nav className="hidden items-center gap-1 md:flex" aria-label="Primary">
-          {siteConfig.nav.map((item) => (
+          {nav.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
