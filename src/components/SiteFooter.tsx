@@ -1,12 +1,7 @@
 import { Link } from "react-router-dom";
 import { SiteLogo } from "./SiteLogo";
 import { GitHubStarsLink } from "@/components/GitHubStarsLink";
-
-const nav = [
-  { to: "/browse", label: "SDKs" },
-  { to: "/plugins", label: "Plugins", soon: true },
-  { to: "/mcps", label: "MCPs", soon: true },
-] as const;
+import { siteConfig } from "@/config/site";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
@@ -27,7 +22,7 @@ export function SiteFooter() {
           <div className="max-w-md">
             <SiteLogo size={32} />
             <p className="mt-4 text-lg font-medium leading-snug tracking-tight text-ink md:text-xl">
-              SDK catalog for AI agents.
+              {siteConfig.tagline}
             </p>
           </div>
 
@@ -39,7 +34,7 @@ export function SiteFooter() {
             aria-label="Footer"
             className="flex flex-wrap items-center gap-x-1 gap-y-2"
           >
-            {nav.map((item, index) => (
+            {siteConfig.nav.map((item, index) => (
               <span key={item.to} className="inline-flex items-center">
                 {index > 0 ? (
                   <span className="mx-2.5 text-muted-soft/70" aria-hidden>
@@ -68,7 +63,7 @@ export function SiteFooter() {
           </nav>
 
           <p className="font-mono text-xs text-muted-soft sm:text-right">
-            © {year} sdks.directory
+            © {year} {siteConfig.name}
           </p>
         </div>
 
@@ -76,7 +71,7 @@ export function SiteFooter() {
           className="footer-wordmark-liquid pointer-events-none mt-12 select-none pb-2 text-center text-[clamp(2.75rem,11vw,7rem)] font-medium leading-none tracking-[-0.06em]"
           aria-hidden
         >
-          sdks.directory
+          {siteConfig.name}
         </p>
       </div>
     </footer>

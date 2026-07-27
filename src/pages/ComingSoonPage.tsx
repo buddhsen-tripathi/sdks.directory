@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Section, SectionHead } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
+import { pageTitle } from "@/config/site";
 
 type ComingSoonPageProps = {
   title: string;
@@ -10,7 +11,7 @@ type ComingSoonPageProps = {
 
 export function ComingSoonPage({ title, description }: ComingSoonPageProps) {
   useEffect(() => {
-    document.title = `${title} · Coming soon · sdks.directory`;
+    document.title = pageTitle(`${title} · Coming soon`);
   }, [title]);
 
   return (

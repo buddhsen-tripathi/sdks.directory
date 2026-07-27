@@ -7,13 +7,14 @@ import { Reveal, RevealItem } from "../components/Reveal";
 import { SdkGrid } from "../components/SdkGrid";
 import { Section, SectionHead } from "../components/ui/section";
 import { Button } from "@/components/ui/button";
+import { githubRepoUrl, siteConfig } from "@/config/site";
 import { getFeaturedSdks } from "../data";
 
 export function HomePage() {
   const featured = getFeaturedSdks().slice(0, 6);
 
   useEffect(() => {
-    document.title = "sdks.directory · SDKs for AI agents";
+    document.title = siteConfig.defaultTitle;
   }, []);
 
   return (
@@ -70,11 +71,7 @@ export function HomePage() {
           </RevealItem>
           <RevealItem>
             <Button asChild size="lg">
-              <a
-                href="https://github.com/buddhsen-tripathi/sdks.directory"
-                target="_blank"
-                rel="noreferrer"
-              >
+              <a href={githubRepoUrl()} target="_blank" rel="noreferrer">
                 Contribute on GitHub
                 <ArrowRight weight="bold" className="h-4 w-4" />
               </a>

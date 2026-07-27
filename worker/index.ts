@@ -1,3 +1,4 @@
+import { siteConfig } from "../src/config/site";
 import { categories } from "../src/data/categories";
 import { languages } from "../src/data/languages";
 import { sdks } from "../src/data/sdks";
@@ -15,7 +16,7 @@ export default {
     }
 
     if (url.pathname === "/api/health") {
-      return json({ ok: true, service: "sdks.directory" });
+      return json({ ok: true, service: siteConfig.name });
     }
 
     if (url.pathname === "/api/sdks") {

@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { SiteLogo } from "@/components/SiteLogo";
 import { GitHubStarsLink } from "@/components/GitHubStarsLink";
+import { siteConfig } from "@/config/site";
 
 export function SiteHeader() {
   const navigate = useNavigate();
@@ -23,16 +24,10 @@ export function SiteHeader() {
         <SiteLogo showWordmark={false} size={32} />
 
         <nav className="hidden items-center gap-1 md:flex" aria-label="Primary">
-          {(
-            [
-              ["/browse", "SDKs"],
-              ["/plugins", "Plugins"],
-              ["/mcps", "MCPs"],
-            ] as const
-          ).map(([to, label]) => (
+          {siteConfig.nav.map((item) => (
             <NavLink
-              key={to}
-              to={to}
+              key={item.to}
+              to={item.to}
               className={({ isActive }) =>
                 cn(
                   "rounded-sm px-3 py-1.5 text-sm font-medium no-underline transition-colors",
@@ -42,7 +37,7 @@ export function SiteHeader() {
                 )
               }
             >
-              {label}
+              {item.label}
             </NavLink>
           ))}
         </nav>
