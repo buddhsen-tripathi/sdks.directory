@@ -1,0 +1,202 @@
+[
+  {
+    "slug": "openai",
+    "skills": [
+      {
+        "name": "openai-docs",
+        "url": "https://skills.sh/openai/skills/openai-docs",
+        "install": "npx skills add openai/skills --skill openai-docs"
+      }
+    ]
+  },
+  {
+    "slug": "aws",
+    "skills": [
+      {
+        "name": "aws-serverless",
+        "url": "https://skills.sh/aws/agent-toolkit-for-aws/aws-serverless",
+        "install": "npx skills add aws/agent-toolkit-for-aws --skill aws-serverless"
+      }
+    ]
+  },
+  {
+    "slug": "azure",
+    "skills": [
+      {
+        "name": "azure-ai",
+        "url": "https://skills.sh/microsoft/azure-skills/azure-ai",
+        "install": "npx skills add microsoft/azure-skills --skill azure-ai"
+      }
+    ]
+  },
+  {
+    "slug": "firebase",
+    "skills": [
+      {
+        "name": "firebase-basics",
+        "url": "https://skills.sh/firebase/agent-skills/firebase-basics",
+        "install": "npx skills add firebase/agent-skills --skill firebase-basics"
+      }
+    ]
+  },
+  {
+    "slug": "vercel",
+    "skills": [
+      {
+        "name": "deploy-to-vercel",
+        "url": "https://skills.sh/vercel-labs/agent-skills/deploy-to-vercel",
+        "install": "npx skills add vercel-labs/agent-skills --skill deploy-to-vercel"
+      }
+    ]
+  },
+  {
+    "slug": "sentry",
+    "skills": [
+      {
+        "name": "sentry-sdk-setup",
+        "url": "https://skills.sh/getsentry/sentry-for-ai/sentry-sdk-setup",
+        "install": "npx skills add getsentry/sentry-for-ai --skill sentry-sdk-setup"
+      }
+    ]
+  },
+  {
+    "slug": "datadog",
+    "skills": [
+      {
+        "name": "dd-apm",
+        "url": "https://skills.sh/datadog-labs/agent-skills/dd-apm",
+        "install": "npx skills add datadog-labs/agent-skills --skill dd-apm"
+      }
+    ]
+  },
+  {
+    "slug": "auth0",
+    "skills": [
+      {
+        "name": "auth0-quickstart",
+        "url": "https://skills.sh/auth0/agent-skills/auth0-quickstart",
+        "install": "npx skills add auth0/agent-skills --skill auth0-quickstart"
+      }
+    ]
+  },
+  {
+    "slug": "clerk",
+    "skills": [
+      {
+        "name": "clerk",
+        "url": "https://skills.sh/clerk/skills/clerk",
+        "install": "npx skills add clerk/skills --skill clerk"
+      }
+    ]
+  },
+  {
+    "slug": "resend",
+    "skills": [
+      {
+        "name": "resend",
+        "url": "https://skills.sh/resend/resend-skills/resend",
+        "install": "npx skills add resend/resend-skills --skill resend"
+      }
+    ]
+  },
+  {
+    "slug": "mongodb",
+    "skills": [
+      {
+        "name": "mongodb-connection",
+        "url": "https://skills.sh/mongodb/agent-skills/mongodb-connection",
+        "install": "npx skills add mongodb/agent-skills --skill mongodb-connection"
+      }
+    ]
+  },
+  {
+    "slug": "redis",
+    "skills": [
+      {
+        "name": "redis-development",
+        "url": "https://skills.sh/redis/agent-skills/redis-development",
+        "install": "npx skills add redis/agent-skills --skill redis-development"
+      }
+    ]
+  },
+  {
+    "slug": "langchain",
+    "skills": [
+      {
+        "name": "langchain-fundamentals",
+        "url": "https://skills.sh/langchain-ai/langchain-skills/langchain-fundamentals",
+        "install": "npx skills add langchain-ai/langchain-skills --skill langchain-fundamentals"
+      }
+    ]
+  },
+  {
+    "slug": "huggingface",
+    "skills": [
+      {
+        "name": "huggingface-datasets",
+        "url": "https://skills.sh/huggingface/skills/huggingface-datasets",
+        "install": "npx skills add huggingface/skills --skill huggingface-datasets"
+      }
+    ]
+  },
+  {
+    "slug": "workos",
+    "skills": [
+      {
+        "name": "workos",
+        "url": "https://skills.sh/workos/skills/workos",
+        "install": "npx skills add workos/skills --skill workos"
+      }
+    ]
+  },
+  {
+    "slug": "launchdarkly",
+    "skills": [
+      {
+        "name": "launchdarkly-flag-discovery",
+        "url": "https://skills.sh/launchdarkly/agent-skills/launchdarkly-flag-discovery",
+        "install": "npx skills add launchdarkly/agent-skills --skill launchdarkly-flag-discovery"
+      }
+    ]
+  },
+  {
+    "slug": "pinecone",
+    "skills": [
+      {
+        "name": "pinecone-docs",
+        "url": "https://skills.sh/pinecone-io/skills/pinecone-docs",
+        "install": "npx skills add pinecone-io/skills --skill pinecone-docs"
+      }
+    ]
+  },
+  {
+    "slug": "notion",
+    "skills": [
+      {
+        "name": "notion-cli",
+        "url": "https://skills.sh/makenotion/skills/notion-cli",
+        "install": "npx skills add makenotion/skills --skill notion-cli"
+      }
+    ]
+  },
+  {
+    "slug": "twilio",
+    "skills": [
+      {
+        "name": "twilio-sms-send-message",
+        "url": "https://skills.sh/twilio/ai/twilio-sms-send-message",
+        "install": "npx skills add twilio/ai --skill twilio-sms-send-message"
+      }
+    ]
+  },
+  {
+    "slug": "posthog",
+    "skills": [
+      {
+        "name": "posthog-instrumentation",
+        "url": "https://skills.sh/posthog/posthog-for-claude/posthog-instrumentation",
+        "install": "npx skills add posthog/posthog-for-claude --skill posthog-instrumentation"
+      }
+    ]
+  }
+]

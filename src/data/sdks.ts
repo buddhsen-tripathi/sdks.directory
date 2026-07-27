@@ -79,6 +79,13 @@ export const sdks: SdkEntry[] = [
       },
     ],
     tags: ["llm", "gpt", "embeddings"],
+    skills: [
+      {
+        name: "openai-docs",
+        url: "https://skills.sh/openai/skills/openai-docs",
+        install: "npx skills add openai/skills --skill openai-docs"
+      }
+    ],
     featured: true,
     official: true,
   },
@@ -149,6 +156,13 @@ export const sdks: SdkEntry[] = [
       },
     ],
     tags: ["aws", "boto3", "cloud"],
+    skills: [
+      {
+        name: "aws-serverless",
+        url: "https://skills.sh/aws/agent-toolkit-for-aws/aws-serverless",
+        install: "npx skills add aws/agent-toolkit-for-aws --skill aws-serverless"
+      }
+    ],
     featured: true,
     official: true,
   },
@@ -204,6 +218,13 @@ export const sdks: SdkEntry[] = [
     docsUrl: "https://learn.microsoft.com/en-us/azure/developer/",
     githubUrl: "https://github.com/Azure",
     tags: ["azure", "microsoft"],
+    skills: [
+      {
+        name: "azure-ai",
+        url: "https://skills.sh/microsoft/azure-skills/azure-ai",
+        install: "npx skills add microsoft/azure-skills --skill azure-ai"
+      }
+    ],
     featured: true,
     official: true,
   },
@@ -285,6 +306,13 @@ export const sdks: SdkEntry[] = [
       },
     ],
     tags: ["sms", "voice", "whatsapp"],
+    skills: [
+      {
+        name: "twilio-sms-send-message",
+        url: "https://skills.sh/twilio/ai/twilio-sms-send-message",
+        install: "npx skills add twilio/ai --skill twilio-sms-send-message"
+      }
+    ],
     featured: true,
     official: true,
   },
@@ -358,6 +386,13 @@ export const sdks: SdkEntry[] = [
     docsUrl: "https://firebase.google.com/docs",
     githubUrl: "https://github.com/firebase",
     tags: ["firestore", "baas"],
+    skills: [
+      {
+        name: "firebase-basics",
+        url: "https://skills.sh/firebase/agent-skills/firebase-basics",
+        install: "npx skills add firebase/agent-skills --skill firebase-basics"
+      }
+    ],
     featured: true,
     official: true,
   },
@@ -381,6 +416,13 @@ export const sdks: SdkEntry[] = [
       },
     ],
     tags: ["deploy", "edge"],
+    skills: [
+      {
+        name: "deploy-to-vercel",
+        url: "https://skills.sh/vercel-labs/agent-skills/deploy-to-vercel",
+        install: "npx skills add vercel-labs/agent-skills --skill deploy-to-vercel"
+      }
+    ],
     official: true,
   },
   {
@@ -442,6 +484,13 @@ export const sdks: SdkEntry[] = [
     docsUrl: "https://docs.sentry.io",
     githubUrl: "https://github.com/getsentry",
     tags: ["errors", "apm", "tracing"],
+    skills: [
+      {
+        name: "sentry-sdk-setup",
+        url: "https://skills.sh/getsentry/sentry-for-ai/sentry-sdk-setup",
+        install: "npx skills add getsentry/sentry-for-ai --skill sentry-sdk-setup"
+      }
+    ],
     featured: true,
     official: true,
   },
@@ -458,6 +507,13 @@ export const sdks: SdkEntry[] = [
     docsUrl: "https://docs.datadoghq.com",
     githubUrl: "https://github.com/DataDog",
     tags: ["apm", "metrics", "logs"],
+    skills: [
+      {
+        name: "dd-apm",
+        url: "https://skills.sh/datadog-labs/agent-skills/dd-apm",
+        install: "npx skills add datadog-labs/agent-skills --skill dd-apm"
+      }
+    ],
     official: true,
   },
   {
@@ -485,6 +541,13 @@ export const sdks: SdkEntry[] = [
     docsUrl: "https://auth0.com/docs",
     githubUrl: "https://github.com/auth0",
     tags: ["oauth", "oidc", "sso"],
+    skills: [
+      {
+        name: "auth0-quickstart",
+        url: "https://skills.sh/auth0/agent-skills/auth0-quickstart",
+        install: "npx skills add auth0/agent-skills --skill auth0-quickstart"
+      }
+    ],
     featured: true,
     official: true,
   },
@@ -508,6 +571,13 @@ export const sdks: SdkEntry[] = [
       },
     ],
     tags: ["auth", "sessions"],
+    skills: [
+      {
+        name: "clerk",
+        url: "https://skills.sh/clerk/skills/clerk",
+        install: "npx skills add clerk/skills --skill clerk"
+      }
+    ],
     official: true,
   },
   {
@@ -559,6 +629,13 @@ export const sdks: SdkEntry[] = [
       },
     ],
     tags: ["email", "transactional"],
+    skills: [
+      {
+        name: "resend",
+        url: "https://skills.sh/resend/resend-skills/resend",
+        install: "npx skills add resend/resend-skills --skill resend"
+      }
+    ],
     featured: true,
     official: true,
   },
@@ -603,6 +680,13 @@ export const sdks: SdkEntry[] = [
     docsUrl: "https://posthog.com/docs",
     githubUrl: "https://github.com/PostHog",
     tags: ["analytics", "feature-flags"],
+    skills: [
+      {
+        name: "posthog-instrumentation",
+        url: "https://skills.sh/posthog/posthog-for-claude/posthog-instrumentation",
+        install: "npx skills add posthog/posthog-for-claude --skill posthog-instrumentation"
+      }
+    ],
     official: true,
   },
   {
@@ -756,6 +840,13 @@ export const sdks: SdkEntry[] = [
     docsUrl: "https://www.mongodb.com/docs/drivers/",
     githubUrl: "https://github.com/mongodb",
     tags: ["nosql", "document"],
+    skills: [
+      {
+        name: "mongodb-connection",
+        url: "https://skills.sh/mongodb/agent-skills/mongodb-connection",
+        install: "npx skills add mongodb/agent-skills --skill mongodb-connection"
+      }
+    ],
     featured: true,
     official: true,
   },
@@ -795,6 +886,13 @@ export const sdks: SdkEntry[] = [
       },
     ],
     tags: ["cache", "pubsub"],
+    skills: [
+      {
+        name: "redis-development",
+        url: "https://skills.sh/redis/agent-skills/redis-development",
+        install: "npx skills add redis/agent-skills --skill redis-development"
+      }
+    ],
     official: true,
   },
   {
@@ -810,6 +908,13 @@ export const sdks: SdkEntry[] = [
     docsUrl: "https://docs.pinecone.io",
     githubUrl: "https://github.com/pinecone-io",
     tags: ["vector", "rag"],
+    skills: [
+      {
+        name: "pinecone-docs",
+        url: "https://skills.sh/pinecone-io/skills/pinecone-docs",
+        install: "npx skills add pinecone-io/skills --skill pinecone-docs"
+      }
+    ],
     official: true,
   },
   {
@@ -1036,6 +1141,13 @@ export const sdks: SdkEntry[] = [
       },
     ],
     tags: ["agents", "rag", "llm"],
+    skills: [
+      {
+        name: "langchain-fundamentals",
+        url: "https://skills.sh/langchain-ai/langchain-skills/langchain-fundamentals",
+        install: "npx skills add langchain-ai/langchain-skills --skill langchain-fundamentals"
+      }
+    ],
     featured: true,
     official: true,
   },
@@ -1074,6 +1186,13 @@ export const sdks: SdkEntry[] = [
       },
     ],
     tags: ["transformers", "models"],
+    skills: [
+      {
+        name: "huggingface-datasets",
+        url: "https://skills.sh/huggingface/skills/huggingface-datasets",
+        install: "npx skills add huggingface/skills --skill huggingface-datasets"
+      }
+    ],
     featured: true,
     official: true,
   },
@@ -1228,6 +1347,13 @@ export const sdks: SdkEntry[] = [
     docsUrl: "https://docs.launchdarkly.com",
     githubUrl: "https://github.com/launchdarkly",
     tags: ["feature-flags"],
+    skills: [
+      {
+        name: "launchdarkly-flag-discovery",
+        url: "https://skills.sh/launchdarkly/agent-skills/launchdarkly-flag-discovery",
+        install: "npx skills add launchdarkly/agent-skills --skill launchdarkly-flag-discovery"
+      }
+    ],
     official: true,
   },
   {
@@ -1243,6 +1369,13 @@ export const sdks: SdkEntry[] = [
     docsUrl: "https://workos.com/docs",
     githubUrl: "https://github.com/workos",
     tags: ["sso", "enterprise"],
+    skills: [
+      {
+        name: "workos",
+        url: "https://skills.sh/workos/skills/workos",
+        install: "npx skills add workos/skills --skill workos"
+      }
+    ],
     official: true,
   },
   {
@@ -1287,6 +1420,13 @@ export const sdks: SdkEntry[] = [
       },
     ],
     tags: ["productivity"],
+    skills: [
+      {
+        name: "notion-cli",
+        url: "https://skills.sh/makenotion/skills/notion-cli",
+        install: "npx skills add makenotion/skills --skill notion-cli"
+      }
+    ],
     official: true,
   },
   {
