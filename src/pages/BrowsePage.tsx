@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { SdkGrid } from "../components/SdkGrid";
 import { TechIcon } from "../components/TechIcon";
 import { Section, SectionHead } from "../components/ui/section";
@@ -44,14 +44,7 @@ export function BrowsePage() {
       <SectionHead
         eyebrow="Catalog"
         title="Browse SDKs"
-        description={
-          <>
-            Search the full index. Language and category are filters.{" "}
-            <Link to="/languages" className="text-ink hover:text-primary">
-              Language filters →
-            </Link>
-          </>
-        }
+        description="Search the full index. Language and category are filters."
       />
 
       <div className="mb-5 grid grid-cols-1 gap-2 md:grid-cols-[1.4fr_1fr_1fr]">

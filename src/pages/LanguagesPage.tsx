@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { LanguageGrid } from "../components/LanguageGrid";
 import { Section, SectionHead } from "../components/ui/section";
 import { getLanguageCounts, languages } from "../data";
@@ -12,14 +11,7 @@ export function LanguagesPage() {
       <SectionHead
         eyebrow="Languages"
         title="Every language we index"
-        description={
-          <>
-            {total} languages with at least one SDK.{" "}
-            <Link to="/browse" className="text-ink hover:text-primary">
-              Or browse everything →
-            </Link>
-          </>
-        }
+        description={`${total} languages with at least one SDK.`}
       />
       <LanguageGrid />
     </Section>

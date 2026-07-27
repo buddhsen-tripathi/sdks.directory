@@ -42,15 +42,7 @@ export function LanguagePage() {
             {language.name} SDKs
           </span>
         }
-        description={
-          <>
-            {list.length} SDK{list.length === 1 ? "" : "s"} with {language.name}{" "}
-            support.{" "}
-            <Link to="/browse" className="text-ink hover:text-primary">
-              Filter the full catalog →
-            </Link>
-          </>
-        }
+        description={`${list.length} SDK${list.length === 1 ? "" : "s"} with ${language.name} support.`}
       />
       <SdkGrid
         sdks={list}
