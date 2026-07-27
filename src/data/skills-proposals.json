@@ -1,202 +1,983 @@
-[
-  {
-    "slug": "openai",
-    "skills": [
-      {
-        "name": "openai-docs",
-        "url": "https://skills.sh/openai/skills/openai-docs",
-        "install": "npx skills add openai/skills --skill openai-docs"
-      }
-    ]
-  },
-  {
-    "slug": "aws",
-    "skills": [
-      {
-        "name": "aws-serverless",
-        "url": "https://skills.sh/aws/agent-toolkit-for-aws/aws-serverless",
-        "install": "npx skills add aws/agent-toolkit-for-aws --skill aws-serverless"
-      }
-    ]
-  },
-  {
-    "slug": "azure",
-    "skills": [
-      {
-        "name": "azure-ai",
-        "url": "https://skills.sh/microsoft/azure-skills/azure-ai",
-        "install": "npx skills add microsoft/azure-skills --skill azure-ai"
-      }
-    ]
-  },
-  {
-    "slug": "firebase",
-    "skills": [
-      {
-        "name": "firebase-basics",
-        "url": "https://skills.sh/firebase/agent-skills/firebase-basics",
-        "install": "npx skills add firebase/agent-skills --skill firebase-basics"
-      }
-    ]
-  },
-  {
-    "slug": "vercel",
-    "skills": [
-      {
-        "name": "deploy-to-vercel",
-        "url": "https://skills.sh/vercel-labs/agent-skills/deploy-to-vercel",
-        "install": "npx skills add vercel-labs/agent-skills --skill deploy-to-vercel"
-      }
-    ]
-  },
-  {
-    "slug": "sentry",
-    "skills": [
-      {
-        "name": "sentry-sdk-setup",
-        "url": "https://skills.sh/getsentry/sentry-for-ai/sentry-sdk-setup",
-        "install": "npx skills add getsentry/sentry-for-ai --skill sentry-sdk-setup"
-      }
-    ]
-  },
-  {
-    "slug": "datadog",
-    "skills": [
-      {
-        "name": "dd-apm",
-        "url": "https://skills.sh/datadog-labs/agent-skills/dd-apm",
-        "install": "npx skills add datadog-labs/agent-skills --skill dd-apm"
-      }
-    ]
-  },
-  {
-    "slug": "auth0",
-    "skills": [
-      {
-        "name": "auth0-quickstart",
-        "url": "https://skills.sh/auth0/agent-skills/auth0-quickstart",
-        "install": "npx skills add auth0/agent-skills --skill auth0-quickstart"
-      }
-    ]
-  },
-  {
-    "slug": "clerk",
-    "skills": [
-      {
-        "name": "clerk",
-        "url": "https://skills.sh/clerk/skills/clerk",
-        "install": "npx skills add clerk/skills --skill clerk"
-      }
-    ]
-  },
-  {
-    "slug": "resend",
-    "skills": [
-      {
-        "name": "resend",
-        "url": "https://skills.sh/resend/resend-skills/resend",
-        "install": "npx skills add resend/resend-skills --skill resend"
-      }
-    ]
-  },
-  {
-    "slug": "mongodb",
-    "skills": [
-      {
-        "name": "mongodb-connection",
-        "url": "https://skills.sh/mongodb/agent-skills/mongodb-connection",
-        "install": "npx skills add mongodb/agent-skills --skill mongodb-connection"
-      }
-    ]
-  },
-  {
-    "slug": "redis",
-    "skills": [
-      {
-        "name": "redis-development",
-        "url": "https://skills.sh/redis/agent-skills/redis-development",
-        "install": "npx skills add redis/agent-skills --skill redis-development"
-      }
-    ]
-  },
-  {
-    "slug": "langchain",
-    "skills": [
-      {
-        "name": "langchain-fundamentals",
-        "url": "https://skills.sh/langchain-ai/langchain-skills/langchain-fundamentals",
-        "install": "npx skills add langchain-ai/langchain-skills --skill langchain-fundamentals"
-      }
-    ]
-  },
-  {
-    "slug": "huggingface",
-    "skills": [
-      {
-        "name": "huggingface-datasets",
-        "url": "https://skills.sh/huggingface/skills/huggingface-datasets",
-        "install": "npx skills add huggingface/skills --skill huggingface-datasets"
-      }
-    ]
-  },
-  {
-    "slug": "workos",
-    "skills": [
-      {
-        "name": "workos",
-        "url": "https://skills.sh/workos/skills/workos",
-        "install": "npx skills add workos/skills --skill workos"
-      }
-    ]
-  },
-  {
-    "slug": "launchdarkly",
-    "skills": [
-      {
-        "name": "launchdarkly-flag-discovery",
-        "url": "https://skills.sh/launchdarkly/agent-skills/launchdarkly-flag-discovery",
-        "install": "npx skills add launchdarkly/agent-skills --skill launchdarkly-flag-discovery"
-      }
-    ]
-  },
-  {
-    "slug": "pinecone",
-    "skills": [
-      {
-        "name": "pinecone-docs",
-        "url": "https://skills.sh/pinecone-io/skills/pinecone-docs",
-        "install": "npx skills add pinecone-io/skills --skill pinecone-docs"
-      }
-    ]
-  },
-  {
-    "slug": "notion",
-    "skills": [
-      {
-        "name": "notion-cli",
-        "url": "https://skills.sh/makenotion/skills/notion-cli",
-        "install": "npx skills add makenotion/skills --skill notion-cli"
-      }
-    ]
-  },
-  {
-    "slug": "twilio",
-    "skills": [
-      {
-        "name": "twilio-sms-send-message",
-        "url": "https://skills.sh/twilio/ai/twilio-sms-send-message",
-        "install": "npx skills add twilio/ai --skill twilio-sms-send-message"
-      }
-    ]
-  },
-  {
-    "slug": "posthog",
-    "skills": [
-      {
-        "name": "posthog-instrumentation",
-        "url": "https://skills.sh/posthog/posthog-for-claude/posthog-instrumentation",
-        "install": "npx skills add posthog/posthog-for-claude --skill posthog-instrumentation"
-      }
-    ]
-  }
-]
+{
+  "generatedAt": "2026-07-27T08:50:00.000Z",
+  "proposals": [
+    {
+      "slug": "openai",
+      "skills": [
+        {
+          "name": "openai-docs",
+          "url": "https://skills.sh/openai/skills/openai-docs",
+          "install": "npx skills add openai/skills --skill openai-docs"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official OpenAI curated skill for API/docs usage (openai/skills). Other openai/skills entries (pdf, playwright, etc.) are general Codex tools, not the OpenAI API SDK."
+    },
+    {
+      "slug": "anthropic",
+      "skills": [
+        {
+          "name": "claude-api",
+          "url": "https://skills.sh/anthropics/skills/claude-api",
+          "install": "npx skills add anthropics/skills --skill claude-api"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official Anthropic skill specifically for the Claude/Messages API. Prefer over generic anthropics/skills (pptx/pdf/frontend-design)."
+    },
+    {
+      "slug": "aws",
+      "skills": [
+        {
+          "name": "aws-iam",
+          "url": "https://skills.sh/aws/agent-toolkit-for-aws/aws-iam",
+          "install": "npx skills add aws/agent-toolkit-for-aws --skill aws-iam"
+        },
+        {
+          "name": "aws-serverless",
+          "url": "https://skills.sh/aws/agent-toolkit-for-aws/aws-serverless",
+          "install": "npx skills add aws/agent-toolkit-for-aws --skill aws-serverless"
+        },
+        {
+          "name": "aws-cdk",
+          "url": "https://skills.sh/aws/agent-toolkit-for-aws/aws-cdk",
+          "install": "npx skills add aws/agent-toolkit-for-aws --skill aws-cdk"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official AWS Agent Toolkit skills (aws/agent-toolkit-for-aws). No single 'boto3 SDK' skill; these cover core AWS development surfaces."
+    },
+    {
+      "slug": "google-cloud",
+      "skills": [
+        {
+          "name": "gcloud",
+          "url": "https://skills.sh/google/skills/gcloud",
+          "install": "npx skills add google/skills --skill gcloud"
+        },
+        {
+          "name": "cloud-run-basics",
+          "url": "https://github.com/google/skills/tree/main/skills/cloud/cloud-run-basics",
+          "install": "npx skills add google/skills --skill cloud-run-basics"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official google/skills cloud suite. gcloud is the best general entry; many service-specific skills also live under skills/cloud/."
+    },
+    {
+      "slug": "azure",
+      "skills": [
+        {
+          "name": "azure-deploy",
+          "url": "https://skills.sh/microsoft/azure-skills/azure-deploy",
+          "install": "npx skills add microsoft/azure-skills --skill azure-deploy"
+        },
+        {
+          "name": "azure-ai",
+          "url": "https://skills.sh/microsoft/azure-skills/azure-ai",
+          "install": "npx skills add microsoft/azure-skills --skill azure-ai"
+        },
+        {
+          "name": "azure-hosted-copilot-sdk",
+          "url": "https://skills.sh/microsoft/azure-skills/azure-hosted-copilot-sdk",
+          "install": "npx skills add microsoft/azure-skills --skill azure-hosted-copilot-sdk"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official Microsoft azure-skills pack (very high install counts)."
+    },
+    {
+      "slug": "twilio",
+      "skills": [
+        {
+          "name": "twilio-sms-send-message",
+          "url": "https://skills.sh/twilio/ai/twilio-sms-send-message",
+          "install": "npx skills add twilio/ai --skill twilio-sms-send-message"
+        },
+        {
+          "name": "twilio-messaging-overview",
+          "url": "https://skills.sh/twilio/ai/twilio-messaging-overview",
+          "install": "npx skills add twilio/ai --skill twilio-messaging-overview"
+        },
+        {
+          "name": "twilio-webhook-architecture",
+          "url": "https://skills.sh/twilio/ai/twilio-webhook-architecture",
+          "install": "npx skills add twilio/ai --skill twilio-webhook-architecture"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official Twilio AI skills repo (twilio/ai). Multiple task-oriented messaging skills; no single umbrella 'twilio-sdk' skill."
+    },
+    {
+      "slug": "firebase",
+      "skills": [
+        {
+          "name": "firebase-basics",
+          "url": "https://skills.sh/firebase/agent-skills/firebase-basics",
+          "install": "npx skills add firebase/agent-skills"
+        },
+        {
+          "name": "firebase-auth-basics",
+          "url": "https://skills.sh/firebase/agent-skills/firebase-auth-basics",
+          "install": "npx skills add firebase/agent-skills --skill firebase-auth-basics"
+        },
+        {
+          "name": "firebase-firestore",
+          "url": "https://skills.sh/firebase/agent-skills/firebase-firestore",
+          "install": "npx skills add firebase/agent-skills --skill firebase-firestore"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official firebase/agent-skills (README also mentions `npx skills add firebase/skills`). Extremely high install counts."
+    },
+    {
+      "slug": "vercel",
+      "skills": [
+        {
+          "name": "deploy-to-vercel",
+          "url": "https://skills.sh/vercel-labs/agent-skills/deploy-to-vercel",
+          "install": "npx skills add vercel-labs/agent-skills --skill deploy-to-vercel"
+        },
+        {
+          "name": "vercel-cli-with-tokens",
+          "url": "https://skills.sh/vercel-labs/agent-skills/vercel-cli-with-tokens",
+          "install": "npx skills add vercel-labs/agent-skills --skill vercel-cli-with-tokens"
+        },
+        {
+          "name": "vercel-react-best-practices",
+          "url": "https://skills.sh/vercel-labs/agent-skills/vercel-react-best-practices",
+          "install": "npx skills add vercel-labs/agent-skills --skill vercel-react-best-practices"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official vercel-labs/agent-skills. Prefer deploy/CLI skills for the Vercel platform SDK entry; AI SDK already linked separately on ai-sdk."
+    },
+    {
+      "slug": "sentry",
+      "skills": [
+        {
+          "name": "sentry-sdk-setup",
+          "url": "https://skills.sh/getsentry/sentry-for-ai/sentry-sdk-setup",
+          "install": "npx skills add getsentry/sentry-for-ai --skill sentry-sdk-setup"
+        },
+        {
+          "name": "sentry-node-sdk",
+          "url": "https://skills.sh/getsentry/sentry-for-ai/sentry-node-sdk",
+          "install": "npx skills add getsentry/sentry-for-ai --skill sentry-node-sdk"
+        },
+        {
+          "name": "sentry-browser-sdk",
+          "url": "https://skills.sh/getsentry/sentry-for-ai/sentry-browser-sdk",
+          "install": "npx skills add getsentry/sentry-for-ai --skill sentry-browser-sdk"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Prefer getsentry/sentry-for-ai SDK setup skills over getsentry/skills (those are general coding/security helpers)."
+    },
+    {
+      "slug": "datadog",
+      "skills": [
+        {
+          "name": "dd-pup",
+          "url": "https://skills.sh/datadog-labs/agent-skills/dd-pup",
+          "install": "npx skills add datadog-labs/agent-skills"
+        },
+        {
+          "name": "dd-apm",
+          "url": "https://skills.sh/datadog-labs/agent-skills/dd-apm",
+          "install": "npx skills add datadog-labs/agent-skills --skill dd-apm"
+        },
+        {
+          "name": "dd-logs",
+          "url": "https://skills.sh/datadog-labs/agent-skills/dd-logs",
+          "install": "npx skills add datadog-labs/agent-skills --skill dd-logs"
+        },
+        {
+          "name": "dd-browser-sdk",
+          "url": "https://skills.sh/datadog-labs/agent-skills/dd-browser-sdk",
+          "install": "npx skills add datadog-labs/agent-skills --skill dd-browser-sdk"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official datadog-labs/agent-skills pack."
+    },
+    {
+      "slug": "auth0",
+      "skills": [
+        {
+          "name": "auth0-quickstart",
+          "url": "https://skills.sh/auth0/agent-skills/auth0-quickstart",
+          "install": "npx skills add auth0/agent-skills"
+        },
+        {
+          "name": "auth0-nextjs",
+          "url": "https://skills.sh/auth0/agent-skills/auth0-nextjs",
+          "install": "npx skills add auth0/agent-skills --skill auth0-nextjs"
+        },
+        {
+          "name": "auth0-react",
+          "url": "https://skills.sh/auth0/agent-skills/auth0-react",
+          "install": "npx skills add auth0/agent-skills --skill auth0-react"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official auth0/agent-skills with many framework-specific skills."
+    },
+    {
+      "slug": "clerk",
+      "skills": [
+        {
+          "name": "clerk-setup",
+          "url": "https://skills.sh/clerk/skills/clerk-setup",
+          "install": "npx skills add clerk/skills"
+        },
+        {
+          "name": "clerk-nextjs-patterns",
+          "url": "https://skills.sh/clerk/skills/clerk-nextjs-patterns",
+          "install": "npx skills add clerk/skills --skill clerk-nextjs-patterns"
+        },
+        {
+          "name": "clerk-backend-api",
+          "url": "https://skills.sh/clerk/skills/clerk-backend-api",
+          "install": "npx skills add clerk/skills --skill clerk-backend-api"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official clerk/skills (high installs)."
+    },
+    {
+      "slug": "resend",
+      "skills": [
+        {
+          "name": "resend",
+          "url": "https://skills.sh/resend/resend-skills/resend",
+          "install": "npx skills add resend/resend-skills"
+        },
+        {
+          "name": "email-best-practices",
+          "url": "https://skills.sh/resend/email-best-practices/email-best-practices",
+          "install": "npx skills add resend/email-best-practices"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official Resend skills; resend/react-email also exists if you want a separate React Email entry later."
+    },
+    {
+      "slug": "sendgrid",
+      "skills": [
+        {
+          "name": "twilio-sendgrid-email-send",
+          "url": "https://skills.sh/twilio/ai/twilio-sendgrid-email-send",
+          "install": "npx skills add twilio/ai --skill twilio-sendgrid-email-send"
+        },
+        {
+          "name": "twilio-sendgrid-webhooks",
+          "url": "https://skills.sh/twilio/ai/twilio-sendgrid-webhooks",
+          "install": "npx skills add twilio/ai --skill twilio-sendgrid-webhooks"
+        },
+        {
+          "name": "twilio-sendgrid-account-setup",
+          "url": "https://skills.sh/twilio/ai/twilio-sendgrid-account-setup",
+          "install": "npx skills add twilio/ai --skill twilio-sendgrid-account-setup"
+        }
+      ],
+      "confidence": "high",
+      "notes": "SendGrid skills live under official Twilio AI skills (Twilio owns SendGrid)."
+    },
+    {
+      "slug": "posthog",
+      "skills": [
+        {
+          "name": "posthog-instrumentation",
+          "url": "https://skills.sh/posthog/posthog-for-claude/posthog-instrumentation",
+          "install": "npx skills add posthog/posthog-for-claude --skill posthog-instrumentation"
+        },
+        {
+          "name": "instrument-product-analytics",
+          "url": "https://skills.sh/posthog/ai-plugin/instrument-product-analytics",
+          "install": "npx skills add posthog/ai-plugin --skill instrument-product-analytics"
+        },
+        {
+          "name": "instrument-feature-flags",
+          "url": "https://skills.sh/posthog/ai-plugin/instrument-feature-flags",
+          "install": "npx skills add posthog/ai-plugin --skill instrument-feature-flags"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official PostHog skills across posthog-for-claude and posthog/ai-plugin; posthog/skills also has framework onboarding skills."
+    },
+    {
+      "slug": "segment",
+      "skills": [
+        {
+          "name": "segment-cdp",
+          "url": "https://skills.sh/sickn33/antigravity-awesome-skills/segment-cdp",
+          "install": "npx skills add sickn33/antigravity-awesome-skills --skill segment-cdp"
+        }
+      ],
+      "confidence": "low",
+      "notes": "No official Segment/Twilio Segment skill found on skills.sh. Best match is community segment-cdp."
+    },
+    {
+      "slug": "planetscale",
+      "skills": [
+        {
+          "name": "postgres",
+          "url": "https://skills.sh/planetscale/database-skills/postgres",
+          "install": "npx skills add planetscale/database-skills --skill postgres"
+        },
+        {
+          "name": "mysql",
+          "url": "https://skills.sh/planetscale/database-skills/mysql",
+          "install": "npx skills add planetscale/database-skills --skill mysql"
+        },
+        {
+          "name": "planetscale-best-practices-matrix",
+          "url": "https://skills.sh/planetscale/skills/planetscale-best-practices-matrix",
+          "install": "npx skills add planetscale/skills --skill planetscale-best-practices-matrix"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official PlanetScale database-skills + planetscale/skills."
+    },
+    {
+      "slug": "drizzle",
+      "skills": [
+        {
+          "name": "drizzle-orm",
+          "url": "https://skills.sh/bobmatnyc/claude-mpm-skills/drizzle-orm",
+          "install": "npx skills add bobmatnyc/claude-mpm-skills --skill drizzle-orm"
+        },
+        {
+          "name": "drizzle-best-practices",
+          "url": "https://skills.sh/honra-io/drizzle-best-practices/drizzle-best-practices",
+          "install": "npx skills add honra-io/drizzle-best-practices"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "No official drizzle-team skill repo. Highest-install community options: bobmatnyc/claude-mpm-skills and honra-io/drizzle-best-practices."
+    },
+    {
+      "slug": "mongodb",
+      "skills": [
+        {
+          "name": "mongodb-connection",
+          "url": "https://skills.sh/mongodb/agent-skills/mongodb-connection",
+          "install": "npx skills add mongodb/agent-skills"
+        },
+        {
+          "name": "mongodb-query-optimizer",
+          "url": "https://skills.sh/mongodb/agent-skills/mongodb-query-optimizer",
+          "install": "npx skills add mongodb/agent-skills --skill mongodb-query-optimizer"
+        },
+        {
+          "name": "mongodb-search-and-ai",
+          "url": "https://skills.sh/mongodb/agent-skills/mongodb-search-and-ai",
+          "install": "npx skills add mongodb/agent-skills --skill mongodb-search-and-ai"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official mongodb/agent-skills."
+    },
+    {
+      "slug": "redis",
+      "skills": [
+        {
+          "name": "redis-development",
+          "url": "https://skills.sh/redis/agent-skills/redis-development",
+          "install": "npx skills add redis/agent-skills"
+        },
+        {
+          "name": "redis-core",
+          "url": "https://skills.sh/redis/agent-skills/redis-core",
+          "install": "npx skills add redis/agent-skills --skill redis-core"
+        },
+        {
+          "name": "redis-connections",
+          "url": "https://skills.sh/redis/agent-skills/redis-connections",
+          "install": "npx skills add redis/agent-skills --skill redis-connections"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official redis/agent-skills."
+    },
+    {
+      "slug": "pinecone",
+      "skills": [
+        {
+          "name": "pinecone-docs",
+          "url": "https://skills.sh/pinecone-io/skills/pinecone-docs",
+          "install": "npx skills add pinecone-io/skills"
+        },
+        {
+          "name": "pinecone-quickstart",
+          "url": "https://skills.sh/pinecone-io/skills/pinecone-quickstart",
+          "install": "npx skills add pinecone-io/skills --skill pinecone-quickstart"
+        },
+        {
+          "name": "pinecone-query",
+          "url": "https://skills.sh/pinecone-io/skills/pinecone-query",
+          "install": "npx skills add pinecone-io/skills --skill pinecone-query"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official pinecone-io/skills."
+    },
+    {
+      "slug": "algolia",
+      "skills": [
+        {
+          "name": "algolia-quickstart",
+          "url": "https://github.com/algolia/skills/tree/main/skills/algolia-quickstart",
+          "install": "npx skills add algolia/skills --skill algolia-quickstart"
+        },
+        {
+          "name": "instantsearch",
+          "url": "https://skills.sh/algolia/skills/instantsearch",
+          "install": "npx skills add algolia/skills --skill instantsearch"
+        },
+        {
+          "name": "algolia-cli",
+          "url": "https://skills.sh/algolia/skills/algolia-cli",
+          "install": "npx skills add algolia/skills --skill algolia-cli"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official algolia/skills."
+    },
+    {
+      "slug": "mapbox",
+      "skills": [
+        {
+          "name": "mapbox-web-integration-patterns",
+          "url": "https://skills.sh/mapbox/mapbox-agent-skills/mapbox-web-integration-patterns",
+          "install": "npx skills add mapbox/mapbox-agent-skills"
+        },
+        {
+          "name": "mapbox-search-integration",
+          "url": "https://skills.sh/mapbox/mapbox-agent-skills/mapbox-search-integration",
+          "install": "npx skills add mapbox/mapbox-agent-skills --skill mapbox-search-integration"
+        },
+        {
+          "name": "mapbox-geospatial-operations",
+          "url": "https://skills.sh/mapbox/mapbox-agent-skills/mapbox-geospatial-operations",
+          "install": "npx skills add mapbox/mapbox-agent-skills --skill mapbox-geospatial-operations"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official mapbox/mapbox-agent-skills."
+    },
+    {
+      "slug": "google-maps",
+      "skills": [
+        {
+          "name": "google-maps-platform",
+          "url": "https://skills.sh/googlemaps/agent-skills/google-maps-platform",
+          "install": "npx skills add googlemaps/agent-skills"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official googlemaps/agent-skills."
+    },
+    {
+      "slug": "cloudinary",
+      "skills": [
+        {
+          "name": "cloudinary-docs",
+          "url": "https://skills.sh/cloudinary-devs/skills/cloudinary-docs",
+          "install": "npx skills add cloudinary-devs/skills"
+        },
+        {
+          "name": "cloudinary-transformations",
+          "url": "https://skills.sh/cloudinary-devs/skills/cloudinary-transformations",
+          "install": "npx skills add cloudinary-devs/skills --skill cloudinary-transformations"
+        },
+        {
+          "name": "cloudinary-react",
+          "url": "https://skills.sh/cloudinary-devs/skills/cloudinary-react",
+          "install": "npx skills add cloudinary-devs/skills --skill cloudinary-react"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official cloudinary-devs/skills."
+    },
+    {
+      "slug": "mux",
+      "skills": [
+        {
+          "name": "mux-video",
+          "url": "https://skills.sh/muxinc/skills/mux-video",
+          "install": "npx skills add muxinc/skills"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official muxinc/skills (skills/mux). Ignore unrelated 'mux'/'cmux'/'tmux' fuzzy hits."
+    },
+    {
+      "slug": "github",
+      "skills": [
+        {
+          "name": "gh-cli",
+          "url": "https://skills.sh/github/awesome-copilot/gh-cli",
+          "install": "npx skills add github/awesome-copilot --skill gh-cli"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "No dedicated Octokit/GitHub REST SDK skill found. Closest official-adjacent skill is github/awesome-copilot gh-cli."
+    },
+    {
+      "slug": "gitlab",
+      "skills": [
+        {
+          "name": "glab",
+          "url": "https://skills.sh/gitlab-org/ai/glab",
+          "install": "npx skills add gitlab-org/ai --skill glab"
+        },
+        {
+          "name": "gitlab-cli-skills",
+          "url": "https://skills.sh/vince-winkintel/gitlab-cli-skills/gitlab-cli-skills",
+          "install": "npx skills add vince-winkintel/gitlab-cli-skills"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "gitlab-org/ai/glab appears on skills.sh as official-adjacent; community gitlab-cli-skills has higher installs. No strong GitLab API SDK skill."
+    },
+    {
+      "slug": "docker",
+      "skills": [
+        {
+          "name": "docker-patterns",
+          "url": "https://skills.sh/affaan-m/everything-claude-code/docker-patterns",
+          "install": "npx skills add affaan-m/everything-claude-code --skill docker-patterns"
+        },
+        {
+          "name": "docker-compose-orchestration",
+          "url": "https://skills.sh/manutej/luxor-claude-marketplace/docker-compose-orchestration",
+          "install": "npx skills add manutej/luxor-claude-marketplace --skill docker-compose-orchestration"
+        }
+      ],
+      "confidence": "low",
+      "notes": "No official docker/* skill repo found. Community patterns only."
+    },
+    {
+      "slug": "kubernetes",
+      "skills": [
+        {
+          "name": "kubernetes-specialist",
+          "url": "https://skills.sh/jeffallan/claude-skills/kubernetes-specialist",
+          "install": "npx skills add jeffallan/claude-skills --skill kubernetes-specialist"
+        },
+        {
+          "name": "k8s-manifest-generator",
+          "url": "https://skills.sh/wshobson/agents/k8s-manifest-generator",
+          "install": "npx skills add wshobson/agents --skill k8s-manifest-generator"
+        }
+      ],
+      "confidence": "low",
+      "notes": "No official kubernetes/kubernetes-sigs agent skill for the client SDKs. Community specialists only. microsoft/azure-skills/azure-kubernetes is Azure-specific."
+    },
+    {
+      "slug": "terraform",
+      "skills": [
+        {
+          "name": "terraform-test",
+          "url": "https://skills.sh/hashicorp/agent-skills/terraform-test",
+          "install": "npx skills add hashicorp/agent-skills --skill terraform-test"
+        },
+        {
+          "name": "terraform-stacks",
+          "url": "https://skills.sh/hashicorp/agent-skills/terraform-stacks",
+          "install": "npx skills add hashicorp/agent-skills --skill terraform-stacks"
+        },
+        {
+          "name": "terraform-style-guide",
+          "url": "https://skills.sh/hashicorp/terraform-agent-kit/terraform-style-guide",
+          "install": "npx skills add hashicorp/terraform-agent-kit --skill terraform-style-guide"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official HashiCorp agent skills for Terraform."
+    },
+    {
+      "slug": "pulumi",
+      "skills": [
+        {
+          "name": "pulumi-best-practices",
+          "url": "https://skills.sh/pulumi/agent-skills/pulumi-best-practices",
+          "install": "npx skills add pulumi/agent-skills"
+        },
+        {
+          "name": "pulumi-automation-api",
+          "url": "https://skills.sh/pulumi/agent-skills/pulumi-automation-api",
+          "install": "npx skills add pulumi/agent-skills --skill pulumi-automation-api"
+        },
+        {
+          "name": "pulumi-overview",
+          "url": "https://skills.sh/pulumi/agent-skills/pulumi-overview",
+          "install": "npx skills add pulumi/agent-skills --skill pulumi-overview"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official pulumi/agent-skills."
+    },
+    {
+      "slug": "langchain",
+      "skills": [
+        {
+          "name": "langchain-fundamentals",
+          "url": "https://skills.sh/langchain-ai/langchain-skills/langchain-fundamentals",
+          "install": "npx skills add langchain-ai/langchain-skills"
+        },
+        {
+          "name": "langchain-python-quickstart",
+          "url": "https://skills.sh/langchain-ai/langchain-skills/langchain-python-quickstart",
+          "install": "npx skills add langchain-ai/langchain-skills --skill langchain-python-quickstart"
+        },
+        {
+          "name": "langchain-typescript-quickstart",
+          "url": "https://skills.sh/langchain-ai/langchain-skills/langchain-typescript-quickstart",
+          "install": "npx skills add langchain-ai/langchain-skills --skill langchain-typescript-quickstart"
+        },
+        {
+          "name": "langchain-rag",
+          "url": "https://skills.sh/langchain-ai/langchain-skills/langchain-rag",
+          "install": "npx skills add langchain-ai/langchain-skills --skill langchain-rag"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official langchain-ai/langchain-skills (includes LangGraph skills too)."
+    },
+    {
+      "slug": "llamaindex",
+      "skills": [
+        {
+          "name": "llamaparse",
+          "url": "https://skills.sh/run-llama/llamaparse-agent-skills/llamaparse",
+          "install": "npx skills add run-llama/llamaparse-agent-skills --skill llamaparse"
+        },
+        {
+          "name": "llamaindex-development",
+          "url": "https://skills.sh/mindrally/skills/llamaindex-development",
+          "install": "npx skills add mindrally/skills --skill llamaindex-development"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Official run-llama skills are LlamaParse-focused, not full LlamaIndex SDK. Community mindrally skill covers LlamaIndex development."
+    },
+    {
+      "slug": "huggingface",
+      "skills": [
+        {
+          "name": "hf-cli",
+          "url": "https://skills.sh/huggingface/skills/hf-cli",
+          "install": "npx skills add huggingface/skills"
+        },
+        {
+          "name": "huggingface-datasets",
+          "url": "https://skills.sh/huggingface/skills/huggingface-datasets",
+          "install": "npx skills add huggingface/skills --skill huggingface-datasets"
+        },
+        {
+          "name": "transformers-js",
+          "url": "https://skills.sh/huggingface/skills/transformers-js",
+          "install": "npx skills add huggingface/skills --skill transformers-js"
+        },
+        {
+          "name": "huggingface-llm-trainer",
+          "url": "https://skills.sh/huggingface/skills/huggingface-llm-trainer",
+          "install": "npx skills add huggingface/skills --skill huggingface-llm-trainer"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official huggingface/skills."
+    },
+    {
+      "slug": "plaid",
+      "skills": [
+        {
+          "name": "plaid",
+          "url": "https://skills.sh/buildgreatproducts/plaid/plaid",
+          "install": "npx skills add buildgreatproducts/plaid"
+        },
+        {
+          "name": "plaid-fintech",
+          "url": "https://skills.sh/sickn33/antigravity-awesome-skills/plaid-fintech",
+          "install": "npx skills add sickn33/antigravity-awesome-skills --skill plaid-fintech"
+        }
+      ],
+      "confidence": "low",
+      "notes": "No official plaid/* skill repo. Community skills only; buildgreatproducts/plaid is the cleaner dedicated source."
+    },
+    {
+      "slug": "shopify",
+      "skills": [
+        {
+          "name": "shopify-dev",
+          "url": "https://skills.sh/shopify/shopify-ai-toolkit/shopify-dev",
+          "install": "npx skills add shopify/shopify-ai-toolkit"
+        },
+        {
+          "name": "shopify-admin",
+          "url": "https://skills.sh/shopify/shopify-ai-toolkit/shopify-admin",
+          "install": "npx skills add shopify/shopify-ai-toolkit --skill shopify-admin"
+        },
+        {
+          "name": "shopify-storefront-graphql",
+          "url": "https://skills.sh/shopify/shopify-ai-toolkit/shopify-storefront-graphql",
+          "install": "npx skills add shopify/shopify-ai-toolkit --skill shopify-storefront-graphql"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official shopify/shopify-ai-toolkit."
+    },
+    {
+      "slug": "slack",
+      "skills": [
+        {
+          "name": "slack-api",
+          "url": "https://skills.sh/slackapi/slack-skills-plugin/slack-api",
+          "install": "npx skills add slackapi/slack-skills-plugin"
+        },
+        {
+          "name": "create-slack-app",
+          "url": "https://skills.sh/slackapi/slack-skills-plugin/create-slack-app",
+          "install": "npx skills add slackapi/slack-skills-plugin --skill create-slack-app"
+        },
+        {
+          "name": "block-kit",
+          "url": "https://github.com/slackapi/slack-skills-plugin/tree/main/skills/block-kit",
+          "install": "npx skills add slackapi/slack-skills-plugin --skill block-kit"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official slackapi/slack-skills-plugin (low install counts but authentic vendor source). Ignore anthropics/skills/slack-gif-creator."
+    },
+    {
+      "slug": "discord",
+      "skills": [
+        {
+          "name": "discord-bot-architect",
+          "url": "https://skills.sh/sickn33/antigravity-awesome-skills/discord-bot-architect",
+          "install": "npx skills add sickn33/antigravity-awesome-skills --skill discord-bot-architect"
+        },
+        {
+          "name": "discord-bot",
+          "url": "https://skills.sh/claude-office-skills/skills/discord-bot",
+          "install": "npx skills add claude-office-skills/skills --skill discord-bot"
+        }
+      ],
+      "confidence": "low",
+      "notes": "No official discord/discordjs skill found. Community bot skills only."
+    },
+    {
+      "slug": "stripe-terminal",
+      "skills": [
+        {
+          "name": "stripe-best-practices",
+          "url": "https://github.com/stripe/ai/tree/main/skills/stripe-best-practices",
+          "install": "npx skills add https://docs.stripe.com --skill stripe-best-practices"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "No Terminal-specific skill on skills.sh. Same official Stripe best-practices skill as the main stripe entry; may still help Terminal integrations."
+    },
+    {
+      "slug": "launchdarkly",
+      "skills": [
+        {
+          "name": "launchdarkly-flag-create",
+          "url": "https://skills.sh/launchdarkly/agent-skills/launchdarkly-flag-create",
+          "install": "npx skills add launchdarkly/agent-skills"
+        },
+        {
+          "name": "launchdarkly-flag-targeting",
+          "url": "https://skills.sh/launchdarkly/agent-skills/launchdarkly-flag-targeting",
+          "install": "npx skills add launchdarkly/agent-skills --skill launchdarkly-flag-targeting"
+        },
+        {
+          "name": "launchdarkly-metric-instrument",
+          "url": "https://skills.sh/launchdarkly/agent-skills/launchdarkly-metric-instrument",
+          "install": "npx skills add launchdarkly/agent-skills --skill launchdarkly-metric-instrument"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official launchdarkly/agent-skills."
+    },
+    {
+      "slug": "workos",
+      "skills": [
+        {
+          "name": "workos",
+          "url": "https://skills.sh/workos/skills/workos",
+          "install": "npx skills add workos/skills"
+        },
+        {
+          "name": "workos-authkit-nextjs",
+          "url": "https://skills.sh/workos/skills/workos-authkit-nextjs",
+          "install": "npx skills add workos/skills --skill workos-authkit-nextjs"
+        },
+        {
+          "name": "workos-widgets",
+          "url": "https://skills.sh/workos/skills/workos-widgets",
+          "install": "npx skills add workos/skills --skill workos-widgets"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official workos/skills."
+    },
+    {
+      "slug": "linear",
+      "skills": [
+        {
+          "name": "linear-release-setup",
+          "url": "https://skills.sh/linear/linear-release/linear-release-setup",
+          "install": "npx skills add linear/linear-release"
+        },
+        {
+          "name": "linear",
+          "url": "https://skills.sh/openai/skills/linear",
+          "install": "npx skills add openai/skills --skill linear"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Official Linear skill found is release-focused (linear/linear-release). openai/skills/linear is popular but OpenAI-curated, not Linear-owned API SDK guidance."
+    },
+    {
+      "slug": "notion",
+      "skills": [
+        {
+          "name": "notion-cli",
+          "url": "https://skills.sh/makenotion/skills/notion-cli",
+          "install": "npx skills add makenotion/skills"
+        },
+        {
+          "name": "notion-knowledge-capture",
+          "url": "https://skills.sh/makenotion/claude-code-notion-plugin/notion-knowledge-capture",
+          "install": "npx skills add makenotion/claude-code-notion-plugin --skill notion-knowledge-capture"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official makenotion skills (Notion)."
+    },
+    {
+      "slug": "airtable",
+      "skills": [
+        {
+          "name": "airtable-overview",
+          "url": "https://skills.sh/airtable/skills/airtable-overview",
+          "install": "npx skills add airtable/skills"
+        },
+        {
+          "name": "airtable-cli",
+          "url": "https://skills.sh/airtable/skills/airtable-cli",
+          "install": "npx skills add airtable/skills --skill airtable-cli"
+        },
+        {
+          "name": "airtable-filters",
+          "url": "https://skills.sh/airtable/skills/airtable-filters",
+          "install": "npx skills add airtable/skills --skill airtable-filters"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official airtable/skills."
+    },
+    {
+      "slug": "openai-agents",
+      "skills": [
+        {
+          "name": "openai-knowledge",
+          "url": "https://skills.sh/openai/openai-agents-python/openai-knowledge",
+          "install": "npx skills add openai/openai-agents-python --skill openai-knowledge"
+        },
+        {
+          "name": "openai-agents-sdk",
+          "url": "https://skills.sh/laguagu/claude-code-nextjs-skills/openai-agents-sdk",
+          "install": "npx skills add laguagu/claude-code-nextjs-skills --skill openai-agents-sdk"
+        }
+      ],
+      "confidence": "medium",
+      "notes": "Official openai-knowledge lives in the Agents SDK repo (.agents/skills) but is partly maintainer-oriented. Higher-install community openai-agents-sdk skill is more end-user focused."
+    },
+    {
+      "slug": "crewai",
+      "skills": [
+        {
+          "name": "getting-started",
+          "url": "https://skills.sh/crewaiinc/skills/getting-started",
+          "install": "npx skills add crewaiinc/skills"
+        },
+        {
+          "name": "design-agent",
+          "url": "https://skills.sh/crewaiinc/skills/design-agent",
+          "install": "npx skills add crewaiinc/skills --skill design-agent"
+        },
+        {
+          "name": "ask-docs",
+          "url": "https://skills.sh/crewaiinc/skills/ask-docs",
+          "install": "npx skills add crewaiinc/skills --skill ask-docs"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official crewaiinc/skills."
+    },
+    {
+      "slug": "meilisearch",
+      "skills": [
+        {
+          "name": "meilisearch",
+          "url": "https://skills.sh/mikkelkrogsholm/dev-skills/meilisearch",
+          "install": "npx skills add mikkelkrogsholm/dev-skills --skill meilisearch"
+        }
+      ],
+      "confidence": "low",
+      "notes": "No official Meilisearch skill repo. Sparse community options only."
+    },
+    {
+      "slug": "upstash",
+      "skills": [
+        {
+          "name": "upstash",
+          "url": "https://skills.sh/upstash/skills/upstash",
+          "install": "npx skills add upstash/skills"
+        },
+        {
+          "name": "upstash-redis-js",
+          "url": "https://skills.sh/upstash/skills/upstash-redis-js",
+          "install": "npx skills add upstash/skills --skill upstash-redis-js"
+        },
+        {
+          "name": "upstash-ratelimit-js",
+          "url": "https://skills.sh/upstash/skills/upstash-ratelimit-js",
+          "install": "npx skills add upstash/skills --skill upstash-ratelimit-js"
+        },
+        {
+          "name": "upstash-qstash-js",
+          "url": "https://skills.sh/upstash/skills/upstash-qstash-js",
+          "install": "npx skills add upstash/skills --skill upstash-qstash-js"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official upstash/skills. Prefer over upstash/context7 (generic docs tools)."
+    },
+    {
+      "slug": "turso",
+      "skills": [
+        {
+          "name": "turso-db",
+          "url": "https://skills.sh/tursodatabase/agent-skills/turso-db",
+          "install": "npx skills add tursodatabase/agent-skills"
+        },
+        {
+          "name": "turso-cloud",
+          "url": "https://skills.sh/tursodatabase/agent-skills/turso-cloud",
+          "install": "npx skills add tursodatabase/agent-skills --skill turso-cloud"
+        }
+      ],
+      "confidence": "high",
+      "notes": "Official tursodatabase/agent-skills. Prefer over internal-engine skills under tursodatabase/turso (code-quality/debugging/etc.)."
+    }
+  ],
+  "noSkillFound": [
+    "square"
+  ]
+}
