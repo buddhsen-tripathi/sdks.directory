@@ -4,6 +4,7 @@ import { BrowsePage } from "./pages/BrowsePage";
 import { HomePage } from "./pages/HomePage";
 import { LanguagePage } from "./pages/LanguagePage";
 import { LanguagesPage } from "./pages/LanguagesPage";
+import { McpsPage, PluginsPage } from "./pages/ComingSoonPage";
 import { SdkDetailPage } from "./pages/SdkDetailPage";
 import { SearchPage } from "./pages/SearchPage";
 
@@ -14,6 +15,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/browse" element={<BrowsePage />} />
+          <Route path="/plugins" element={<PluginsPage />} />
+          <Route path="/mcps" element={<McpsPage />} />
           <Route path="/languages" element={<LanguagesPage />} />
           <Route path="/languages/:langId" element={<LanguagePage />} />
           <Route path="/sdk/:slug" element={<SdkDetailPage />} />
