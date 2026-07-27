@@ -77,8 +77,10 @@ Same seed data as the SPA (Worker first for `/api/*`).
 | Endpoint | Description |
 |----------|-------------|
 | `GET /api/health` | Health check |
-| `GET /api/sdks` | List / filter (`?language=&category=&q=`) |
-| `GET /api/sdks/:slug` | Single SDK |
+| `GET /api/sdks` | List / filter (`?language=&category=&q=&withSkills=1`); items include `skills[]` |
+| `GET /api/sdks/:slug` | Single SDK (includes `skills[]`) |
+| `GET /api/skills` | Flattened skills (`?sdk=&language=&q=`) |
+| `GET /api/coverage` | Skills/packages coverage + missing skill slugs |
 | `GET /api/languages` | Language index |
 | `GET /api/categories` | Category index |
 

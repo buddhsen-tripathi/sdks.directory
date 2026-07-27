@@ -50,6 +50,13 @@ export interface SkillRef {
   url: string;
   /** Optional install hint, e.g. `npx skills add cloudflare/skills` */
   install?: string;
+  /** When set, skill applies only to these languages (omit = all SDK languages). */
+  languages?: LanguageId[];
+}
+
+/** Flattened skill for `GET /api/skills` (includes owning SDK slug). */
+export interface SkillListing extends SkillRef {
+  sdk: string;
 }
 
 export interface SdkEntry {
