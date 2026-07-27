@@ -70,19 +70,29 @@ Add or edit an SDK in `sdks.ts`, then open a PR. Types are in `src/types/catalog
 | `/languages`, `/languages/:id` | Language filters |
 | `/plugins`, `/mcps` | Coming soon |
 
-## API
+## API (agent-first)
 
-Same seed data as the SPA (Worker first for `/api/*`).
+Same seed data as the SPA (Worker first for `/api/*`). Skill **bodies** are snapshotted so agents get full `SKILL.md` text in one request — no hop to skills.sh.
 
 | Endpoint | Description |
 |----------|-------------|
+| `GET /api` | Agent discovery (endpoints + hints) |
+| `GET /llms.txt` | Short agent instructions |
 | `GET /api/health` | Health check |
-| `GET /api/sdks` | List / filter (`?language=&category=&q=&withSkills=1`); items include `skills[]` |
-| `GET /api/sdks/:slug` | Single SDK (includes `skills[]`) |
-| `GET /api/skills` | Flattened skills (`?sdk=&language=&q=`) |
-| `GET /api/coverage` | Skills/packages coverage + missing skill slugs |
+| `GET /api/sdks` | List / filter (`?language=&category=&q=&withSkills=1&include=body`) |
+| `GET /api/sdks/:slug` | Single SDK; pass `?include=body` for skill contents |
+| `GET /api/skills` | Flattened skills (`?sdk=&language=&q=&withContent=1&include=body`) |
+| `GET /api/skills/:sdk/:name` | **Preferred** — single skill with `content` (full SKILL.md) |
+| `GET /api/skills/:sdk/:name.md` | Raw markdown (`Accept: text/markdown` also works) |
+| `GET /api/coverage` | Skills/packages/body coverage |
 | `GET /api/languages` | Language index |
 | `GET /api/categories` | Category index |
+
+Refresh skill snapshots after linking new skills:
+
+```bash
+bun run sync:skills
+```
 
 ## Roadmap
 

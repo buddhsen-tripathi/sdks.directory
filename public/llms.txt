@@ -1,0 +1,63 @@
+# sdks.directory
+
+> Agent-skills directory for SDKs. One request returns the skill body — no hop to skills.sh.
+
+## For agents
+
+Start here:
+
+- Discovery JSON: `/api`
+- Health: `/api/health`
+- Coverage: `/api/coverage`
+
+### Fetch an SDK with skill content
+
+```
+GET /api/sdks/stripe?include=body
+```
+
+Each item in `skills[]` includes `content` (full SKILL.md text) when a snapshot exists, plus `url` / `install` for attribution.
+
+### Fetch a single skill (preferred)
+
+```
+GET /api/skills/stripe/stripe-best-practices
+```
+
+Response fields:
+
+- `name`, `sdk`, `key` — identifiers
+- `content` — full SKILL.md (YAML frontmatter + body)
+- `url`, `install` — upstream source / install hint
+- `hasContent` — whether body is present
+
+Raw markdown:
+
+```
+GET /api/skills/stripe/stripe-best-practices.md
+Accept: text/markdown
+```
+
+### List / search skills
+
+```
+GET /api/skills?q=redis&withContent=1
+GET /api/skills?sdk=neon&include=body
+```
+
+List endpoints omit bodies by default (smaller payloads). Pass `include=body` when you need them.
+
+### List SDKs
+
+```
+GET /api/sdks?withSkills=1&q=auth
+GET /api/sdks?language=python&category=ai
+```
+
+## Human site
+
+Browse SDKs at `/`, `/browse`, `/sdk/{slug}`. Plugins and MCPs are coming soon.
+
+## Notes
+
+Skill bodies are snapshotted from upstream (skills.sh / GitHub) for agent latency and reliability. Prefer our `/api/skills/...` over following `url` when you need the instructions themselves.
