@@ -776,6 +776,23 @@ export const sdks: SdkEntry[] = [
       }
     ],
     tags: ["email"],
+    skills: [
+      {
+        name: "twilio-sendgrid-email-send",
+        url: "https://skills.sh/twilio/ai/twilio-sendgrid-email-send",
+        install: "npx skills add twilio/ai --skill twilio-sendgrid-email-send"
+      },
+      {
+        name: "twilio-sendgrid-webhooks",
+        url: "https://skills.sh/twilio/ai/twilio-sendgrid-webhooks",
+        install: "npx skills add twilio/ai --skill twilio-sendgrid-webhooks"
+      },
+      {
+        name: "twilio-sendgrid-account-setup",
+        url: "https://skills.sh/twilio/ai/twilio-sendgrid-account-setup",
+        install: "npx skills add twilio/ai --skill twilio-sendgrid-account-setup"
+      }
+    ],
     official: true,
   },
   {
@@ -894,6 +911,23 @@ export const sdks: SdkEntry[] = [
       }
     ],
     tags: ["mysql", "serverless"],
+    skills: [
+      {
+        name: "postgres",
+        url: "https://skills.sh/planetscale/database-skills/postgres",
+        install: "npx skills add planetscale/database-skills --skill postgres"
+      },
+      {
+        name: "mysql",
+        url: "https://skills.sh/planetscale/database-skills/mysql",
+        install: "npx skills add planetscale/database-skills --skill mysql"
+      },
+      {
+        name: "planetscale-best-practices-matrix",
+        url: "https://skills.sh/planetscale/skills/planetscale-best-practices-matrix",
+        install: "npx skills add planetscale/skills --skill planetscale-best-practices-matrix"
+      }
+    ],
     official: true,
   },
   {
@@ -976,6 +1010,18 @@ export const sdks: SdkEntry[] = [
       },
     ],
     tags: ["orm", "sql"],
+    skills: [
+      {
+        name: "drizzle-orm",
+        url: "https://skills.sh/bobmatnyc/claude-mpm-skills/drizzle-orm",
+        install: "npx skills add bobmatnyc/claude-mpm-skills --skill drizzle-orm"
+      },
+      {
+        name: "drizzle-best-practices",
+        url: "https://skills.sh/honra-io/drizzle-best-practices/drizzle-best-practices",
+        install: "npx skills add honra-io/drizzle-best-practices"
+      }
+    ],
     official: true,
   },
   {
@@ -1144,6 +1190,23 @@ export const sdks: SdkEntry[] = [
       }
     ],
     tags: ["search"],
+    skills: [
+      {
+        name: "algolia-quickstart",
+        url: "https://github.com/algolia/skills/tree/main/skills/algolia-quickstart",
+        install: "npx skills add algolia/skills --skill algolia-quickstart"
+      },
+      {
+        name: "instantsearch",
+        url: "https://skills.sh/algolia/skills/instantsearch",
+        install: "npx skills add algolia/skills --skill instantsearch"
+      },
+      {
+        name: "algolia-cli",
+        url: "https://skills.sh/algolia/skills/algolia-cli",
+        install: "npx skills add algolia/skills --skill algolia-cli"
+      }
+    ],
     official: true,
   },
   {
@@ -1171,6 +1234,23 @@ export const sdks: SdkEntry[] = [
       }
     ],
     tags: ["maps", "geocoding"],
+    skills: [
+      {
+        name: "mapbox-web-integration-patterns",
+        url: "https://skills.sh/mapbox/mapbox-agent-skills/mapbox-web-integration-patterns",
+        install: "npx skills add mapbox/mapbox-agent-skills"
+      },
+      {
+        name: "mapbox-search-integration",
+        url: "https://skills.sh/mapbox/mapbox-agent-skills/mapbox-search-integration",
+        install: "npx skills add mapbox/mapbox-agent-skills --skill mapbox-search-integration"
+      },
+      {
+        name: "mapbox-geospatial-operations",
+        url: "https://skills.sh/mapbox/mapbox-agent-skills/mapbox-geospatial-operations",
+        install: "npx skills add mapbox/mapbox-agent-skills --skill mapbox-geospatial-operations"
+      }
+    ],
     official: true,
   },
   {
@@ -1203,6 +1283,13 @@ export const sdks: SdkEntry[] = [
       }
     ],
     tags: ["maps", "places"],
+    skills: [
+      {
+        name: "google-maps-platform",
+        url: "https://skills.sh/googlemaps/agent-skills/google-maps-platform",
+        install: "npx skills add googlemaps/agent-skills"
+      }
+    ],
     official: true,
   },
   {
@@ -1243,6 +1330,23 @@ export const sdks: SdkEntry[] = [
       }
     ],
     tags: ["images", "video"],
+    skills: [
+      {
+        name: "cloudinary-docs",
+        url: "https://skills.sh/cloudinary-devs/skills/cloudinary-docs",
+        install: "npx skills add cloudinary-devs/skills"
+      },
+      {
+        name: "cloudinary-transformations",
+        url: "https://skills.sh/cloudinary-devs/skills/cloudinary-transformations",
+        install: "npx skills add cloudinary-devs/skills --skill cloudinary-transformations"
+      },
+      {
+        name: "cloudinary-react",
+        url: "https://skills.sh/cloudinary-devs/skills/cloudinary-react",
+        install: "npx skills add cloudinary-devs/skills --skill cloudinary-react"
+      }
+    ],
     official: true,
   },
   {
@@ -1270,6 +1374,13 @@ export const sdks: SdkEntry[] = [
       }
     ],
     tags: ["video", "streaming"],
+    skills: [
+      {
+        name: "mux-video",
+        url: "https://skills.sh/muxinc/skills/mux-video",
+        install: "npx skills add muxinc/skills"
+      }
+    ],
     official: true,
   },
   {
@@ -1292,6 +1403,13 @@ export const sdks: SdkEntry[] = [
       },
     ],
     tags: ["git", "api"],
+    skills: [
+      {
+        name: "gh-cli",
+        url: "https://skills.sh/github/awesome-copilot/gh-cli",
+        install: "npx skills add github/awesome-copilot --skill gh-cli"
+      }
+    ],
     featured: true,
     official: true,
   },
@@ -1325,6 +1443,18 @@ export const sdks: SdkEntry[] = [
       }
     ],
     tags: ["ci", "devops"],
+    skills: [
+      {
+        name: "glab",
+        url: "https://skills.sh/gitlab-org/ai/glab",
+        install: "npx skills add gitlab-org/ai --skill glab"
+      },
+      {
+        name: "gitlab-cli-skills",
+        url: "https://skills.sh/vince-winkintel/gitlab-cli-skills/gitlab-cli-skills",
+        install: "npx skills add vince-winkintel/gitlab-cli-skills"
+      }
+    ],
     official: true,
   },
   {
@@ -1411,6 +1541,23 @@ export const sdks: SdkEntry[] = [
       }
     ],
     tags: ["iac", "providers"],
+    skills: [
+      {
+        name: "terraform-test",
+        url: "https://skills.sh/hashicorp/agent-skills/terraform-test",
+        install: "npx skills add hashicorp/agent-skills --skill terraform-test"
+      },
+      {
+        name: "terraform-stacks",
+        url: "https://skills.sh/hashicorp/agent-skills/terraform-stacks",
+        install: "npx skills add hashicorp/agent-skills --skill terraform-stacks"
+      },
+      {
+        name: "terraform-style-guide",
+        url: "https://skills.sh/hashicorp/terraform-agent-kit/terraform-style-guide",
+        install: "npx skills add hashicorp/terraform-agent-kit --skill terraform-style-guide"
+      }
+    ],
     official: true,
   },
   {
@@ -1438,6 +1585,23 @@ export const sdks: SdkEntry[] = [
       }
     ],
     tags: ["iac"],
+    skills: [
+      {
+        name: "pulumi-best-practices",
+        url: "https://skills.sh/pulumi/agent-skills/pulumi-best-practices",
+        install: "npx skills add pulumi/agent-skills"
+      },
+      {
+        name: "pulumi-automation-api",
+        url: "https://skills.sh/pulumi/agent-skills/pulumi-automation-api",
+        install: "npx skills add pulumi/agent-skills --skill pulumi-automation-api"
+      },
+      {
+        name: "pulumi-overview",
+        url: "https://skills.sh/pulumi/agent-skills/pulumi-overview",
+        install: "npx skills add pulumi/agent-skills --skill pulumi-overview"
+      }
+    ],
     official: true,
   },
   {
@@ -1500,6 +1664,18 @@ export const sdks: SdkEntry[] = [
       }
     ],
     tags: ["rag", "agents"],
+    skills: [
+      {
+        name: "llamaparse",
+        url: "https://skills.sh/run-llama/llamaparse-agent-skills/llamaparse",
+        install: "npx skills add run-llama/llamaparse-agent-skills --skill llamaparse"
+      },
+      {
+        name: "llamaindex-development",
+        url: "https://skills.sh/mindrally/skills/llamaindex-development",
+        install: "npx skills add mindrally/skills --skill llamaindex-development"
+      }
+    ],
     official: true,
   },
   {
@@ -1645,6 +1821,23 @@ export const sdks: SdkEntry[] = [
       }
     ],
     tags: ["ecommerce"],
+    skills: [
+      {
+        name: "shopify-dev",
+        url: "https://skills.sh/shopify/shopify-ai-toolkit/shopify-dev",
+        install: "npx skills add shopify/shopify-ai-toolkit"
+      },
+      {
+        name: "shopify-admin",
+        url: "https://skills.sh/shopify/shopify-ai-toolkit/shopify-admin",
+        install: "npx skills add shopify/shopify-ai-toolkit --skill shopify-admin"
+      },
+      {
+        name: "shopify-storefront-graphql",
+        url: "https://skills.sh/shopify/shopify-ai-toolkit/shopify-storefront-graphql",
+        install: "npx skills add shopify/shopify-ai-toolkit --skill shopify-storefront-graphql"
+      }
+    ],
     official: true,
   },
   {
@@ -1677,6 +1870,23 @@ export const sdks: SdkEntry[] = [
       }
     ],
     tags: ["chat", "bots"],
+    skills: [
+      {
+        name: "slack-api",
+        url: "https://skills.sh/slackapi/slack-skills-plugin/slack-api",
+        install: "npx skills add slackapi/slack-skills-plugin"
+      },
+      {
+        name: "create-slack-app",
+        url: "https://skills.sh/slackapi/slack-skills-plugin/create-slack-app",
+        install: "npx skills add slackapi/slack-skills-plugin --skill create-slack-app"
+      },
+      {
+        name: "block-kit",
+        url: "https://github.com/slackapi/slack-skills-plugin/tree/main/skills/block-kit",
+        install: "npx skills add slackapi/slack-skills-plugin --skill block-kit"
+      }
+    ],
     official: true,
   },
   {
@@ -1726,6 +1936,13 @@ export const sdks: SdkEntry[] = [
       }
     ],
     tags: ["pos", "hardware"],
+    skills: [
+      {
+        name: "stripe-best-practices",
+        url: "https://github.com/stripe/ai/tree/main/skills/stripe-best-practices",
+        install: "npx skills add https://docs.stripe.com --skill stripe-best-practices"
+      }
+    ],
     official: true,
   },
   {
@@ -1830,6 +2047,18 @@ export const sdks: SdkEntry[] = [
       },
     ],
     tags: ["issues", "project-management"],
+    skills: [
+      {
+        name: "linear-release-setup",
+        url: "https://skills.sh/linear/linear-release/linear-release-setup",
+        install: "npx skills add linear/linear-release"
+      },
+      {
+        name: "linear",
+        url: "https://skills.sh/openai/skills/linear",
+        install: "npx skills add openai/skills --skill linear"
+      }
+    ],
     official: true,
   },
   {
@@ -1881,6 +2110,23 @@ export const sdks: SdkEntry[] = [
       }
     ],
     tags: ["spreadsheet", "api"],
+    skills: [
+      {
+        name: "airtable-overview",
+        url: "https://skills.sh/airtable/skills/airtable-overview",
+        install: "npx skills add airtable/skills"
+      },
+      {
+        name: "airtable-cli",
+        url: "https://skills.sh/airtable/skills/airtable-cli",
+        install: "npx skills add airtable/skills --skill airtable-cli"
+      },
+      {
+        name: "airtable-filters",
+        url: "https://skills.sh/airtable/skills/airtable-filters",
+        install: "npx skills add airtable/skills --skill airtable-filters"
+      }
+    ],
     official: true,
   },
   {
@@ -1908,6 +2154,18 @@ export const sdks: SdkEntry[] = [
       }
     ],
     tags: ["agents", "tools"],
+    skills: [
+      {
+        name: "openai-knowledge",
+        url: "https://skills.sh/openai/openai-agents-python/openai-knowledge",
+        install: "npx skills add openai/openai-agents-python --skill openai-knowledge"
+      },
+      {
+        name: "openai-agents-sdk",
+        url: "https://skills.sh/laguagu/claude-code-nextjs-skills/openai-agents-sdk",
+        install: "npx skills add laguagu/claude-code-nextjs-skills --skill openai-agents-sdk"
+      }
+    ],
     official: true,
   },
   {
@@ -1930,6 +2188,23 @@ export const sdks: SdkEntry[] = [
       },
     ],
     tags: ["agents"],
+    skills: [
+      {
+        name: "getting-started",
+        url: "https://skills.sh/crewaiinc/skills/getting-started",
+        install: "npx skills add crewaiinc/skills"
+      },
+      {
+        name: "design-agent",
+        url: "https://skills.sh/crewaiinc/skills/design-agent",
+        install: "npx skills add crewaiinc/skills --skill design-agent"
+      },
+      {
+        name: "ask-docs",
+        url: "https://skills.sh/crewaiinc/skills/ask-docs",
+        install: "npx skills add crewaiinc/skills --skill ask-docs"
+      }
+    ],
     official: true,
   },
   {
@@ -1992,6 +2267,28 @@ export const sdks: SdkEntry[] = [
       },
     ],
     tags: ["redis", "serverless", "edge"],
+    skills: [
+      {
+        name: "upstash",
+        url: "https://skills.sh/upstash/skills/upstash",
+        install: "npx skills add upstash/skills"
+      },
+      {
+        name: "upstash-redis-js",
+        url: "https://skills.sh/upstash/skills/upstash-redis-js",
+        install: "npx skills add upstash/skills --skill upstash-redis-js"
+      },
+      {
+        name: "upstash-ratelimit-js",
+        url: "https://skills.sh/upstash/skills/upstash-ratelimit-js",
+        install: "npx skills add upstash/skills --skill upstash-ratelimit-js"
+      },
+      {
+        name: "upstash-qstash-js",
+        url: "https://skills.sh/upstash/skills/upstash-qstash-js",
+        install: "npx skills add upstash/skills --skill upstash-qstash-js"
+      }
+    ],
     official: true,
   },
   {
@@ -2019,6 +2316,18 @@ export const sdks: SdkEntry[] = [
       }
     ],
     tags: ["sqlite", "edge"],
+    skills: [
+      {
+        name: "turso-db",
+        url: "https://skills.sh/tursodatabase/agent-skills/turso-db",
+        install: "npx skills add tursodatabase/agent-skills"
+      },
+      {
+        name: "turso-cloud",
+        url: "https://skills.sh/tursodatabase/agent-skills/turso-cloud",
+        install: "npx skills add tursodatabase/agent-skills --skill turso-cloud"
+      }
+    ],
     official: true,
   },
 ];
