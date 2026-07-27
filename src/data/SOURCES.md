@@ -16,7 +16,7 @@ Avoid blind `*-sdk` dumps. Join languages via GitHub org + docs, not package-nam
 
 ## Agent skills (on each `SdkEntry.skills`)
 
-Keep **refs** in `sdks.ts` (`name`, `url`, `install?`). Snapshot **bodies** into `skill-bodies.json` so `/api/skills/:sdk/:name` returns full `SKILL.md` without a second hop for agents.
+Keep **refs** in `sdks.ts` (`name`, `url`, `install?`). Snapshot **bodies** into `skill-bodies.json` so `/api/skills/:sdk/:name` returns full `SKILL.md`.
 
 ```bash
 bun run sync:skills   # resume-safe; prefers GitHub raw over skills.sh download

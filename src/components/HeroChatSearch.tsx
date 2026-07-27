@@ -66,14 +66,14 @@ export function HeroChatSearch() {
           {...enter}
           transition={{ duration: 0.55, ease, delay: 0.05 }}
         >
-          SDKs for AI agents
+          sdks.directory
         </motion.h1>
         <motion.p
           className="mt-3 max-w-md text-center text-base leading-relaxed text-body md:text-lg"
           {...enter}
           transition={{ duration: 0.55, ease, delay: 0.1 }}
         >
-          Look up official clients by name, package, or vendor.
+          Official clients by name, package, or vendor.
         </motion.p>
 
         <motion.form

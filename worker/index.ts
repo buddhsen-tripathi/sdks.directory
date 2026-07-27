@@ -10,7 +10,7 @@ import {
 
 /**
  * Edge API for the catalog. Seed data mirrors the SPA; skill bodies are
- * snapshotted so agents get SKILL.md content without a second hop.
+ * snapshotted and returned inline on skill endpoints.
  */
 export default {
   async fetch(request): Promise<Response> {
@@ -234,7 +234,7 @@ function agentDiscovery(origin: string) {
   return {
     name: "sdks.directory",
     description:
-      "Agent-skills directory for SDKs. Query SDKs and receive installable SKILL.md content in one request — no follow-up hop to skills.sh required.",
+      "sdks.directory — official SDKs, packages, and agent skills. Skill endpoints return SKILL.md content inline.",
     documentation: `${origin}/llms.txt`,
     endpoints: {
       discovery: `${origin}/api`,

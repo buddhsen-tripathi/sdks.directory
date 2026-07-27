@@ -1,6 +1,6 @@
 # sdks.directory
 
-> Agent-skills directory for SDKs. One request returns the skill body — no hop to skills.sh.
+> Official SDKs, packages, and agent skills. Skill responses include full SKILL.md content.
 
 ## For agents
 
@@ -60,4 +60,4 @@ Browse SDKs at `/`, `/browse`, `/sdk/{slug}`. Plugins and MCPs are coming soon.
 
 ## Notes
 
-Skill bodies are snapshotted from upstream (skills.sh / GitHub) for agent latency and reliability. Prefer our `/api/skills/...` over following `url` when you need the instructions themselves.
+Skill bodies are snapshotted from upstream (skills.sh / GitHub). Use `/api/skills/{sdk}/{name}` for the SKILL.md text; `url` is the upstream source.

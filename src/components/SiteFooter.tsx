@@ -27,7 +27,7 @@ export function SiteFooter() {
           <div className="max-w-md">
             <SiteLogo size={32} />
             <p className="mt-4 text-lg font-medium leading-snug tracking-tight text-ink md:text-xl">
-              SDK catalog for AI agents.
+              Official SDKs, packages, and agent skills.
             </p>
           </div>
 

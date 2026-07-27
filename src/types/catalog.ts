@@ -59,10 +59,7 @@ export interface SkillListing extends SkillRef {
   sdk: string;
 }
 
-/**
- * Skill payload returned by the agent API when bodies are included.
- * `content` is the full SKILL.md so agents need no follow-up hop.
- */
+/** Skill payload returned by the agent API when bodies are included. */
 export interface SkillWithContent extends SkillListing {
   key: string;
   description?: string;

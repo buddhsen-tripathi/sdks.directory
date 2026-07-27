@@ -13,7 +13,7 @@ export function HomePage() {
   const featured = getFeaturedSdks().slice(0, 6);
 
   useEffect(() => {
-    document.title = "sdks.directory · SDKs for AI agents";
+    document.title = "sdks.directory";
   }, []);
 
   return (

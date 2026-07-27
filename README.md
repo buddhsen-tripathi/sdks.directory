@@ -1,12 +1,12 @@
 # sdks.directory
 
-SDK catalog built for **AI agents** (and the humans who wire them up). Look up official client libraries by name, package, or vendor — language is a filter, not the product.
+Official SDKs, packages, and agent skills — indexed for humans and tools. Language is a filter, not the product.
 
-Live catalog today: **SDKs**. **Plugins** and **MCPs** share the same directory shape and ship next (`/plugins`, `/mcps`).
+Live today: **SDKs**. **Plugins** and **MCPs** share the same directory shape and ship next (`/plugins`, `/mcps`).
 
 ## Why it exists
 
-Agents need reliable client libraries — auth, payments, models, databases, observability. This site indexes those SDKs in one place, with a small edge API so tools can query the same data the UI uses.
+One place to look up client libraries — auth, payments, models, databases, observability — with an edge API that returns the same data the UI uses, including skill bodies.
 
 ## Stack
 
@@ -70,9 +70,9 @@ Add or edit an SDK in `sdks.ts`, then open a PR. Types are in `src/types/catalog
 | `/languages`, `/languages/:id` | Language filters |
 | `/plugins`, `/mcps` | Coming soon |
 
-## API (agent-first)
+## API
 
-Same seed data as the SPA (Worker first for `/api/*`). Skill **bodies** are snapshotted so agents get full `SKILL.md` text in one request — no hop to skills.sh.
+Same seed data as the SPA (Worker first for `/api/*`). Skill **bodies** are snapshotted so agents get full `SKILL.md` text from the API.
 
 | Endpoint | Description |
 |----------|-------------|
