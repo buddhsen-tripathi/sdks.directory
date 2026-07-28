@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { SiteLayout } from "./components/SiteLayout";
+import { WebMcpTools } from "./components/WebMcpTools";
 import { BrowsePage } from "./pages/BrowsePage";
 import {
   McpDetailPage,
@@ -16,6 +17,7 @@ import { SearchPage } from "./pages/SearchPage";
 export default function App() {
   return (
     <BrowserRouter>
+      <WebMcpTools />
       <SiteLayout>
         <Routes>
           <Route path="/" element={<HomePage />} />

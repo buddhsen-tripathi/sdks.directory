@@ -88,10 +88,14 @@ Same seed data as the SPA (Worker first for `/api/*` and agent discovery files).
 | `GET /api/search?q=` | Unified search across SDKs, plugins, MCPs, skills |
 | `GET /llms.txt` | Short agent instructions (also `/.well-known/llms.txt`) |
 | `GET /openapi.json` | OpenAPI 3.1 description of the API |
+| `GET /.well-known/api-catalog` | RFC 9727 API catalog (`application/linkset+json`) |
+| `GET /.well-known/agent-skills/index.json` | Agent Skills discovery index |
 | `GET /.well-known/mcp.json` | Catalog MCP server card |
+| `GET /auth.md` | Auth policy (public API; no OAuth) |
 | `POST /api/mcp` | Catalog MCP (JSON-RPC tools) |
-| `GET /robots.txt` | Allows `/api/` and points at the sitemap |
+| `GET /robots.txt` | Allows `/api/`, Content Signals, sitemap |
 | `GET /sitemap.xml` | HTML + API resource sitemap |
+| Homepage `Link` headers | RFC 8288 links to api-catalog, OpenAPI, llms.txt, skills index |
 | `GET /api/health` | Health check |
 | `GET /api/sdks` | List / filter (`?language=&category=&q=&withSkills=1&include=body`) |
 | `GET /api/sdks/:slug` | Single SDK; `?view=agent` includes skill bodies |
@@ -113,6 +117,22 @@ bun run sync:skills
 ```
 
 Sitemap and robots are regenerated on every build (`bun run generate:sitemap`) into `public/` so crawlers get real XML even when the Worker is not first.
+
+HTML catalog pages honor `Accept: text/markdown` (Markdown for Agents) with an `x-markdown-tokens` estimate. Cloudflare zone **Markdown for Agents** can also be enabled in AI Crawl Control for automatic HTML→Markdown conversion (Pro+).
+
+### DNS for AI Discovery (DNS-AID)
+
+DNS-AID cannot be shipped in the Worker; add Cloudflare DNS records for the zone, then enable DNSSEC:
+
+```text
+_index._agents.sdks.directory. 300 IN HTTPS 1 . alpn="h2,h3"
+```
+
+Point agents at the catalog via HTTPS/SVCB under `_agents` as in [draft-mozleywilliams-dnsop-dnsaid](https://datatracker.ietf.org/doc/draft-mozleywilliams-dnsop-dnsaid/).
+
+### Auth / OAuth
+
+The catalog API is public. There is no OAuth/OIDC authorization server and no protected-resource metadata on purpose. See `/auth.md`. Do not publish stub OAuth discovery documents.
 
 ## Roadmap
 

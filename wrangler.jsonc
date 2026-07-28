@@ -9,15 +9,8 @@
 	"compatibility_date": "2026-07-24",
 	"assets": {
 		"not_found_handling": "single-page-application",
-		"run_worker_first": [
-			"/api",
-			"/api/*",
-			"/openapi.json",
-			"/llms.txt",
-			"/robots.txt",
-			"/sitemap.xml",
-			"/.well-known/*"
-		]
+		"binding": "ASSETS",
+		"run_worker_first": true
 	},
 	"observability": {
 		"enabled": true

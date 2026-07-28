@@ -7,12 +7,17 @@
 Start here:
 
 - Discovery JSON: `/api`
+- API catalog: `/.well-known/api-catalog`
 - OpenAPI: `/openapi.json`
 - Unified search: `/api/search?q=`
 - Catalog MCP: `/api/mcp`
+- Skills index: `/.well-known/agent-skills/index.json`
 - MCP card: `/.well-known/mcp.json`
+- Auth: `/auth.md` (public API; no OAuth)
 - Health: `/api/health`
 - Coverage: `/api/coverage`
+
+HTML pages also honor `Accept: text/markdown` (Markdown for Agents).
 
 ### Search everything
 

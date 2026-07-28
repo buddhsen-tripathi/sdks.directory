@@ -3,6 +3,16 @@ import { languages } from "../src/data/languages";
 import { mcps } from "../src/data/mcps";
 import { plugins } from "../src/data/plugins";
 import { sdks } from "../src/data/sdks";
+import {
+  agentSkillsIndex,
+  apiCatalog,
+  authMd,
+  discoveryLinkHeader,
+  estimateMarkdownTokens,
+  getDiscoverySkillMarkdown,
+  pageMarkdown,
+  wantsMarkdown,
+} from "./agent-readiness";
 import { searchCatalog, withAgentFields } from "./catalog";
 import {
   llmsTxt,
@@ -25,7 +35,7 @@ import type { SdkEntry } from "../src/types/catalog";
  * snapshotted and returned inline on skill endpoints.
  */
 export default {
-  async fetch(request): Promise<Response> {
+  async fetch(request, env): Promise<Response> {
     const url = new URL(request.url);
     const accept = request.headers.get("Accept") ?? "";
     const origin = url.origin;
@@ -43,6 +53,27 @@ export default {
     }
     if (url.pathname === "/sitemap.xml") {
       return text(sitemapXml(origin), "application/xml; charset=utf-8");
+    }
+    if (url.pathname === "/auth.md") {
+      return text(authMd(origin), "text/markdown; charset=utf-8");
+    }
+    if (url.pathname === "/.well-known/api-catalog") {
+      return linkset(apiCatalog(origin));
+    }
+    if (url.pathname === "/.well-known/agent-skills/index.json") {
+      return json(await agentSkillsIndex(origin));
+    }
+    const skillMdMatch = url.pathname.match(
+      /^\/\.well-known\/agent-skills\/([^/]+)\/SKILL\.md\/?$/,
+    );
+    if (skillMdMatch) {
+      const markdown = getDiscoverySkillMarkdown(
+        decodeURIComponent(skillMdMatch[1]),
+      );
+      if (!markdown) {
+        return json({ error: "not_found" }, 404);
+      }
+      return text(markdown, "text/markdown; charset=utf-8");
     }
     if (
       url.pathname === "/.well-known/mcp.json" ||
@@ -227,9 +258,51 @@ export default {
       return json({ error: "not_found" }, 404);
     }
 
-    return new Response(null, { status: 404 });
+    // Markdown-for-agents content negotiation on HTML catalog pages
+    if (request.method === "GET" && wantsMarkdown(accept)) {
+      const markdown = pageMarkdown(origin, url.pathname);
+      if (markdown) {
+        return new Response(markdown, {
+          headers: {
+            ...corsHeaders(),
+            "Content-Type": "text/markdown; charset=utf-8",
+            "Cache-Control": "public, max-age=300",
+            Vary: "Accept",
+            Link: discoveryLinkHeader(),
+            "x-markdown-tokens": String(estimateMarkdownTokens(markdown)),
+            "Content-Signal": "ai-train=no, search=yes, ai-input=yes",
+          },
+        });
+      }
+    }
+
+    const assetResponse = await env.ASSETS.fetch(request);
+    return withDiscoveryHeaders(assetResponse, url.pathname);
   },
 } satisfies ExportedHandler<Env>;
+
+function withDiscoveryHeaders(response: Response, pathname: string): Response {
+  const headers = new Headers(response.headers);
+  const contentType = headers.get("Content-Type") ?? "";
+  const isHtmlShell =
+    pathname === "/" ||
+    contentType.includes("text/html") ||
+    (!pathname.includes(".") && response.status === 200);
+
+  if (isHtmlShell || pathname === "/") {
+    headers.delete("Link");
+    headers.set("Link", discoveryLinkHeader());
+    headers.set("Content-Signal", "ai-train=no, search=yes, ai-input=yes");
+    const vary = headers.get("Vary");
+    headers.set("Vary", vary ? `${vary}, Accept` : "Accept");
+  }
+
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
+}
 
 function listCatalog(
   items: SdkEntry[],
@@ -315,7 +388,8 @@ function detailCatalog(items: SdkEntry[], url: URL, kind: string): Response {
     return json({ error: "not_found" }, 404);
   }
   const agent = wantsAgentView(url) || kind !== "sdk";
-  const includeBody = wantsBody(url, true) || (kind === "sdk" && wantsAgentView(url));
+  const includeBody =
+    wantsBody(url, true) || (kind === "sdk" && wantsAgentView(url));
   const base = agent ? withAgentFields(item) : item;
   return json({
     ...base,
@@ -345,6 +419,9 @@ function agentDiscovery(origin: string) {
       "sdks.directory — official SDKs, agent plugins, MCP servers, and skills. Skill endpoints return SKILL.md content inline.",
     documentation: `${origin}/llms.txt`,
     openapi: `${origin}/openapi.json`,
+    apiCatalog: `${origin}/.well-known/api-catalog`,
+    agentSkills: `${origin}/.well-known/agent-skills/index.json`,
+    auth: `${origin}/auth.md`,
     mcp: `${origin}/api/mcp`,
     endpoints: {
       discovery: `${origin}/api`,
@@ -364,14 +441,18 @@ function agentDiscovery(origin: string) {
       categories: `${origin}/api/categories`,
       catalogMcp: `${origin}/api/mcp`,
       openapi: `${origin}/openapi.json`,
+      apiCatalog: `${origin}/.well-known/api-catalog`,
+      agentSkills: `${origin}/.well-known/agent-skills/index.json`,
+      auth: `${origin}/auth.md`,
     },
     agentHints: [
       "Start with GET /api/search?q= to find SDKs, plugins, MCPs, and skills in one call.",
       "Prefer GET /api/skills/{sdk}/{name} — response includes `content` (full SKILL.md).",
       "Use GET /api/sdks/{slug}?view=agent for one-shot SDK + skill bodies.",
       "Connect the catalog MCP at POST /api/mcp (tools: search_catalog, get_sdk, get_skill, get_plugin, get_mcp).",
-      "Use Accept: text/markdown or .md suffix for raw skill text.",
+      "Use Accept: text/markdown on HTML pages for Markdown-for-Agents responses.",
       "Attribution: skill.url is the upstream source; content is a snapshot for agent use.",
+      "Auth: public API — see /auth.md. No OAuth required.",
     ],
     skillBodies: skillBodiesMeta(),
   };
@@ -386,6 +467,19 @@ function json(data: unknown, status = 200): Response {
       ...corsHeaders(),
       "Content-Type": "application/json; charset=utf-8",
       ETag: etag,
+    },
+  });
+}
+
+function linkset(data: unknown): Response {
+  const body = JSON.stringify(data);
+  return new Response(body, {
+    headers: {
+      ...corsHeaders(),
+      "Content-Type":
+        'application/linkset+json; profile="https://www.rfc-editor.org/info/rfc9727"',
+      "Cache-Control": "public, max-age=300",
+      Link: discoveryLinkHeader(),
     },
   });
 }

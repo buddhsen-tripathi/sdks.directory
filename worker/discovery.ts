@@ -13,14 +13,18 @@ Allow: /llms.txt
 Allow: /openapi.json
 Allow: /sitemap.xml
 Allow: /.well-known/
+Allow: /auth.md
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 
 Sitemap: ${origin}/sitemap.xml
 
 # Prefer the JSON API over scraping the SPA HTML.
 # Discovery: ${origin}/api
+# API catalog: ${origin}/.well-known/api-catalog
 # Search: ${origin}/api/search?q=
 # Skills with bodies: ${origin}/api/skills/{sdk}/{name}
 # Catalog MCP: ${origin}/api/mcp
+# Content Signals: https://contentsignals.org/
 `;
 }
 
@@ -34,10 +38,13 @@ export function llmsTxt(origin: string): string {
 Start here:
 
 - Discovery JSON: ${origin}/api
+- API catalog: ${origin}/.well-known/api-catalog
 - OpenAPI: ${origin}/openapi.json
 - Unified search: ${origin}/api/search?q=
 - Catalog MCP: ${origin}/api/mcp
+- Skills index: ${origin}/.well-known/agent-skills/index.json
 - MCP card: ${origin}/.well-known/mcp.json
+- Auth: ${origin}/auth.md (public API; no OAuth)
 - Health: ${origin}/api/health
 - Coverage: ${origin}/api/coverage
 
@@ -111,6 +118,9 @@ export function sitemapXml(origin: string): string {
     `${origin}/api/mcp`,
     `${origin}/.well-known/mcp.json`,
     `${origin}/.well-known/llms.txt`,
+    `${origin}/.well-known/api-catalog`,
+    `${origin}/.well-known/agent-skills/index.json`,
+    `${origin}/auth.md`,
     `${origin}/browse`,
     `${origin}/plugins`,
     `${origin}/mcps`,
