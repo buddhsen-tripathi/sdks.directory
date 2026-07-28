@@ -69,7 +69,7 @@ export function HomePage() {
               as="h2"
               eyebrow="Plugins"
               title="Agent plugins"
-              description="Installable packages: skills, MCP, and rules."
+              description="Installable packages of skills and rules for agent hosts."
             />
           </RevealItem>
           <RevealItem>

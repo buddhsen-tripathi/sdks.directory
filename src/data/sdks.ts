@@ -2330,4 +2330,366 @@ export const sdks: SdkEntry[] = [
     ],
     official: true,
   },
+  {
+    id: "convex",
+    kind: "sdk",
+    name: "Convex",
+    slug: "convex",
+    description:
+      "Reactive backend platform: TypeScript database, server functions, and realtime clients.",
+    vendor: "Convex",
+    languages: ["typescript", "javascript", "python"],
+    categories: ["database", "cloud"],
+    homepage: "https://www.convex.dev",
+    docsUrl: "https://docs.convex.dev",
+    githubUrl: "https://github.com/get-convex/agent-skills",
+    packages: [
+      {
+        registry: "npm",
+        name: "convex",
+        url: "https://www.npmjs.com/package/convex",
+      },
+    ],
+    tags: ["realtime", "backend", "typescript"],
+    skills: [
+      {
+        name: "convex-quickstart",
+        url: "https://github.com/get-convex/agent-skills/tree/main/skills/convex-quickstart",
+        install: "npx skills add get-convex/agent-skills --skill convex-quickstart",
+      },
+      {
+        name: "convex",
+        url: "https://github.com/get-convex/agent-skills/tree/main/skills/convex",
+        install: "npx skills add get-convex/agent-skills --skill convex",
+      },
+      {
+        name: "convex-setup-auth",
+        url: "https://github.com/get-convex/agent-skills/tree/main/skills/convex-setup-auth",
+        install: "npx skills add get-convex/agent-skills --skill convex-setup-auth",
+      },
+    ],
+    featured: true,
+    official: true,
+  },
+  {
+    id: "expo",
+    kind: "sdk",
+    name: "Expo",
+    slug: "expo",
+    description:
+      "Official toolchain for React Native apps: Expo Router, EAS Build, and native modules.",
+    vendor: "Expo",
+    languages: ["typescript", "javascript", "swift", "kotlin"],
+    categories: ["devtools"],
+    homepage: "https://expo.dev",
+    docsUrl: "https://docs.expo.dev",
+    githubUrl: "https://github.com/expo/skills",
+    packages: [
+      {
+        registry: "npm",
+        name: "expo",
+        url: "https://www.npmjs.com/package/expo",
+      },
+    ],
+    tags: ["react-native", "mobile", "eas"],
+    skills: [
+      {
+        name: "expo-dev-client",
+        url: "https://github.com/expo/skills/tree/main/plugins/expo/skills/expo-dev-client",
+        install: "npx skills add expo/skills --skill expo-dev-client",
+      },
+      {
+        name: "expo-native-ui",
+        url: "https://github.com/expo/skills/tree/main/plugins/expo/skills/expo-native-ui",
+        install: "npx skills add expo/skills --skill expo-native-ui",
+      },
+      {
+        name: "expo-router",
+        url: "https://github.com/expo/skills/tree/main/plugins/expo/skills/expo-router",
+        install: "npx skills add expo/skills --skill expo-router",
+      },
+    ],
+    featured: true,
+    official: true,
+  },
+  {
+    id: "firecrawl",
+    kind: "sdk",
+    name: "Firecrawl",
+    slug: "firecrawl",
+    description:
+      "Web scraping and crawling API for turning sites into clean LLM-ready markdown.",
+    vendor: "Firecrawl",
+    languages: ["typescript", "javascript", "python", "nodejs"],
+    categories: ["ai", "devtools"],
+    homepage: "https://www.firecrawl.dev",
+    docsUrl: "https://docs.firecrawl.dev",
+    githubUrl: "https://github.com/firecrawl/skills",
+    packages: [
+      {
+        registry: "npm",
+        name: "@mendable/firecrawl-js",
+        url: "https://www.npmjs.com/package/@mendable/firecrawl-js",
+      },
+      {
+        registry: "pypi",
+        name: "firecrawl-py",
+        url: "https://pypi.org/project/firecrawl-py/",
+      },
+    ],
+    tags: ["scrape", "crawl", "search"],
+    skills: [
+      {
+        name: "firecrawl-build",
+        url: "https://github.com/firecrawl/skills/tree/main/skills/firecrawl-build",
+        install: "npx skills add firecrawl/skills --skill firecrawl-build",
+      },
+      {
+        name: "firecrawl-build-scrape",
+        url: "https://github.com/firecrawl/skills/tree/main/skills/firecrawl-build-scrape",
+        install: "npx skills add firecrawl/skills --skill firecrawl-build-scrape",
+      },
+      {
+        name: "firecrawl-build-search",
+        url: "https://github.com/firecrawl/skills/tree/main/skills/firecrawl-build-search",
+        install: "npx skills add firecrawl/skills --skill firecrawl-build-search",
+      },
+    ],
+    official: true,
+  },
+  {
+    id: "browserbase",
+    kind: "sdk",
+    name: "Browserbase",
+    slug: "browserbase",
+    description:
+      "Cloud browsers for agents: Stagehand, sessions, and headless automation APIs.",
+    vendor: "Browserbase",
+    languages: ["typescript", "javascript", "python"],
+    categories: ["ai", "devtools"],
+    homepage: "https://www.browserbase.com",
+    docsUrl: "https://docs.browserbase.com",
+    githubUrl: "https://github.com/browserbase/skills",
+    packages: [
+      {
+        registry: "npm",
+        name: "@browserbasehq/sdk",
+        url: "https://www.npmjs.com/package/@browserbasehq/sdk",
+      },
+      {
+        registry: "pypi",
+        name: "browserbase",
+        url: "https://pypi.org/project/browserbase/",
+      },
+    ],
+    tags: ["browser", "stagehand", "automation"],
+    skills: [
+      {
+        name: "browser",
+        url: "https://github.com/browserbase/skills/tree/main/skills/browser",
+        install: "npx skills add browserbase/skills --skill browser",
+      },
+      {
+        name: "fetch",
+        url: "https://github.com/browserbase/skills/tree/main/skills/fetch",
+        install: "npx skills add browserbase/skills --skill fetch",
+      },
+      {
+        name: "browserbase-cli",
+        url: "https://skills.sh/browserbase/skills/browserbase-cli",
+        install: "npx skills add browserbase/skills --skill browserbase-cli",
+      },
+    ],
+    official: true,
+  },
+  {
+    id: "tavily",
+    kind: "sdk",
+    name: "Tavily",
+    slug: "tavily",
+    description:
+      "Search and research API built for agents: web search, extract, crawl, and map.",
+    vendor: "Tavily",
+    languages: ["python", "typescript", "javascript"],
+    categories: ["ai"],
+    homepage: "https://tavily.com",
+    docsUrl: "https://docs.tavily.com",
+    githubUrl: "https://github.com/tavily-ai/skills",
+    packages: [
+      {
+        registry: "npm",
+        name: "@tavily/core",
+        url: "https://www.npmjs.com/package/@tavily/core",
+      },
+      {
+        registry: "pypi",
+        name: "tavily-python",
+        url: "https://pypi.org/project/tavily-python/",
+      },
+    ],
+    tags: ["search", "research", "rag"],
+    skills: [
+      {
+        name: "tavily-search",
+        url: "https://github.com/tavily-ai/skills/tree/main/skills/tavily-search",
+        install: "npx skills add tavily-ai/skills --skill tavily-search",
+      },
+      {
+        name: "tavily-research",
+        url: "https://github.com/tavily-ai/skills/tree/main/skills/tavily-research",
+        install: "npx skills add tavily-ai/skills --skill tavily-research",
+      },
+      {
+        name: "tavily-extract",
+        url: "https://github.com/tavily-ai/skills/tree/main/skills/tavily-extract",
+        install: "npx skills add tavily-ai/skills --skill tavily-extract",
+      },
+    ],
+    official: true,
+  },
+  {
+    id: "mastra",
+    kind: "sdk",
+    name: "Mastra",
+    slug: "mastra",
+    description:
+      "TypeScript agent framework: workflows, tools, memory, and model routing.",
+    vendor: "Mastra",
+    languages: ["typescript", "javascript"],
+    categories: ["ai"],
+    homepage: "https://mastra.ai",
+    docsUrl: "https://mastra.ai/docs",
+    githubUrl: "https://github.com/mastra-ai/skills",
+    packages: [
+      {
+        registry: "npm",
+        name: "@mastra/core",
+        url: "https://www.npmjs.com/package/@mastra/core",
+      },
+    ],
+    tags: ["agents", "workflows", "typescript"],
+    skills: [
+      {
+        name: "mastra",
+        url: "https://github.com/mastra-ai/skills/tree/main/skills/mastra",
+        install: "npx skills add mastra-ai/skills --skill mastra",
+      },
+    ],
+    official: true,
+  },
+  {
+    id: "elevenlabs",
+    kind: "sdk",
+    name: "ElevenLabs",
+    slug: "elevenlabs",
+    description:
+      "Voice AI SDKs: text-to-speech, speech-to-text, agents, and audio tools.",
+    vendor: "ElevenLabs",
+    languages: ["python", "typescript", "javascript"],
+    categories: ["ai", "media", "comms"],
+    homepage: "https://elevenlabs.io",
+    docsUrl: "https://elevenlabs.io/docs",
+    githubUrl: "https://github.com/elevenlabs/skills",
+    packages: [
+      {
+        registry: "npm",
+        name: "@elevenlabs/elevenlabs-js",
+        url: "https://www.npmjs.com/package/@elevenlabs/elevenlabs-js",
+      },
+      {
+        registry: "pypi",
+        name: "elevenlabs",
+        url: "https://pypi.org/project/elevenlabs/",
+      },
+    ],
+    tags: ["tts", "stt", "voice"],
+    skills: [
+      {
+        name: "text-to-speech",
+        url: "https://github.com/elevenlabs/skills/tree/main/text-to-speech",
+        install: "npx skills add elevenlabs/skills --skill text-to-speech",
+      },
+      {
+        name: "speech-to-text",
+        url: "https://github.com/elevenlabs/skills/tree/main/speech-to-text",
+        install: "npx skills add elevenlabs/skills --skill speech-to-text",
+      },
+      {
+        name: "agents",
+        url: "https://github.com/elevenlabs/skills/tree/main/agents",
+        install: "npx skills add elevenlabs/skills --skill agents",
+      },
+    ],
+    official: true,
+  },
+  {
+    id: "clickhouse",
+    kind: "sdk",
+    name: "ClickHouse",
+    slug: "clickhouse",
+    description:
+      "Official clients for ClickHouse: analytics database drivers and query helpers.",
+    vendor: "ClickHouse",
+    languages: ["python", "typescript", "javascript", "go", "java"],
+    categories: ["database"],
+    homepage: "https://clickhouse.com",
+    docsUrl: "https://clickhouse.com/docs",
+    githubUrl: "https://github.com/ClickHouse/agent-skills",
+    packages: [
+      {
+        registry: "npm",
+        name: "@clickhouse/client",
+        url: "https://www.npmjs.com/package/@clickhouse/client",
+      },
+      {
+        registry: "pypi",
+        name: "clickhouse-connect",
+        url: "https://pypi.org/project/clickhouse-connect/",
+      },
+    ],
+    tags: ["analytics", "olap", "sql"],
+    skills: [
+      {
+        name: "clickhouse-best-practices",
+        url: "https://skills.sh/clickhouse/agent-skills/clickhouse-best-practices",
+        install: "npx skills add ClickHouse/agent-skills --skill clickhouse-best-practices",
+      },
+    ],
+    official: true,
+  },
+  {
+    id: "grafana",
+    kind: "sdk",
+    name: "Grafana",
+    slug: "grafana",
+    description:
+      "Observability stack clients and tooling around Grafana, Prometheus, Loki, and Tempo.",
+    vendor: "Grafana Labs",
+    languages: ["go", "typescript", "python"],
+    categories: ["observability"],
+    homepage: "https://grafana.com",
+    docsUrl: "https://grafana.com/docs",
+    githubUrl: "https://github.com/grafana/skills",
+    packages: [
+      {
+        registry: "npm",
+        name: "@grafana/data",
+        url: "https://www.npmjs.com/package/@grafana/data",
+      },
+    ],
+    tags: ["dashboards", "metrics", "logs"],
+    skills: [
+      {
+        name: "dashboarding",
+        url: "https://skills.sh/grafana/skills/dashboarding",
+        install: "npx skills add grafana/skills --skill dashboarding",
+      },
+      {
+        name: "promql",
+        url: "https://skills.sh/grafana/skills/promql",
+        install: "npx skills add grafana/skills --skill promql",
+      },
+    ],
+    official: true,
+  },
 ];

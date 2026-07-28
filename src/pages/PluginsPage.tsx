@@ -6,7 +6,7 @@ export function PluginsPage() {
     <CatalogBrowsePage
       kind="plugin"
       title="Browse plugins"
-      description="Installable agent packages: skills, MCP servers, and rules indexed like SDKs."
+      description="Installable agent packages of skills and rules, indexed like SDKs."
       search={searchPlugins}
       emptyMessage="No plugins match these filters."
       showPlatformFilter
