@@ -13,6 +13,7 @@ import {
   pageMarkdown,
   wantsMarkdown,
 } from "./agent-readiness";
+import { clientHint, recordAgentEvent } from "./analytics";
 import { searchCatalog, withAgentFields } from "./catalog";
 import {
   llmsTxt,
@@ -86,7 +87,7 @@ export default {
     }
 
     if (url.pathname === "/api/mcp" || url.pathname === "/api/mcp/") {
-      return handleMcpRequest(request, origin);
+      return handleMcpRequest(request, origin, env.AGENT_ANALYTICS);
     }
 
     if (url.pathname === "/api" || url.pathname === "/api/") {
@@ -103,7 +104,23 @@ export default {
       if (!q.trim()) {
         return json({ error: "missing_query", hint: "Pass ?q=" }, 400);
       }
-      return json(searchCatalog(origin, q, Number.isFinite(limit) ? limit : 25));
+      const started = Date.now();
+      const results = searchCatalog(
+        origin,
+        q,
+        Number.isFinite(limit) ? limit : 25,
+      );
+      recordAgentEvent(env.AGENT_ANALYTICS, {
+        event: "search_impression",
+        surface: "api",
+        tool: "GET /api/search",
+        query: q.trim(),
+        results: results.items.length,
+        slugs: results.items.slice(0, 10).map((item) => item.slug ?? item.id),
+        latencyMs: Date.now() - started,
+        client: clientHint(request),
+      });
+      return json(results);
     }
 
     if (url.pathname === "/api/sdks") {
@@ -111,7 +128,7 @@ export default {
     }
 
     if (url.pathname.startsWith("/api/sdks/")) {
-      return detailCatalog(sdks, url, "sdk");
+      return detailCatalog(sdks, url, "sdk", env.AGENT_ANALYTICS, request);
     }
 
     if (url.pathname === "/api/plugins") {
@@ -119,7 +136,7 @@ export default {
     }
 
     if (url.pathname.startsWith("/api/plugins/")) {
-      return detailCatalog(plugins, url, "plugin");
+      return detailCatalog(plugins, url, "plugin", env.AGENT_ANALYTICS, request);
     }
 
     if (url.pathname === "/api/mcps") {
@@ -127,7 +144,7 @@ export default {
     }
 
     if (url.pathname.startsWith("/api/mcps/")) {
-      return detailCatalog(mcps, url, "mcp");
+      return detailCatalog(mcps, url, "mcp", env.AGENT_ANALYTICS, request);
     }
 
     if (url.pathname === "/api/skills") {
@@ -208,6 +225,15 @@ export default {
             },
           );
         }
+        recordAgentEvent(env.AGENT_ANALYTICS, {
+          event: "detail_pull",
+          surface: "api",
+          tool: "GET /api/skills/:sdk/:name",
+          kind: "skill",
+          slugs: [`${sdkSlug}/${skillName}`],
+          results: 1,
+          client: clientHint(request),
+        });
         return new Response(body.content, {
           headers: {
             ...corsHeaders(),
@@ -219,6 +245,15 @@ export default {
       }
 
       const enriched = enrichSkill(skill, sdk.slug, { includeBody: true });
+      recordAgentEvent(env.AGENT_ANALYTICS, {
+        event: "detail_pull",
+        surface: "api",
+        tool: "GET /api/skills/:sdk/:name",
+        kind: "skill",
+        slugs: [`${sdkSlug}/${skillName}`],
+        results: 1,
+        client: clientHint(request),
+      });
       return json(enriched);
     }
 
@@ -372,7 +407,14 @@ function listCatalog(
   };
 }
 
-function detailCatalog(items: SdkEntry[], url: URL, kind: string): Response {
+function detailCatalog(
+  items: SdkEntry[],
+  url: URL,
+  kind: string,
+  dataset: AnalyticsEngineDataset | undefined,
+  request: Request,
+): Response {
+  const started = Date.now();
   const prefix =
     kind === "sdk"
       ? "/api/sdks/"
@@ -391,13 +433,24 @@ function detailCatalog(items: SdkEntry[], url: URL, kind: string): Response {
   const includeBody =
     wantsBody(url, true) || (kind === "sdk" && wantsAgentView(url));
   const base = agent ? withAgentFields(item) : item;
-  return json({
+  const payload = {
     ...base,
     generatedAt: skillBodiesMeta().generatedAt,
     skills: base.skills?.map((skill) =>
       enrichSkill(skill, item.slug, { includeBody }),
     ),
+  };
+  recordAgentEvent(dataset, {
+    event: "detail_pull",
+    surface: "api",
+    tool: `GET ${prefix}:slug`,
+    kind,
+    slugs: [slug],
+    results: 1,
+    latencyMs: Date.now() - started,
+    client: clientHint(request),
   });
+  return json(payload);
 }
 
 function wantsBody(url: URL, defaultOnDetail = false): boolean {
