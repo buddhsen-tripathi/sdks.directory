@@ -46,6 +46,7 @@ worker/
   index.ts           # /api/* + agent discovery handlers
   catalog.ts         # search + MCP field enrichment
   mcp.ts             # catalog MCP (JSON-RPC)
+  analytics.ts       # agent usage events (Analytics Engine)
   openapi.ts
   discovery.ts       # robots, llms, sitemap, well-known
   skills.ts          # skill body enrichment
@@ -133,6 +134,15 @@ Point agents at the catalog via HTTPS/SVCB under `_agents` as in [draft-mozleywi
 ### Auth / OAuth
 
 The catalog API is public. There is no OAuth/OIDC authorization server and no protected-resource metadata on purpose. See `/auth.md`. Do not publish stub OAuth discovery documents.
+
+### Agent usage analytics
+
+Successful agent calls are counted in a Workers Analytics Engine dataset (`sdks_directory_agent_usage`, binding `AGENT_ANALYTICS`). Two event types:
+
+- `search_impression` — `search_catalog` / `GET /api/search` answered (query, result count, top slugs; includes zero-result searches)
+- `detail_pull` — `get_sdk` / `get_skill` / `get_plugin` / `get_mcp` or the REST detail endpoints returned an entry
+
+Only successful responses are recorded (errors, retries, and health checks are excluded). No IPs or user identifiers are stored — just event type, surface (`mcp` / `api`), tool, query, slugs, result count, latency, and the client name when the agent supplies one (MCP `clientInfo` or User-Agent). Query via the Analytics Engine SQL API.
 
 ## Roadmap
 
