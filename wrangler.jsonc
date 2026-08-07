@@ -18,6 +18,16 @@
 	"upload_source_maps": true,
 	"compatibility_flags": [
 		"nodejs_compat"
+	],
+	/**
+	 * Agent usage analytics (search impressions + detail pulls).
+	 * Query via the Analytics Engine SQL API; no user identifiers are stored.
+	 */
+	"analytics_engine_datasets": [
+		{
+			"binding": "AGENT_ANALYTICS",
+			"dataset": "sdks_directory_agent_usage"
+		}
 	]
 	/**
 	 * Smart Placement
