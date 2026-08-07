@@ -172,7 +172,7 @@ function handleMessage(origin: string, message: JsonRpcRequest) {
     };
   }
 
-  if (method === "notifications/initialized" || method === "initialized") {
+  if (method.startsWith("notifications/") || method === "initialized") {
     return null;
   }
 
