@@ -1,6 +1,8 @@
 import { mcps } from "../src/data/mcps";
 import { plugins } from "../src/data/plugins";
 import { sdks } from "../src/data/sdks";
+import type { AgentEvent } from "./analytics";
+import { clientHint, recordAgentEvent } from "./analytics";
 import { searchCatalog, withAgentFields } from "./catalog";
 import { enrichSkill } from "./skills";
 
@@ -11,6 +13,16 @@ type JsonRpcRequest = {
   id?: JsonRpcId;
   method?: string;
   params?: Record<string, unknown>;
+};
+
+type McpSession = {
+  dataset?: AnalyticsEngineDataset;
+  client?: string;
+};
+
+type ToolOutcome = {
+  result: ReturnType<typeof textResult> | ReturnType<typeof toolError>;
+  analytics?: Omit<AgentEvent, "surface" | "client" | "latencyMs">;
 };
 
 const SERVER_INFO = {
@@ -105,26 +117,49 @@ function callTool(
   origin: string,
   name: string,
   args: Record<string, unknown>,
-) {
+): ToolOutcome {
   switch (name) {
     case "search_catalog": {
       const q = String(args.q ?? "").trim();
-      if (!q) return toolError("Missing required argument: q");
+      if (!q) return { result: toolError("Missing required argument: q") };
       const limit = Number(args.limit ?? 15);
-      return textResult(
-        searchCatalog(origin, q, Number.isFinite(limit) ? limit : 15),
+      const search = searchCatalog(
+        origin,
+        q,
+        Number.isFinite(limit) ? limit : 15,
       );
+      return {
+        result: textResult(search),
+        analytics: {
+          event: "search_impression",
+          tool: name,
+          query: q,
+          results: search.items.length,
+          slugs: search.items
+            .slice(0, 10)
+            .map((item) => item.slug ?? item.id),
+        },
+      };
     }
     case "get_sdk": {
       const slug = String(args.slug ?? "").trim();
       const sdk = sdks.find((item) => item.slug === slug);
-      if (!sdk) return toolError(`SDK not found: ${slug}`);
-      return textResult({
-        ...sdk,
-        skills: sdk.skills?.map((skill) =>
-          enrichSkill(skill, sdk.slug, { includeBody: true }),
-        ),
-      });
+      if (!sdk) return { result: toolError(`SDK not found: ${slug}`) };
+      return {
+        result: textResult({
+          ...sdk,
+          skills: sdk.skills?.map((skill) =>
+            enrichSkill(skill, sdk.slug, { includeBody: true }),
+          ),
+        }),
+        analytics: {
+          event: "detail_pull",
+          tool: name,
+          kind: "sdk",
+          slugs: [slug],
+          results: 1,
+        },
+      };
     }
     case "get_skill": {
       const sdkSlug = String(args.sdk ?? "").trim();
@@ -132,33 +167,71 @@ function callTool(
       const sdk = sdks.find((item) => item.slug === sdkSlug);
       const skill = sdk?.skills?.find((item) => item.name === skillName);
       if (!sdk || !skill) {
-        return toolError(`Skill not found: ${sdkSlug}/${skillName}`);
+        return { result: toolError(`Skill not found: ${sdkSlug}/${skillName}`) };
       }
-      return textResult(enrichSkill(skill, sdk.slug, { includeBody: true }));
+      return {
+        result: textResult(enrichSkill(skill, sdk.slug, { includeBody: true })),
+        analytics: {
+          event: "detail_pull",
+          tool: name,
+          kind: "skill",
+          slugs: [`${sdkSlug}/${skillName}`],
+          results: 1,
+        },
+      };
     }
     case "get_plugin": {
       const slug = String(args.slug ?? "").trim();
       const plugin = plugins.find((item) => item.slug === slug);
-      if (!plugin) return toolError(`Plugin not found: ${slug}`);
-      return textResult(plugin);
+      if (!plugin) return { result: toolError(`Plugin not found: ${slug}`) };
+      return {
+        result: textResult(plugin),
+        analytics: {
+          event: "detail_pull",
+          tool: name,
+          kind: "plugin",
+          slugs: [slug],
+          results: 1,
+        },
+      };
     }
     case "get_mcp": {
       const slug = String(args.slug ?? "").trim();
       const mcp = mcps.find((item) => item.slug === slug);
-      if (!mcp) return toolError(`MCP not found: ${slug}`);
-      return textResult(withAgentFields(mcp));
+      if (!mcp) return { result: toolError(`MCP not found: ${slug}`) };
+      return {
+        result: textResult(withAgentFields(mcp)),
+        analytics: {
+          event: "detail_pull",
+          tool: name,
+          kind: "mcp",
+          slugs: [slug],
+          results: 1,
+        },
+      };
     }
     default:
-      return toolError(`Unknown tool: ${name}`);
+      return { result: toolError(`Unknown tool: ${name}`) };
   }
 }
 
-function handleMessage(origin: string, message: JsonRpcRequest) {
+function handleMessage(
+  origin: string,
+  message: JsonRpcRequest,
+  session: McpSession,
+) {
   const id = message.id ?? null;
   const method = message.method ?? "";
   const params = (message.params ?? {}) as Record<string, unknown>;
 
   if (method === "initialize") {
+    const clientInfo = params.clientInfo as
+      | { name?: string; version?: string }
+      | undefined;
+    const client = [clientInfo?.name, clientInfo?.version]
+      .filter(Boolean)
+      .join("/");
+    if (client) session.client = client;
     return {
       jsonrpc: "2.0",
       id,
@@ -191,10 +264,20 @@ function handleMessage(origin: string, message: JsonRpcRequest) {
   if (method === "tools/call") {
     const name = String(params.name ?? "");
     const args = (params.arguments ?? {}) as Record<string, unknown>;
+    const started = Date.now();
+    const { result, analytics } = callTool(origin, name, args);
+    if (analytics && !("isError" in result && result.isError)) {
+      recordAgentEvent(session.dataset, {
+        ...analytics,
+        surface: "mcp",
+        client: session.client,
+        latencyMs: Date.now() - started,
+      });
+    }
     return {
       jsonrpc: "2.0",
       id,
-      result: callTool(origin, name, args),
+      result,
     };
   }
 
@@ -223,6 +306,7 @@ export function mcpServerCard(origin: string) {
 export async function handleMcpRequest(
   request: Request,
   origin: string,
+  dataset?: AnalyticsEngineDataset,
 ): Promise<Response> {
   if (request.method === "GET") {
     return Response.json(
@@ -262,8 +346,11 @@ export async function handleMcpRequest(
   }
 
   const messages = Array.isArray(payload) ? payload : [payload];
+  const session: McpSession = { dataset, client: clientHint(request) };
   const responses = messages
-    .map((message) => handleMessage(origin, message as JsonRpcRequest))
+    .map((message) =>
+      handleMessage(origin, message as JsonRpcRequest, session),
+    )
     .filter((message) => message !== null);
 
   const body = Array.isArray(payload) ? responses : responses[0] ?? {};
