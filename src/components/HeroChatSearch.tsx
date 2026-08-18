@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "motion/react";
 import { ArrowUp, MagnifyingGlass } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { AgentUsageStats } from "./AgentUsageStats";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -98,6 +99,14 @@ export function HeroChatSearch() {
             </Button>
           </div>
         </motion.form>
+
+        <motion.div
+          className="w-full"
+          {...enter}
+          transition={{ duration: 0.55, ease, delay: 0.22 }}
+        >
+          <AgentUsageStats />
+        </motion.div>
       </div>
     </section>
   );

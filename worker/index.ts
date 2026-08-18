@@ -13,7 +13,12 @@ import {
   pageMarkdown,
   wantsMarkdown,
 } from "./agent-readiness";
-import { clientHint, recordAgentEvent } from "./analytics";
+import { clientHint } from "./analytics";
+import {
+  AgentStats,
+  emptyAgentStats,
+  recordAgentUsage,
+} from "./agent-stats";
 import { searchCatalog, withAgentFields, relatedApiLinks } from "./catalog";
 import {
   llmsTxt,
@@ -35,8 +40,10 @@ import type { SdkEntry } from "../src/types/catalog";
  * Edge API for the catalog. Seed data mirrors the SPA; skill bodies are
  * snapshotted and returned inline on skill endpoints.
  */
+export { AgentStats };
+
 export default {
-  async fetch(request, env): Promise<Response> {
+  async fetch(request, env, ctx): Promise<Response> {
     const url = new URL(request.url);
     const accept = request.headers.get("Accept") ?? "";
     const origin = url.origin;
@@ -87,7 +94,7 @@ export default {
     }
 
     if (url.pathname === "/api/mcp" || url.pathname === "/api/mcp/") {
-      return handleMcpRequest(request, origin, env.AGENT_ANALYTICS);
+      return handleMcpRequest(request, origin, env, ctx);
     }
 
     if (url.pathname === "/api" || url.pathname === "/api/") {
@@ -96,6 +103,14 @@ export default {
 
     if (url.pathname === "/api/health") {
       return json({ ok: true, service: "sdks.directory" });
+    }
+
+    if (url.pathname === "/api/stats") {
+      try {
+        return json(await env.AGENT_STATS.getByName("public").snapshot());
+      } catch {
+        return json(emptyAgentStats());
+      }
     }
 
     if (url.pathname === "/api/search") {
@@ -110,7 +125,7 @@ export default {
         q,
         Number.isFinite(limit) ? limit : 25,
       );
-      recordAgentEvent(env.AGENT_ANALYTICS, {
+      recordAgentUsage(env, ctx, {
         event: "search_impression",
         surface: "api",
         tool: "GET /api/search",
@@ -128,7 +143,7 @@ export default {
     }
 
     if (url.pathname.startsWith("/api/sdks/")) {
-      return detailCatalog(sdks, url, "sdk", env.AGENT_ANALYTICS, request);
+      return detailCatalog(sdks, url, "sdk", env, ctx, request);
     }
 
     if (url.pathname === "/api/plugins") {
@@ -136,7 +151,7 @@ export default {
     }
 
     if (url.pathname.startsWith("/api/plugins/")) {
-      return detailCatalog(plugins, url, "plugin", env.AGENT_ANALYTICS, request);
+      return detailCatalog(plugins, url, "plugin", env, ctx, request);
     }
 
     if (url.pathname === "/api/mcps") {
@@ -144,7 +159,7 @@ export default {
     }
 
     if (url.pathname.startsWith("/api/mcps/")) {
-      return detailCatalog(mcps, url, "mcp", env.AGENT_ANALYTICS, request);
+      return detailCatalog(mcps, url, "mcp", env, ctx, request);
     }
 
     if (url.pathname === "/api/skills") {
@@ -225,7 +240,7 @@ export default {
             },
           );
         }
-        recordAgentEvent(env.AGENT_ANALYTICS, {
+        recordAgentUsage(env, ctx, {
           event: "detail_pull",
           surface: "api",
           tool: "GET /api/skills/:sdk/:name",
@@ -245,7 +260,7 @@ export default {
       }
 
       const enriched = enrichSkill(skill, sdk.slug, { includeBody: true });
-      recordAgentEvent(env.AGENT_ANALYTICS, {
+      recordAgentUsage(env, ctx, {
         event: "detail_pull",
         surface: "api",
         tool: "GET /api/skills/:sdk/:name",
@@ -411,7 +426,8 @@ function detailCatalog(
   items: SdkEntry[],
   url: URL,
   kind: string,
-  dataset: AnalyticsEngineDataset | undefined,
+  env: Env,
+  ctx: ExecutionContext,
   request: Request,
 ): Response {
   const started = Date.now();
@@ -441,7 +457,7 @@ function detailCatalog(
       enrichSkill(skill, item.slug, { includeBody }),
     ),
   };
-  recordAgentEvent(dataset, {
+  recordAgentUsage(env, ctx, {
     event: "detail_pull",
     surface: "api",
     tool: `GET ${prefix}:slug`,
@@ -490,6 +506,7 @@ function agentDiscovery(origin: string) {
       skills: `${origin}/api/skills?sdk=&q=&withContent=1&include=body`,
       skill: `${origin}/api/skills/{sdk}/{name}`,
       skillMarkdown: `${origin}/api/skills/{sdk}/{name}.md`,
+      stats: `${origin}/api/stats`,
       coverage: `${origin}/api/coverage`,
       languages: `${origin}/api/languages`,
       categories: `${origin}/api/categories`,
@@ -508,6 +525,7 @@ function agentDiscovery(origin: string) {
       "Use Accept: text/markdown on HTML pages for Markdown-for-Agents responses.",
       "Attribution: skill.url is the upstream source; content is a snapshot for agent use.",
       "Auth: public API — see /auth.md. No OAuth required.",
+      "GET /api/stats returns public agent lookup counts only (no queries or clients).",
     ],
     skillBodies: skillBodiesMeta(),
   };

@@ -169,6 +169,13 @@ export function openApiDocument(origin: string) {
           },
         },
       },
+      "/api/stats": {
+        get: {
+          summary: "Public agent lookup counts (API + MCP; no queries or clients)",
+          operationId: "getAgentStats",
+          responses: { "200": { description: "Lookup windows" } },
+        },
+      },
       "/api/coverage": {
         get: {
           summary: "Catalog coverage stats",

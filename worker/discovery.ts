@@ -46,6 +46,7 @@ Start here:
 - MCP card: ${origin}/.well-known/mcp.json
 - Auth: ${origin}/auth.md (public API; no OAuth)
 - Health: ${origin}/api/health
+- Agent lookups (public counts): ${origin}/api/stats
 - Coverage: ${origin}/api/coverage
 
 ### Search everything

@@ -47,6 +47,7 @@ worker/
   catalog.ts         # search + MCP field enrichment
   mcp.ts             # catalog MCP (JSON-RPC)
   analytics.ts       # agent usage events (Analytics Engine)
+  agent-stats.ts     # public lookup counters (Durable Object)
   openapi.ts
   discovery.ts       # robots, llms, sitemap, well-known
   skills.ts          # skill body enrichment
@@ -98,6 +99,7 @@ Same seed data as the SPA (Worker first for `/api/*` and agent discovery files).
 | `GET /sitemap.xml` | HTML + API resource sitemap |
 | Homepage `Link` headers | RFC 8288 links to api-catalog, OpenAPI, llms.txt, skills index |
 | `GET /api/health` | Health check |
+| `GET /api/stats` | Public agent lookup counts (24h / 7d / all-time; no queries) |
 | `GET /api/sdks` | List / filter (`?language=&category=&q=&withSkills=1&include=body`) |
 | `GET /api/sdks/:slug` | Single SDK; `?view=agent` includes skill bodies |
 | `GET /api/plugins` | List / filter (`?category=&platform=&q=`) |
@@ -137,12 +139,12 @@ The catalog API is public. There is no OAuth/OIDC authorization server and no pr
 
 ### Agent usage analytics
 
-Successful agent calls are counted in a Workers Analytics Engine dataset (`sdks_directory_agent_usage`, binding `AGENT_ANALYTICS`). Two event types:
+Successful agent calls are counted two ways:
 
-- `search_impression` — `search_catalog` / `GET /api/search` answered (query, result count, top slugs; includes zero-result searches)
-- `detail_pull` — `get_sdk` / `get_skill` / `get_plugin` / `get_mcp` or the REST detail endpoints returned an entry
+- **Public totals** — `GET /api/stats` returns search vs detail-pull counts for the last 24 hours, last 7 days, and all time. Human SPA page views are not counted. The homepage shows these numbers.
+- **Private event log** — Workers Analytics Engine dataset `sdks_directory_agent_usage` (binding `AGENT_ANALYTICS`) stores `search_impression` and `detail_pull` with tool, query, slugs, latency, and client hint. Query that dataset via the Analytics Engine SQL API.
 
-Only successful responses are recorded (errors, retries, and health checks are excluded). No IPs or user identifiers are stored — just event type, surface (`mcp` / `api`), tool, query, slugs, result count, latency, and the client name when the agent supplies one (MCP `clientInfo` or User-Agent). Query via the Analytics Engine SQL API.
+Only successful MCP tools and REST search/detail responses are recorded. Errors, retries, health checks, and `GET /api/stats` itself are excluded. No IPs or user identifiers are stored in either channel.
 
 ## Roadmap
 

@@ -28,6 +28,20 @@
 			"binding": "AGENT_ANALYTICS",
 			"dataset": "sdks_directory_agent_usage"
 		}
+	],
+	"durable_objects": {
+		"bindings": [
+			{
+				"name": "AGENT_STATS",
+				"class_name": "AgentStats"
+			}
+		]
+	},
+	"migrations": [
+		{
+			"tag": "v1",
+			"new_sqlite_classes": ["AgentStats"]
+		}
 	]
 	/**
 	 * Smart Placement
