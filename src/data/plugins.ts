@@ -17,7 +17,7 @@ export const plugins: SdkEntry[] = [
     categories: ["payments"],
     homepage: "https://github.com/stripe/ai/tree/main/providers/claude/plugin",
     githubUrl: "https://github.com/stripe/ai",
-    platforms: ["claude"],
+    platforms: ["claude", "cursor"],
     install: "/plugin install stripe@claude-plugins-official",
     packages: [
       {
@@ -25,8 +25,13 @@ export const plugins: SdkEntry[] = [
         name: "stripe@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "stripe",
+        url: "https://cursor.com/marketplace/stripe",
+      },
     ],
-    tags: ["claude", "payments", "billing"],
+    tags: ["claude", "cursor", "payments", "billing"],
     featured: true,
     official: true,
   },
@@ -43,7 +48,7 @@ export const plugins: SdkEntry[] = [
     homepage:
       "https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/github",
     githubUrl: "https://github.com/github/github-mcp-server",
-    platforms: ["claude"],
+    platforms: ["claude", "cursor"],
     install: "/plugin install github@claude-plugins-official",
     packages: [
       {
@@ -51,8 +56,13 @@ export const plugins: SdkEntry[] = [
         name: "github@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "github",
+        url: "https://cursor.com/marketplace/github",
+      },
     ],
-    tags: ["claude", "repos", "prs"],
+    tags: ["claude", "cursor", "repos", "prs"],
     featured: true,
     official: true,
   },
@@ -68,7 +78,7 @@ export const plugins: SdkEntry[] = [
     categories: ["devtools"],
     homepage: "https://github.com/makenotion/claude-code-notion-plugin",
     githubUrl: "https://github.com/makenotion/claude-code-notion-plugin",
-    platforms: ["claude"],
+    platforms: ["claude", "cursor"],
     install: "/plugin install notion@claude-plugins-official",
     packages: [
       {
@@ -76,8 +86,13 @@ export const plugins: SdkEntry[] = [
         name: "notion@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "notion",
+        url: "https://cursor.com/marketplace/notion",
+      },
     ],
-    tags: ["claude", "docs", "workspace"],
+    tags: ["claude", "cursor", "docs", "workspace"],
     featured: true,
     official: true,
   },
@@ -101,6 +116,11 @@ export const plugins: SdkEntry[] = [
         registry: "other",
         name: "cloudflare@claude-plugins-official",
         url: "https://claude.com/plugins",
+      },
+      {
+        registry: "other",
+        name: "cloudflare",
+        url: "https://cursor.com/marketplace/cloudflare",
       },
     ],
     tags: ["claude", "cursor", "workers", "wrangler"],
@@ -127,6 +147,11 @@ export const plugins: SdkEntry[] = [
         name: "vercel@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "vercel",
+        url: "https://cursor.com/marketplace/vercel",
+      },
     ],
     tags: ["claude", "cursor", "deploy", "nextjs"],
     featured: true,
@@ -144,7 +169,7 @@ export const plugins: SdkEntry[] = [
     categories: ["observability"],
     homepage: "https://github.com/getsentry/plugin-claude",
     githubUrl: "https://github.com/getsentry/plugin-claude",
-    platforms: ["claude"],
+    platforms: ["claude", "cursor"],
     install: "/plugin install sentry@claude-plugins-official",
     packages: [
       {
@@ -152,8 +177,13 @@ export const plugins: SdkEntry[] = [
         name: "sentry@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "sentry",
+        url: "https://cursor.com/marketplace/sentry",
+      },
     ],
-    tags: ["claude", "errors", "apm"],
+    tags: ["claude", "cursor", "errors", "apm"],
     featured: true,
     official: true,
   },
@@ -169,7 +199,7 @@ export const plugins: SdkEntry[] = [
     categories: ["database"],
     homepage: "https://github.com/supabase-community/supabase-plugin",
     githubUrl: "https://github.com/supabase-community/supabase-plugin",
-    platforms: ["claude"],
+    platforms: ["claude", "cursor"],
     install: "/plugin install supabase@claude-plugins-official",
     packages: [
       {
@@ -177,8 +207,13 @@ export const plugins: SdkEntry[] = [
         name: "supabase@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "supabase",
+        url: "https://cursor.com/marketplace/supabase",
+      },
     ],
-    tags: ["claude", "postgres", "auth"],
+    tags: ["claude", "cursor", "postgres", "auth"],
     featured: true,
     official: true,
   },
@@ -202,6 +237,11 @@ export const plugins: SdkEntry[] = [
         name: "linear@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "linear",
+        url: "https://cursor.com/marketplace/linear",
+      },
     ],
     tags: ["claude", "cursor", "issues", "projects"],
     official: true,
@@ -218,7 +258,7 @@ export const plugins: SdkEntry[] = [
     categories: ["devtools"],
     homepage: "https://github.com/atlassian/atlassian-mcp-server",
     githubUrl: "https://github.com/atlassian/atlassian-mcp-server",
-    platforms: ["claude"],
+    platforms: ["claude", "cursor"],
     install: "/plugin install atlassian@claude-plugins-official",
     packages: [
       {
@@ -226,8 +266,13 @@ export const plugins: SdkEntry[] = [
         name: "atlassian@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "atlassian",
+        url: "https://cursor.com/marketplace/atlassian",
+      },
     ],
-    tags: ["claude", "jira", "confluence"],
+    tags: ["claude", "cursor", "jira", "confluence"],
     official: true,
   },
   {
@@ -242,7 +287,7 @@ export const plugins: SdkEntry[] = [
     categories: ["comms"],
     homepage: "https://github.com/slackapi/slack-mcp-plugin",
     githubUrl: "https://github.com/slackapi/slack-mcp-plugin",
-    platforms: ["claude"],
+    platforms: ["claude", "cursor"],
     install: "/plugin install slack@claude-plugins-official",
     packages: [
       {
@@ -250,8 +295,13 @@ export const plugins: SdkEntry[] = [
         name: "slack@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "slack",
+        url: "https://cursor.com/marketplace/slack",
+      },
     ],
-    tags: ["claude", "chat", "search"],
+    tags: ["claude", "cursor", "chat", "search"],
     official: true,
   },
   {
@@ -274,6 +324,11 @@ export const plugins: SdkEntry[] = [
         name: "figma@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "figma",
+        url: "https://cursor.com/marketplace/figma",
+      },
     ],
     tags: ["claude", "cursor", "design", "tokens"],
     official: true,
@@ -291,7 +346,7 @@ export const plugins: SdkEntry[] = [
     homepage:
       "https://github.com/neondatabase/agent-skills/tree/main/plugins/neon-postgres",
     githubUrl: "https://github.com/neondatabase/agent-skills",
-    platforms: ["claude"],
+    platforms: ["claude", "cursor"],
     install: "/plugin install neon@claude-plugins-official",
     packages: [
       {
@@ -299,8 +354,13 @@ export const plugins: SdkEntry[] = [
         name: "neon@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "neon-postgres",
+        url: "https://cursor.com/marketplace/neon-postgres",
+      },
     ],
-    tags: ["claude", "postgres", "branching"],
+    tags: ["claude", "cursor", "postgres", "branching"],
     featured: true,
     official: true,
   },
@@ -346,7 +406,7 @@ export const plugins: SdkEntry[] = [
     categories: ["database"],
     homepage: "https://github.com/prisma/claude-plugin",
     githubUrl: "https://github.com/prisma/claude-plugin",
-    platforms: ["claude"],
+    platforms: ["claude", "cursor"],
     install: "/plugin install prisma@claude-plugins-official",
     packages: [
       {
@@ -354,8 +414,13 @@ export const plugins: SdkEntry[] = [
         name: "prisma@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "prisma",
+        url: "https://cursor.com/marketplace/prisma",
+      },
     ],
-    tags: ["claude", "orm", "postgres"],
+    tags: ["claude", "cursor", "orm", "postgres"],
     official: true,
   },
   {
@@ -371,7 +436,7 @@ export const plugins: SdkEntry[] = [
     homepage: "https://posthog.com/docs/model-context-protocol",
     docsUrl: "https://posthog.com/docs/model-context-protocol",
     githubUrl: "https://github.com/PostHog/ai-plugin",
-    platforms: ["claude"],
+    platforms: ["claude", "cursor"],
     install: "/plugin install posthog@claude-plugins-official",
     packages: [
       {
@@ -379,8 +444,13 @@ export const plugins: SdkEntry[] = [
         name: "posthog@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "posthog",
+        url: "https://cursor.com/marketplace/posthog",
+      },
     ],
-    tags: ["claude", "analytics", "flags"],
+    tags: ["claude", "cursor", "analytics", "flags"],
     official: true,
   },
   {
@@ -395,7 +465,7 @@ export const plugins: SdkEntry[] = [
     categories: ["email"],
     homepage: "https://resend.com",
     githubUrl: "https://github.com/resend/resend-skills",
-    platforms: ["claude"],
+    platforms: ["claude", "cursor"],
     install: "/plugin install resend@claude-plugins-official",
     packages: [
       {
@@ -403,8 +473,13 @@ export const plugins: SdkEntry[] = [
         name: "resend@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "resend",
+        url: "https://cursor.com/marketplace/resend",
+      },
     ],
-    tags: ["claude", "email", "transactional"],
+    tags: ["claude", "cursor", "email", "transactional"],
     official: true,
   },
   {
@@ -419,7 +494,7 @@ export const plugins: SdkEntry[] = [
     categories: ["auth"],
     homepage: "https://auth0.com",
     githubUrl: "https://github.com/auth0/agent-skills",
-    platforms: ["claude"],
+    platforms: ["claude", "cursor"],
     install: "/plugin install auth0@claude-plugins-official",
     packages: [
       {
@@ -427,8 +502,13 @@ export const plugins: SdkEntry[] = [
         name: "auth0@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "auth0",
+        url: "https://cursor.com/marketplace/auth0",
+      },
     ],
-    tags: ["claude", "auth", "sso"],
+    tags: ["claude", "cursor", "auth", "sso"],
     official: true,
   },
   {
@@ -444,7 +524,7 @@ export const plugins: SdkEntry[] = [
     homepage:
       "https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/playwright",
     githubUrl: "https://github.com/microsoft/playwright-mcp",
-    platforms: ["claude"],
+    platforms: ["claude", "cursor"],
     install: "/plugin install playwright@claude-plugins-official",
     packages: [
       {
@@ -452,8 +532,13 @@ export const plugins: SdkEntry[] = [
         name: "playwright@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "playwright",
+        url: "https://cursor.com/marketplace/playwright",
+      },
     ],
-    tags: ["claude", "browser", "testing"],
+    tags: ["claude", "cursor", "browser", "testing"],
     official: true,
   },
   {
@@ -468,7 +553,7 @@ export const plugins: SdkEntry[] = [
     categories: ["database"],
     homepage:
       "https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/firebase",
-    platforms: ["claude"],
+    platforms: ["claude", "cursor"],
     install: "/plugin install firebase@claude-plugins-official",
     packages: [
       {
@@ -476,8 +561,13 @@ export const plugins: SdkEntry[] = [
         name: "firebase@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "firebase",
+        url: "https://cursor.com/marketplace/firebase",
+      },
     ],
-    tags: ["claude", "firestore", "auth"],
+    tags: ["claude", "cursor", "firestore", "auth"],
     official: true,
   },
   {
@@ -517,7 +607,7 @@ export const plugins: SdkEntry[] = [
     categories: ["ai"],
     homepage: "https://github.com/huggingface/skills",
     githubUrl: "https://github.com/huggingface/skills",
-    platforms: ["claude"],
+    platforms: ["claude", "cursor"],
     install: "/plugin install huggingface-skills@claude-plugins-official",
     packages: [
       {
@@ -525,8 +615,13 @@ export const plugins: SdkEntry[] = [
         name: "huggingface-skills@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "huggingface",
+        url: "https://cursor.com/marketplace/huggingface",
+      },
     ],
-    tags: ["claude", "models", "datasets"],
+    tags: ["claude", "cursor", "models", "datasets"],
     official: true,
   },
   {
@@ -750,6 +845,11 @@ export const plugins: SdkEntry[] = [
         name: "aws-core@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "aws-core",
+        url: "https://cursor.com/marketplace/aws-core",
+      },
     ],
     tags: ["claude", "cursor", "aws", "iac"],
     featured: true,
@@ -775,6 +875,11 @@ export const plugins: SdkEntry[] = [
         name: "azure@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "azure",
+        url: "https://cursor.com/marketplace/azure",
+      },
     ],
     tags: ["claude", "cursor", "copilot", "azure"],
     featured: true,
@@ -799,6 +904,11 @@ export const plugins: SdkEntry[] = [
         registry: "other",
         name: "shopify-ai-toolkit@claude-plugins-official",
         url: "https://claude.com/plugins",
+      },
+      {
+        registry: "other",
+        name: "shopify",
+        url: "https://cursor.com/marketplace/shopify",
       },
     ],
     tags: ["claude", "cursor", "commerce"],
@@ -849,6 +959,11 @@ export const plugins: SdkEntry[] = [
         name: "netlify-skills@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "netlify",
+        url: "https://cursor.com/marketplace/netlify",
+      },
     ],
     tags: ["claude", "cursor", "copilot", "deploy"],
     official: true,
@@ -873,8 +988,36 @@ export const plugins: SdkEntry[] = [
         name: "workos@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "workos",
+        url: "https://cursor.com/marketplace/workos",
+      },
     ],
     tags: ["claude", "cursor", "sso", "auth"],
+    official: true,
+  },
+  {
+    id: "plugin-clerk",
+    kind: "plugin",
+    name: "Clerk",
+    slug: "clerk",
+    description:
+      "Clerk authentication toolkit for Cursor: setup guides, MCP, and skills for frameworks, orgs, billing, and webhooks.",
+    vendor: "Clerk",
+    languages: [],
+    categories: ["auth"],
+    homepage: "https://cursor.com/marketplace/clerk",
+    githubUrl: "https://github.com/clerk/cursor-plugin",
+    platforms: ["cursor"],
+    packages: [
+      {
+        registry: "other",
+        name: "clerk",
+        url: "https://cursor.com/marketplace/clerk",
+      },
+    ],
+    tags: ["cursor", "auth", "identity"],
     official: true,
   },
   {
@@ -913,7 +1056,7 @@ export const plugins: SdkEntry[] = [
     categories: ["database", "ai"],
     homepage: "https://github.com/databricks/databricks-agent-skills",
     githubUrl: "https://github.com/databricks/databricks-agent-skills",
-    platforms: ["claude"],
+    platforms: ["claude", "cursor"],
     install: "/plugin install databricks@claude-plugins-official",
     packages: [
       {
@@ -921,8 +1064,13 @@ export const plugins: SdkEntry[] = [
         name: "databricks@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "databricks",
+        url: "https://cursor.com/marketplace/databricks",
+      },
     ],
-    tags: ["claude", "lakehouse", "data"],
+    tags: ["claude", "cursor", "lakehouse", "data"],
     official: true,
   },
   {
@@ -937,7 +1085,7 @@ export const plugins: SdkEntry[] = [
     categories: ["database"],
     homepage: "https://github.com/Airtable/skills",
     githubUrl: "https://github.com/Airtable/skills",
-    platforms: ["claude"],
+    platforms: ["claude", "cursor"],
     install: "/plugin install airtable@claude-plugins-official",
     packages: [
       {
@@ -945,8 +1093,13 @@ export const plugins: SdkEntry[] = [
         name: "airtable@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "airtable",
+        url: "https://cursor.com/marketplace/airtable",
+      },
     ],
-    tags: ["claude", "bases", "records"],
+    tags: ["claude", "cursor", "bases", "records"],
     official: true,
   },
   {
@@ -961,7 +1114,7 @@ export const plugins: SdkEntry[] = [
     categories: ["database"],
     homepage: "https://github.com/ClickHouse/clickhouse-claude-code-plugin",
     githubUrl: "https://github.com/ClickHouse/clickhouse-claude-code-plugin",
-    platforms: ["claude"],
+    platforms: ["claude", "cursor"],
     install: "/plugin install clickhouse@claude-plugins-official",
     packages: [
       {
@@ -969,8 +1122,13 @@ export const plugins: SdkEntry[] = [
         name: "clickhouse@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "clickhouse",
+        url: "https://cursor.com/marketplace/clickhouse",
+      },
     ],
-    tags: ["claude", "olap", "sql"],
+    tags: ["claude", "cursor", "olap", "sql"],
     official: true,
   },
   {
@@ -985,7 +1143,7 @@ export const plugins: SdkEntry[] = [
     categories: ["media"],
     homepage: "https://github.com/cloudinary-devs/cloudinary-plugin",
     githubUrl: "https://github.com/cloudinary-devs/cloudinary-plugin",
-    platforms: ["claude"],
+    platforms: ["claude", "cursor"],
     install: "/plugin install cloudinary@claude-plugins-official",
     packages: [
       {
@@ -993,8 +1151,13 @@ export const plugins: SdkEntry[] = [
         name: "cloudinary@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "cloudinary",
+        url: "https://cursor.com/marketplace/cloudinary",
+      },
     ],
-    tags: ["claude", "media", "assets"],
+    tags: ["claude", "cursor", "media", "assets"],
     official: true,
   },
   {
@@ -1010,7 +1173,7 @@ export const plugins: SdkEntry[] = [
     homepage:
       "https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/context7",
     githubUrl: "https://github.com/upstash/context7",
-    platforms: ["claude"],
+    platforms: ["claude", "cursor"],
     install: "/plugin install context7@claude-plugins-official",
     packages: [
       {
@@ -1018,8 +1181,13 @@ export const plugins: SdkEntry[] = [
         name: "context7@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "context7",
+        url: "https://cursor.com/marketplace/context7",
+      },
     ],
-    tags: ["claude", "docs", "libraries"],
+    tags: ["claude", "cursor", "docs", "libraries"],
     official: true,
   },
   {
@@ -1034,7 +1202,7 @@ export const plugins: SdkEntry[] = [
     categories: ["database"],
     homepage: "https://github.com/get-convex/convex-backend-skill",
     githubUrl: "https://github.com/get-convex/convex-backend-skill",
-    platforms: ["claude"],
+    platforms: ["claude", "cursor"],
     install: "/plugin install convex@claude-plugins-official",
     packages: [
       {
@@ -1042,8 +1210,13 @@ export const plugins: SdkEntry[] = [
         name: "convex@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "convex",
+        url: "https://cursor.com/marketplace/convex",
+      },
     ],
-    tags: ["claude", "backend", "realtime"],
+    tags: ["claude", "cursor", "backend", "realtime"],
     official: true,
   },
   {
@@ -1058,7 +1231,7 @@ export const plugins: SdkEntry[] = [
     categories: ["observability"],
     homepage: "https://github.com/datadog-labs/claude-code-plugin",
     githubUrl: "https://github.com/datadog-labs/claude-code-plugin",
-    platforms: ["claude"],
+    platforms: ["claude", "cursor"],
     install: "/plugin install datadog@claude-plugins-official",
     packages: [
       {
@@ -1066,8 +1239,13 @@ export const plugins: SdkEntry[] = [
         name: "datadog@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "datadog",
+        url: "https://cursor.com/marketplace/datadog",
+      },
     ],
-    tags: ["claude", "apm", "logs"],
+    tags: ["claude", "cursor", "apm", "logs"],
     official: true,
   },
   {
@@ -1106,7 +1284,7 @@ export const plugins: SdkEntry[] = [
     categories: ["devtools"],
     homepage: "https://github.com/firecrawl/firecrawl-claude-plugin",
     githubUrl: "https://github.com/firecrawl/firecrawl-claude-plugin",
-    platforms: ["claude"],
+    platforms: ["claude", "cursor"],
     install: "/plugin install firecrawl@claude-plugins-official",
     packages: [
       {
@@ -1114,8 +1292,13 @@ export const plugins: SdkEntry[] = [
         name: "firecrawl@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "firecrawl",
+        url: "https://cursor.com/marketplace/firecrawl",
+      },
     ],
-    tags: ["claude", "scrape", "crawl"],
+    tags: ["claude", "cursor", "scrape", "crawl"],
     official: true,
   },
   {
@@ -1130,7 +1313,7 @@ export const plugins: SdkEntry[] = [
     categories: ["devtools"],
     homepage:
       "https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/gitlab",
-    platforms: ["claude"],
+    platforms: ["claude", "cursor"],
     install: "/plugin install gitlab@claude-plugins-official",
     packages: [
       {
@@ -1138,8 +1321,13 @@ export const plugins: SdkEntry[] = [
         name: "gitlab@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "gitlab",
+        url: "https://cursor.com/marketplace/gitlab",
+      },
     ],
-    tags: ["claude", "mrs", "ci"],
+    tags: ["claude", "cursor", "mrs", "ci"],
     official: true,
   },
   {
@@ -1154,7 +1342,7 @@ export const plugins: SdkEntry[] = [
     categories: ["observability"],
     homepage: "https://github.com/grafana/ai-marketplace",
     githubUrl: "https://github.com/grafana/ai-marketplace",
-    platforms: ["claude"],
+    platforms: ["claude", "cursor"],
     install: "/plugin install grafana-mcp@claude-plugins-official",
     packages: [
       {
@@ -1162,8 +1350,13 @@ export const plugins: SdkEntry[] = [
         name: "grafana-mcp@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "grafana",
+        url: "https://cursor.com/marketplace/grafana",
+      },
     ],
-    tags: ["claude", "dashboards", "metrics"],
+    tags: ["claude", "cursor", "dashboards", "metrics"],
     official: true,
   },
   {
@@ -1202,7 +1395,7 @@ export const plugins: SdkEntry[] = [
     categories: ["ai"],
     homepage: "https://github.com/pinecone-io/pinecone-claude-code-plugin",
     githubUrl: "https://github.com/pinecone-io/pinecone-claude-code-plugin",
-    platforms: ["claude"],
+    platforms: ["claude", "cursor"],
     install: "/plugin install pinecone@claude-plugins-official",
     packages: [
       {
@@ -1210,8 +1403,13 @@ export const plugins: SdkEntry[] = [
         name: "pinecone@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "pinecone",
+        url: "https://cursor.com/marketplace/pinecone",
+      },
     ],
-    tags: ["claude", "vectors", "rag"],
+    tags: ["claude", "cursor", "vectors", "rag"],
     official: true,
   },
   {
@@ -1226,7 +1424,7 @@ export const plugins: SdkEntry[] = [
     categories: ["database"],
     homepage: "https://github.com/planetscale/claude-plugin",
     githubUrl: "https://github.com/planetscale/claude-plugin",
-    platforms: ["claude"],
+    platforms: ["claude", "cursor"],
     install: "/plugin install planetscale@claude-plugins-official",
     packages: [
       {
@@ -1234,8 +1432,13 @@ export const plugins: SdkEntry[] = [
         name: "planetscale@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "planetscale",
+        url: "https://cursor.com/marketplace/planetscale",
+      },
     ],
-    tags: ["claude", "mysql", "postgres"],
+    tags: ["claude", "cursor", "mysql", "postgres"],
     official: true,
   },
   {
@@ -1250,7 +1453,7 @@ export const plugins: SdkEntry[] = [
     categories: ["devtools"],
     homepage: "https://github.com/Postman-Devrel/postman-claude-code-plugin",
     githubUrl: "https://github.com/Postman-Devrel/postman-claude-code-plugin",
-    platforms: ["claude"],
+    platforms: ["claude", "cursor"],
     install: "/plugin install postman@claude-plugins-official",
     packages: [
       {
@@ -1258,8 +1461,13 @@ export const plugins: SdkEntry[] = [
         name: "postman@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "postman",
+        url: "https://cursor.com/marketplace/postman",
+      },
     ],
-    tags: ["claude", "apis", "collections"],
+    tags: ["claude", "cursor", "apis", "collections"],
     official: true,
   },
   {
@@ -1274,7 +1482,7 @@ export const plugins: SdkEntry[] = [
     categories: ["database"],
     homepage: "https://github.com/redis/agent-skills",
     githubUrl: "https://github.com/redis/agent-skills",
-    platforms: ["claude"],
+    platforms: ["claude", "cursor"],
     install: "/plugin install redis-development@claude-plugins-official",
     packages: [
       {
@@ -1282,8 +1490,13 @@ export const plugins: SdkEntry[] = [
         name: "redis-development@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "redis",
+        url: "https://cursor.com/marketplace/redis",
+      },
     ],
-    tags: ["claude", "cache", "search"],
+    tags: ["claude", "cursor", "cache", "search"],
     official: true,
   },
   {
@@ -1298,7 +1511,7 @@ export const plugins: SdkEntry[] = [
     categories: ["devtools"],
     homepage: "https://github.com/tavily-ai/skills",
     githubUrl: "https://github.com/tavily-ai/skills",
-    platforms: ["claude"],
+    platforms: ["claude", "cursor"],
     install: "/plugin install tavily@claude-plugins-official",
     packages: [
       {
@@ -1306,8 +1519,13 @@ export const plugins: SdkEntry[] = [
         name: "tavily@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "tavily",
+        url: "https://cursor.com/marketplace/tavily",
+      },
     ],
-    tags: ["claude", "search", "web"],
+    tags: ["claude", "cursor", "search", "web"],
     official: true,
   },
   {
@@ -1322,7 +1540,7 @@ export const plugins: SdkEntry[] = [
     categories: ["comms"],
     homepage: "https://github.com/twilio/ai",
     githubUrl: "https://github.com/twilio/ai",
-    platforms: ["claude"],
+    platforms: ["claude", "cursor"],
     install: "/plugin install twilio-developer-kit@claude-plugins-official",
     packages: [
       {
@@ -1330,8 +1548,13 @@ export const plugins: SdkEntry[] = [
         name: "twilio-developer-kit@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "twilio",
+        url: "https://cursor.com/marketplace/twilio",
+      },
     ],
-    tags: ["claude", "sms", "voice"],
+    tags: ["claude", "cursor", "sms", "voice"],
     official: true,
   },
   {
@@ -1346,7 +1569,7 @@ export const plugins: SdkEntry[] = [
     categories: ["devtools"],
     homepage: "https://github.com/zapier/zapier-mcp",
     githubUrl: "https://github.com/zapier/zapier-mcp",
-    platforms: ["claude"],
+    platforms: ["claude", "cursor"],
     install: "/plugin install zapier@claude-plugins-official",
     packages: [
       {
@@ -1354,8 +1577,13 @@ export const plugins: SdkEntry[] = [
         name: "zapier@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "zapier",
+        url: "https://cursor.com/marketplace/zapier",
+      },
     ],
-    tags: ["claude", "automation"],
+    tags: ["claude", "cursor", "automation"],
     official: true,
   },
   {
