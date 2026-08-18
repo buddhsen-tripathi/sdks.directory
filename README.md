@@ -48,6 +48,7 @@ worker/
   mcp.ts             # catalog MCP (JSON-RPC)
   analytics.ts       # agent usage events (Analytics Engine)
   agent-stats.ts     # public lookup counters (Durable Object)
+  usage.ts           # record public + private usage together
   openapi.ts
   discovery.ts       # robots, llms, sitemap, well-known
   skills.ts          # skill body enrichment

@@ -80,7 +80,10 @@ export function WebMcpTools() {
         },
         execute({ path }) {
           const next = String(path ?? "/");
-          const safe = next.startsWith("/") ? next : `/${next}`;
+          const safe = catalogPath(next);
+          if (!safe) {
+            return { ok: false, error: "path must be a same-origin catalog route" };
+          }
           window.location.assign(safe);
           return { ok: true, path: safe };
         },
@@ -105,4 +108,12 @@ export function WebMcpTools() {
   }, []);
 
   return null;
+}
+
+function catalogPath(path: string): string | null {
+  const trimmed = path.trim();
+  if (!trimmed.startsWith("/") || trimmed.startsWith("//")) return null;
+  if (trimmed.includes("\\") || trimmed.includes("://")) return null;
+  if (!/^\/[A-Za-z0-9/_?=&.-]*$/.test(trimmed)) return null;
+  return trimmed;
 }

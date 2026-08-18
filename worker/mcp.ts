@@ -3,7 +3,7 @@ import { plugins } from "../src/data/plugins";
 import { sdks } from "../src/data/sdks";
 import type { AgentEvent } from "./analytics";
 import { clientHint } from "./analytics";
-import { recordAgentUsage } from "./agent-stats";
+import { recordAgentUsage } from "./usage";
 import { searchCatalog, withAgentFields, relatedApiLinks } from "./catalog";
 import { enrichSkill } from "./skills";
 
@@ -294,21 +294,6 @@ function handleMessage(
     jsonrpc: "2.0",
     id,
     error: { code: -32601, message: `Method not found: ${method}` },
-  };
-}
-
-export function mcpServerCard(origin: string) {
-  return {
-    name: "io.github.buddhsen-tripathi/sdks-directory",
-    description:
-      "Search official SDKs, agent plugins, MCP servers, and skill bodies from sdks.directory.",
-    version: "1.0.0",
-    remotes: [
-      {
-        type: "streamable-http",
-        url: `${origin}/api/mcp`,
-      },
-    ],
   };
 }
 

@@ -1006,6 +1006,12 @@
     <loc>https://sdks.directory/plugin/workos</loc>
   </url>
   <url>
+    <loc>https://sdks.directory/api/plugins/clerk</loc>
+  </url>
+  <url>
+    <loc>https://sdks.directory/plugin/clerk</loc>
+  </url>
+  <url>
     <loc>https://sdks.directory/api/plugins/paypal</loc>
   </url>
   <url>

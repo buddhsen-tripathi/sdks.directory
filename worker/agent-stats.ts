@@ -1,6 +1,5 @@
 import { DurableObject } from "cloudflare:workers";
-import type { AgentEvent, AgentEventKind } from "./analytics";
-import { recordAgentEvent } from "./analytics";
+import type { AgentEventKind } from "./analytics";
 import type { PublicAgentStats, WindowCounts } from "../src/types/agent-stats";
 
 const HOUR_MS = 60 * 60 * 1000;
@@ -97,30 +96,6 @@ export class AgentStats extends DurableObject {
         .toArray()[0] ?? { searches: 0, details: 0 }
     );
   }
-}
-
-export function emptyAgentStats(): PublicAgentStats {
-  const zero = windows(0, 0, 0);
-  return {
-    generatedAt: new Date().toISOString(),
-    lookups: zero,
-    searches: zero,
-    details: zero,
-  };
-}
-
-export function recordAgentUsage(
-  env: Env,
-  ctx: ExecutionContext,
-  event: AgentEvent,
-): void {
-  recordAgentEvent(env.AGENT_ANALYTICS, event);
-  ctx.waitUntil(
-    env.AGENT_STATS.getByName("public")
-      .record(event.event)
-      .then(() => undefined)
-      .catch(() => undefined),
-  );
 }
 
 function windows(

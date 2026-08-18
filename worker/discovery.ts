@@ -2,7 +2,6 @@ import { mcps } from "../src/data/mcps";
 import { plugins } from "../src/data/plugins";
 import { sdks } from "../src/data/sdks";
 import { skillBodiesMeta } from "./skills";
-import { mcpServerCard } from "./mcp";
 
 export function robotsTxt(origin: string): string {
   return `# sdks.directory — agents: start at ${origin}/llms.txt and ${origin}/api
@@ -161,7 +160,18 @@ ${body}
 }
 
 export function wellKnownMcp(origin: string) {
-  return mcpServerCard(origin);
+  return {
+    name: "io.github.buddhsen-tripathi/sdks-directory",
+    description:
+      "Search official SDKs, agent plugins, MCP servers, and skill bodies from sdks.directory.",
+    version: "1.0.0",
+    remotes: [
+      {
+        type: "streamable-http",
+        url: `${origin}/api/mcp`,
+      },
+    ],
+  };
 }
 
 function escapeXml(value: string): string {

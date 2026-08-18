@@ -14,11 +14,8 @@ import {
   wantsMarkdown,
 } from "./agent-readiness";
 import { clientHint } from "./analytics";
-import {
-  AgentStats,
-  emptyAgentStats,
-  recordAgentUsage,
-} from "./agent-stats";
+import { AgentStats } from "./agent-stats";
+import { emptyAgentStats, recordAgentUsage } from "./usage";
 import { searchCatalog, withAgentFields, relatedApiLinks } from "./catalog";
 import {
   llmsTxt,
