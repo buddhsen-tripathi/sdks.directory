@@ -6,7 +6,6 @@ import type { CatalogKind, SdkEntry } from "../types/catalog";
 /** Slugs that refer to the same product across SDK / plugin / MCP catalogs. */
 const RELATED_SLUG: Record<string, string> = {
   "huggingface-skills": "huggingface",
-  "chrome-devtools-mcp": "chrome-devtools",
 };
 
 export function relatedSlug(slug: string): string {
@@ -36,21 +35,36 @@ export function relatedCatalog(entry: SdkEntry): {
   };
 }
 
+/** True when a package URL is a connectable MCP endpoint, not docs HTML. */
+function isRemoteMcpUrl(url: string): boolean {
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== "https:") return false;
+    const host = parsed.hostname;
+    const path = parsed.pathname.replace(/\/+$/, "") || "/";
+    if (host === "api.githubcopilot.com" && path.startsWith("/mcp")) return true;
+    if (host === "huggingface.co" && path === "/mcp") return true;
+    if (host.startsWith("mcp.") || host.includes(".mcp.")) {
+      return true;
+    }
+    return /\/mcp$/i.test(path);
+  } catch {
+    return false;
+  }
+}
+
 /** Derive agent-facing MCP connect fields when authors omit them. */
 export function withAgentFields(entry: SdkEntry): SdkEntry {
   if (entry.kind !== "mcp") return entry;
 
   const tags = new Set(entry.tags ?? []);
   const remotePkg = entry.packages?.find(
-    (pkg) =>
-      pkg.registry === "other" &&
-      (/\/mcp\b/i.test(pkg.url) ||
-        /\bmcp\./i.test(pkg.url) ||
-        pkg.url.includes("githubcopilot.com/mcp") ||
-        pkg.url.includes("huggingface.co/mcp")),
+    (pkg) => pkg.registry === "other" && isRemoteMcpUrl(pkg.url),
   );
 
-  const remoteUrl = entry.remoteUrl ?? remotePkg?.url;
+  const remoteUrl =
+    entry.remoteUrl ??
+    (remotePkg && isRemoteMcpUrl(remotePkg.url) ? remotePkg.url : undefined);
 
   const transport =
     entry.transport ??

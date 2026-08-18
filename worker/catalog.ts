@@ -105,7 +105,7 @@ export function searchCatalog(origin: string, query: string, limit = 25) {
         slug: sdk.slug,
         vendor: sdk.vendor,
         description: sdk.description,
-        url: `${origin}/api/sdks/${sdk.slug}`,
+        url: `${origin}/api/sdks/${sdk.slug}?view=agent`,
         related: relatedApiLinks(origin, sdk),
       });
     }

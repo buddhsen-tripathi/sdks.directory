@@ -399,7 +399,6 @@ function listCatalog(
         opts.enrichAgent || item.kind === "mcp" ? withAgentFields(item) : item;
       return {
         ...base,
-        related: relatedApiLinks(url.origin, item),
         skills: base.skills?.map((skill) =>
           enrichSkill(skill, item.slug, { includeBody }),
         ),
