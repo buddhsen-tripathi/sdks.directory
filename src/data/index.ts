@@ -3,8 +3,10 @@ import { languages } from "./languages";
 import { mcps } from "./mcps";
 import { plugins } from "./plugins";
 import { sdks } from "./sdks";
-import { searchCatalog } from "../lib/catalog";
+import { relatedCatalog, searchCatalog } from "../lib/catalog";
 import type { LanguageId, SdkEntry } from "../types/catalog";
+
+export { relatedCatalog };
 
 export { categories, languages, mcps, plugins, sdks };
 export { getCategory } from "./categories";

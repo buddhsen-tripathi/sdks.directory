@@ -70,7 +70,7 @@ export function BrowsePage() {
       <SectionHead
         eyebrow="Catalog"
         title="Browse SDKs"
-        description="Search the full index. Language and category are filters."
+        description="Search the full index. Language and category are filters. Each SDK links to a matching plugin and MCP when we have them."
       />
 
       <div className="mb-5 grid grid-cols-1 gap-2 md:grid-cols-[1.4fr_1fr_1fr]">

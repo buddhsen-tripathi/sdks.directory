@@ -3,8 +3,44 @@ import { languages } from "../src/data/languages";
 import { mcps } from "../src/data/mcps";
 import { plugins } from "../src/data/plugins";
 import { sdks } from "../src/data/sdks";
+import { relatedCatalog, withAgentFields } from "../src/lib/catalog";
 import { enrichSkill, skillBodiesMeta } from "./skills";
 import type { SdkEntry } from "../src/types/catalog";
+
+export { withAgentFields };
+
+export function relatedApiLinks(origin: string, entry: SdkEntry) {
+  const related = relatedCatalog(entry);
+  return {
+    ...(related.sdk
+      ? {
+          sdk: {
+            slug: related.sdk.slug,
+            name: related.sdk.name,
+            url: `${origin}/api/sdks/${related.sdk.slug}?view=agent`,
+          },
+        }
+      : {}),
+    ...(related.plugin
+      ? {
+          plugin: {
+            slug: related.plugin.slug,
+            name: related.plugin.name,
+            url: `${origin}/api/plugins/${related.plugin.slug}`,
+          },
+        }
+      : {}),
+    ...(related.mcp
+      ? {
+          mcp: {
+            slug: related.mcp.slug,
+            name: related.mcp.name,
+            url: `${origin}/api/mcps/${related.mcp.slug}`,
+          },
+        }
+      : {}),
+  };
+}
 
 export type SearchHit = {
   kind: "sdk" | "plugin" | "mcp" | "skill";
@@ -18,6 +54,11 @@ export type SearchHit = {
   install?: string;
   sdk?: string;
   hasContent?: boolean;
+  platforms?: string[];
+  transport?: SdkEntry["transport"];
+  auth?: SdkEntry["auth"];
+  remoteUrl?: string;
+  related?: ReturnType<typeof relatedApiLinks>;
 };
 
 function scoreText(query: string, fields: string[]): number {
@@ -64,7 +105,8 @@ export function searchCatalog(origin: string, query: string, limit = 25) {
         slug: sdk.slug,
         vendor: sdk.vendor,
         description: sdk.description,
-        url: `${origin}/api/sdks/${sdk.slug}`,
+        url: `${origin}/api/sdks/${sdk.slug}?view=agent`,
+        related: relatedApiLinks(origin, sdk),
       });
     }
 
@@ -116,11 +158,14 @@ export function searchCatalog(origin: string, query: string, limit = 25) {
         description: plugin.description,
         url: `${origin}/api/plugins/${plugin.slug}`,
         install: plugin.install,
+        platforms: plugin.platforms,
+        related: relatedApiLinks(origin, plugin),
       });
     }
   }
 
   for (const mcp of mcps) {
+    const enriched = withAgentFields(mcp);
     const score = scoreText(q, [
       mcp.name,
       mcp.vendor,
@@ -142,7 +187,11 @@ export function searchCatalog(origin: string, query: string, limit = 25) {
         vendor: mcp.vendor,
         description: mcp.description,
         url: `${origin}/api/mcps/${mcp.slug}`,
-        install: mcp.install,
+        install: enriched.install,
+        transport: enriched.transport,
+        auth: enriched.auth,
+        remoteUrl: enriched.remoteUrl,
+        related: relatedApiLinks(origin, mcp),
       });
     }
   }
@@ -164,45 +213,6 @@ export function searchCatalog(origin: string, query: string, limit = 25) {
     q,
     count: unique.length,
     items: unique.slice(0, Math.max(1, Math.min(limit, 100))),
-  };
-}
-
-/** Derive agent-facing MCP connect fields when authors omit them. */
-export function withAgentFields(entry: SdkEntry): SdkEntry {
-  if (entry.kind !== "mcp") return entry;
-
-  const tags = new Set(entry.tags ?? []);
-  const remotePkg = entry.packages?.find(
-    (pkg) =>
-      pkg.registry === "other" &&
-      (/\/mcp\b/i.test(pkg.url) ||
-        /\bmcp\./i.test(pkg.url) ||
-        pkg.url.includes("mcp.stripe.com") ||
-        pkg.url.includes("mcp.vercel.com") ||
-        pkg.url.includes("githubcopilot.com/mcp")),
-  );
-
-  const transport =
-    entry.transport ??
-    (tags.has("remote") || remotePkg
-      ? "http"
-      : tags.has("stdio")
-        ? "stdio"
-        : remotePkg
-          ? "http"
-          : undefined);
-
-  const auth =
-    entry.auth ??
-    (tags.has("oauth") ? "oauth" : tags.has("api_key") ? "api_key" : undefined);
-
-  const remoteUrl = entry.remoteUrl ?? remotePkg?.url;
-
-  return {
-    ...entry,
-    ...(transport ? { transport } : {}),
-    ...(auth ? { auth } : {}),
-    ...(remoteUrl ? { remoteUrl } : {}),
   };
 }
 

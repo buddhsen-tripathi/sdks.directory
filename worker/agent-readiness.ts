@@ -1,6 +1,8 @@
 import { mcps } from "../src/data/mcps";
 import { plugins } from "../src/data/plugins";
 import { sdks } from "../src/data/sdks";
+import { relatedCatalog, withAgentFields } from "../src/lib/catalog";
+import type { SdkEntry } from "../src/types/catalog";
 import { getSkillBody, skillBodiesMeta } from "./skills";
 
 /** RFC 8288 Link values advertised on the homepage and HTML shell. */
@@ -216,42 +218,68 @@ ${items.map((item) => `- [${item.name}](${origin}/${prefix}/${item.slug}): ${ite
 function entryMarkdown(
   origin: string,
   kind: "sdk" | "plugin" | "mcp",
-  item: {
-    slug: string;
-    name: string;
-    description: string;
-    homepage?: string;
-    docsUrl?: string;
-    skills?: { name: string }[];
-  },
+  item: SdkEntry,
 ): string {
+  const entry = withAgentFields(item);
+  const related = relatedCatalog(entry);
   const apiPath =
     kind === "sdk"
-      ? `/api/sdks/${item.slug}`
+      ? `/api/sdks/${entry.slug}`
       : kind === "plugin"
-        ? `/api/plugins/${item.slug}`
-        : `/api/mcps/${item.slug}`;
+        ? `/api/plugins/${entry.slug}`
+        : `/api/mcps/${entry.slug}`;
   const skills =
-    item.skills
+    entry.skills
       ?.map(
         (s) =>
-          `- [${s.name}](${origin}/api/skills/${item.slug}/${s.name}.md)`,
+          `- [${s.name}](${origin}/api/skills/${entry.slug}/${s.name}.md)`,
       )
       .join("\n") ?? "";
+  const relatedLines = [
+    related.sdk
+      ? `- SDK: [${related.sdk.name}](${origin}/api/sdks/${related.sdk.slug}?view=agent)`
+      : "",
+    related.plugin
+      ? `- Plugin: [${related.plugin.name}](${origin}/api/plugins/${related.plugin.slug})`
+      : "",
+    related.mcp
+      ? `- MCP: [${related.mcp.name}](${origin}/api/mcps/${related.mcp.slug})`
+      : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+  const connect =
+    kind === "mcp"
+      ? [
+          entry.transport ? `- Transport: ${entry.transport}` : "",
+          entry.auth ? `- Auth: ${entry.auth}` : "",
+          entry.remoteUrl ? `- Remote URL: ${entry.remoteUrl}` : "",
+          entry.install ? `- Install: \`${entry.install}\`` : "",
+          entry.registryName ? `- Registry: \`${entry.registryName}\`` : "",
+        ]
+          .filter(Boolean)
+          .join("\n")
+      : [
+          entry.install ? `- Install: \`${entry.install}\`` : "",
+          entry.platforms?.length
+            ? `- Platforms: ${entry.platforms.join(", ")}`
+            : "",
+        ]
+          .filter(Boolean)
+          .join("\n");
   return `---
-title: ${item.name} · sdks.directory
-description: ${item.description}
+title: ${entry.name} · sdks.directory
+description: ${entry.description}
 ---
 
-# ${item.name}
+# ${entry.name}
 
-${item.description}
+${entry.description}
 
 - API: ${origin}${apiPath}${kind === "sdk" ? "?view=agent" : ""}
-- Website: ${item.homepage ?? "n/a"}
-- Docs: ${item.docsUrl ?? "n/a"}
-
-${skills ? `## Skills\n\n${skills}\n` : ""}`;
+- Website: ${entry.homepage ?? "n/a"}
+- Docs: ${entry.docsUrl ?? "n/a"}
+${connect ? `\n## Connect\n\n${connect}\n` : ""}${relatedLines ? `\n## Related\n\n${relatedLines}\n` : ""}${skills ? `## Skills\n\n${skills}\n` : ""}`;
 }
 
 export type AgentSkillIndexEntry = {

@@ -3,7 +3,7 @@ import { plugins } from "../src/data/plugins";
 import { sdks } from "../src/data/sdks";
 import type { AgentEvent } from "./analytics";
 import { clientHint, recordAgentEvent } from "./analytics";
-import { searchCatalog, withAgentFields } from "./catalog";
+import { searchCatalog, withAgentFields, relatedApiLinks } from "./catalog";
 import { enrichSkill } from "./skills";
 
 type JsonRpcId = string | number | null;
@@ -148,6 +148,7 @@ function callTool(
       return {
         result: textResult({
           ...sdk,
+          related: relatedApiLinks(origin, sdk),
           skills: sdk.skills?.map((skill) =>
             enrichSkill(skill, sdk.slug, { includeBody: true }),
           ),
@@ -185,7 +186,10 @@ function callTool(
       const plugin = plugins.find((item) => item.slug === slug);
       if (!plugin) return { result: toolError(`Plugin not found: ${slug}`) };
       return {
-        result: textResult(plugin),
+        result: textResult({
+          ...plugin,
+          related: relatedApiLinks(origin, plugin),
+        }),
         analytics: {
           event: "detail_pull",
           tool: name,
@@ -200,7 +204,10 @@ function callTool(
       const mcp = mcps.find((item) => item.slug === slug);
       if (!mcp) return { result: toolError(`MCP not found: ${slug}`) };
       return {
-        result: textResult(withAgentFields(mcp)),
+        result: textResult({
+          ...withAgentFields(mcp),
+          related: relatedApiLinks(origin, mcp),
+        }),
         analytics: {
           event: "detail_pull",
           tool: name,

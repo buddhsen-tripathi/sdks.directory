@@ -6,7 +6,7 @@ export function McpsPage() {
     <CatalogBrowsePage
       kind="mcp"
       title="Browse MCPs"
-      description="Model Context Protocol servers agents can connect to. Curated, not a raw registry dump."
+      description="Official MCP servers with transport, auth, and a remote URL when agents can connect over HTTP."
       search={searchMcps}
       emptyMessage="No MCP servers match these filters."
     />
