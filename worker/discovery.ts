@@ -54,7 +54,7 @@ Start here:
 GET /api/search?q=stripe&limit=20
 \`\`\`
 
-Returns ranked SDKs, plugins, MCPs, and skills in one payload.
+Returns ranked SDKs, plugins, MCPs, and skills in one payload. MCP hits include \`transport\`, \`auth\`, \`remoteUrl\`, and \`install\`. Every hit includes \`related\` slugs when a matching SDK, plugin, or MCP exists.
 
 ### Fetch a single skill (preferred)
 
@@ -81,7 +81,7 @@ GET /api/mcps?category=database
 GET /api/mcps/github
 \`\`\`
 
-\`view=agent\` on SDK detail includes skill bodies and is the one-shot happy path.
+\`view=agent\` on SDK detail includes skill bodies and related plugin/MCP links. MCP detail includes \`transport\`, \`auth\`, \`remoteUrl\`, and \`install\`.
 
 ### Catalog MCP tools
 

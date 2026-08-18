@@ -1,4 +1,82 @@
+import { mcps } from "../data/mcps";
+import { plugins } from "../data/plugins";
+import { sdks } from "../data/sdks";
 import type { CatalogKind, SdkEntry } from "../types/catalog";
+
+/** Slugs that refer to the same product across SDK / plugin / MCP catalogs. */
+const RELATED_SLUG: Record<string, string> = {
+  "huggingface-skills": "huggingface",
+  "chrome-devtools-mcp": "chrome-devtools",
+};
+
+export function relatedSlug(slug: string): string {
+  return RELATED_SLUG[slug] ?? slug;
+}
+
+/** Sibling SDK / plugin / MCP entries for the same product. */
+export function relatedCatalog(entry: SdkEntry): {
+  sdk?: SdkEntry;
+  plugin?: SdkEntry;
+  mcp?: SdkEntry;
+} {
+  const slug = relatedSlug(entry.slug);
+  return {
+    sdk:
+      entry.kind === "sdk"
+        ? undefined
+        : sdks.find((item) => relatedSlug(item.slug) === slug),
+    plugin:
+      entry.kind === "plugin"
+        ? undefined
+        : plugins.find((item) => relatedSlug(item.slug) === slug),
+    mcp:
+      entry.kind === "mcp"
+        ? undefined
+        : mcps.find((item) => relatedSlug(item.slug) === slug),
+  };
+}
+
+/** Derive agent-facing MCP connect fields when authors omit them. */
+export function withAgentFields(entry: SdkEntry): SdkEntry {
+  if (entry.kind !== "mcp") return entry;
+
+  const tags = new Set(entry.tags ?? []);
+  const remotePkg = entry.packages?.find(
+    (pkg) =>
+      pkg.registry === "other" &&
+      (/\/mcp\b/i.test(pkg.url) ||
+        /\bmcp\./i.test(pkg.url) ||
+        pkg.url.includes("githubcopilot.com/mcp") ||
+        pkg.url.includes("huggingface.co/mcp")),
+  );
+
+  const remoteUrl = entry.remoteUrl ?? remotePkg?.url;
+
+  const transport =
+    entry.transport ??
+    (remoteUrl || tags.has("remote")
+      ? "http"
+      : tags.has("stdio")
+        ? "stdio"
+        : undefined);
+
+  const auth =
+    entry.auth ??
+    (tags.has("oauth")
+      ? "oauth"
+      : tags.has("api_key")
+        ? "api_key"
+        : tags.has("reference") || tags.has("none")
+          ? "none"
+          : undefined);
+
+  return {
+    ...entry,
+    ...(transport ? { transport } : {}),
+    ...(auth ? { auth } : {}),
+    ...(remoteUrl ? { remoteUrl } : {}),
+  };
+}
 
 const kindMeta: Record<
   CatalogKind,

@@ -16,29 +16,29 @@
     "sync:skills": "bun run scripts/sync-skill-bodies.ts"
   },
   "dependencies": {
-    "@cloudflare/vite-plugin": "^1.47.0",
-    "@lobehub/icons": "^5.15.0",
+    "@cloudflare/vite-plugin": "^1.52.1",
+    "@lobehub/icons": "^5.16.0",
     "@phosphor-icons/react": "^2.1.10",
     "@radix-ui/react-slot": "^1.3.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "motion": "^12.42.2",
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7",
+    "motion": "^12.43.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
     "react-icons": "^5.7.0",
-    "react-router-dom": "^7.18.1",
+    "react-router-dom": "^7.18.2",
     "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.3",
-    "@types/node": "^26.1.1",
-    "@types/react": "^19.2.17",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.3",
-    "oxlint": "^1.71.0",
+    "@types/node": "^26.2.0",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@vitejs/plugin-react": "^6.0.5",
+    "oxlint": "^1.78.0",
     "tailwindcss": "^4.3.3",
-    "typescript": "~6.0.2",
-    "vite": "^8.1.1",
-    "wrangler": "^4.114.0"
+    "typescript": "~6.0.3",
+    "vite": "^8.2.1",
+    "wrangler": "^4.123.0"
   }
 }

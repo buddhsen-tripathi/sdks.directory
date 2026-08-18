@@ -69,7 +69,7 @@ export function HomePage() {
               as="h2"
               eyebrow="Plugins"
               title="Agent plugins"
-              description="Installable packages of skills and rules for agent hosts."
+              description="Installable packages of skills, MCP, and rules — with the command agents need."
             />
           </RevealItem>
           <RevealItem>
@@ -93,7 +93,7 @@ export function HomePage() {
               as="h2"
               eyebrow="MCPs"
               title="Model Context Protocol"
-              description="Curated servers agents can connect to."
+              description="Vendor-official servers with transport, auth, and a connect URL when one exists."
             />
           </RevealItem>
           <RevealItem>

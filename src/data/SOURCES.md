@@ -47,7 +47,7 @@ curl "https://registry.modelcontextprotocol.io/v0.1/servers?limit=100&version=la
 
 Docs: https://modelcontextprotocol.io/registry/about · OpenAPI in `modelcontextprotocol/registry`.
 
-Curate into `mcps.ts` — prefer vendor-official servers. Enrich later: Glama, Smithery, Docker MCP Catalog. We are an aggregator/subregistry — not a raw dump.
+Curate into `mcps.ts` — prefer vendor-official servers. Persist `transport`, `auth`, and `remoteUrl` so the SPA and API agree. Enrich later: Glama, Smithery, Docker MCP Catalog. We are an aggregator/subregistry — not a raw dump.
 
 ## Plugins (`plugins.ts`)
 

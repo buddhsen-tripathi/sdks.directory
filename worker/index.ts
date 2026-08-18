@@ -14,7 +14,7 @@ import {
   wantsMarkdown,
 } from "./agent-readiness";
 import { clientHint, recordAgentEvent } from "./analytics";
-import { searchCatalog, withAgentFields } from "./catalog";
+import { searchCatalog, withAgentFields, relatedApiLinks } from "./catalog";
 import {
   llmsTxt,
   robotsTxt,
@@ -399,6 +399,7 @@ function listCatalog(
         opts.enrichAgent || item.kind === "mcp" ? withAgentFields(item) : item;
       return {
         ...base,
+        related: relatedApiLinks(url.origin, item),
         skills: base.skills?.map((skill) =>
           enrichSkill(skill, item.slug, { includeBody }),
         ),
@@ -436,6 +437,7 @@ function detailCatalog(
   const payload = {
     ...base,
     generatedAt: skillBodiesMeta().generatedAt,
+    related: relatedApiLinks(url.origin, item),
     skills: base.skills?.map((skill) =>
       enrichSkill(skill, item.slug, { includeBody }),
     ),
@@ -499,9 +501,10 @@ function agentDiscovery(origin: string) {
       auth: `${origin}/auth.md`,
     },
     agentHints: [
-      "Start with GET /api/search?q= to find SDKs, plugins, MCPs, and skills in one call.",
+      "Start with GET /api/search?q= to find SDKs, plugins, MCPs, and skills in one call. Hits include install, transport, auth, remoteUrl, and related slugs.",
       "Prefer GET /api/skills/{sdk}/{name} — response includes `content` (full SKILL.md).",
-      "Use GET /api/sdks/{slug}?view=agent for one-shot SDK + skill bodies.",
+      "Use GET /api/sdks/{slug}?view=agent for one-shot SDK + skill bodies + related plugin/MCP.",
+      "GET /api/mcps/{slug} and get_mcp return transport, auth, remoteUrl, install, and related SDK/plugin.",
       "Connect the catalog MCP at POST /api/mcp (tools: search_catalog, get_sdk, get_skill, get_plugin, get_mcp).",
       "Use Accept: text/markdown on HTML pages for Markdown-for-Agents responses.",
       "Attribution: skill.url is the upstream source; content is a snapshot for agent use.",

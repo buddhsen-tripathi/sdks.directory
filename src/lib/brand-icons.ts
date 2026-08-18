@@ -3,6 +3,7 @@ import type { IconType } from "react-icons";
 import {
   SiAirtable,
   SiAlgolia,
+  SiAsana,
   SiAuth0,
   SiClickhouse,
   SiClerk,
@@ -17,6 +18,7 @@ import {
   SiFirebase,
   SiGithub,
   SiGitlab,
+  SiGooglechrome,
   SiGooglecloud,
   SiGrafana,
   SiHuggingface,
@@ -28,6 +30,7 @@ import {
   SiMongodb,
   SiNeon,
   SiNetlify,
+  SiPaypal,
   SiPlanetscale,
   SiPosthog,
   SiPostman,
@@ -142,6 +145,9 @@ const simpleBySlug: Record<string, IconType> = {
   netlify: SiNetlify,
   zapier: SiZapier,
   postman: SiPostman,
+  paypal: SiPaypal,
+  asana: SiAsana,
+  "chrome-devtools": SiGooglechrome,
 };
 
 export function resolveSdkBrandIcon(sdk: SdkEntry) {

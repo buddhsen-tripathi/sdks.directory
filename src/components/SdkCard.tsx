@@ -2,7 +2,11 @@ import type { CSSProperties } from "react";
 import { ArrowRight } from "@phosphor-icons/react";
 import type { SdkEntry } from "../types/catalog";
 import { getLanguage } from "../data";
-import { catalogDetailPath, catalogKindMeta } from "../lib/catalog";
+import {
+  catalogDetailPath,
+  catalogKindMeta,
+  withAgentFields,
+} from "../lib/catalog";
 import { cn } from "../lib/utils";
 import { CardFrame } from "./CardFrame";
 import { SdkBrandIcon } from "./SdkBrandIcon";
@@ -15,10 +19,13 @@ interface SdkCardProps {
 }
 
 export function SdkCard({ sdk, style, className }: SdkCardProps) {
-  const langs = sdk.languages.slice(0, 4);
-  const platforms = sdk.platforms?.slice(0, 3) ?? [];
+  const entry = withAgentFields(sdk);
+  const langs = entry.languages.slice(0, 4);
+  const platforms = entry.platforms?.slice(0, 3) ?? [];
   const showLanguages = langs.length > 0;
   const showPlatforms = !showLanguages && platforms.length > 0;
+  const showConnect =
+    !showLanguages && !showPlatforms && Boolean(entry.transport);
 
   return (
     <CardFrame
@@ -84,7 +91,16 @@ export function SdkCard({ sdk, style, className }: SdkCardProps) {
                 </span>
               ))
             : null}
-          {!showLanguages && !showPlatforms && sdk.categories[0] ? (
+          {showConnect ? (
+            <span className="rounded-sm border border-hairline bg-surface-card-elevated px-2 py-0.5 text-[11px] uppercase tracking-wide text-body">
+              {entry.transport}
+              {entry.auth ? ` · ${entry.auth.replace("_", " ")}` : ""}
+            </span>
+          ) : null}
+          {!showLanguages &&
+          !showPlatforms &&
+          !showConnect &&
+          sdk.categories[0] ? (
             <span className="truncate text-xs text-muted">
               {sdk.categories[0]}
             </span>
