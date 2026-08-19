@@ -23,8 +23,12 @@
     </script>
     <meta
       name="description"
-      content="sdks.directory — official SDKs, packages, and agent skills."
+      content="sdks.directory — official SDKs, agent plugins, MCP servers, and skills."
     />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://sdks.directory/" />
+    <link rel="describedby" href="/llms.txt" type="text/plain" title="Agent guide" />
+    <link rel="alternate" type="application/json" href="/api" title="API discovery" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -35,12 +39,35 @@
     <meta property="og:title" content="sdks.directory" />
     <meta
       property="og:description"
-      content="Official SDKs, packages, and agent skills."
+      content="Official SDKs, agent plugins, MCP servers, and skills."
     />
     <meta property="og:type" content="website" />
     <title>sdks.directory</title>
   </head>
   <body>
+    <noscript>
+      <main>
+        <h1>sdks.directory</h1>
+        <p>
+          Official SDKs, agent plugins, MCP servers, and SKILL.md bodies.
+          No JavaScript required for the catalog API.
+        </p>
+        <p>Start here:</p>
+        <ul>
+          <li><a href="/llms.txt">llms.txt — agent guide</a></li>
+          <li><a href="/llms-full.txt">llms-full.txt — every slug</a></li>
+          <li><a href="/api">/api — discovery JSON</a></li>
+          <li><a href="/api/sdks">/api/sdks</a></li>
+          <li><a href="/api/plugins">/api/plugins</a></li>
+          <li><a href="/api/mcps">/api/mcps</a></li>
+          <li><a href="/api/search?q=stripe">/api/search</a></li>
+          <li><a href="/api/stats">/api/stats — agent lookup totals</a></li>
+          <li><a href="/api/mcp">/api/mcp — catalog MCP</a></li>
+          <li><a href="/openapi.json">OpenAPI</a></li>
+          <li><a href="/sitemap.xml">sitemap.xml</a></li>
+        </ul>
+      </main>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

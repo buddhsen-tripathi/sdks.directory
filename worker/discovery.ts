@@ -2,7 +2,8 @@ import { mcps } from "../src/data/mcps";
 import { plugins } from "../src/data/plugins";
 import { sdks } from "../src/data/sdks";
 import { skillBodiesMeta } from "./skills";
-import { mcpServerCard } from "./mcp";
+import { formatLookupProof } from "./usage";
+import type { PublicAgentStats } from "../src/types/agent-stats";
 
 export function robotsTxt(origin: string): string {
   return `# sdks.directory — agents: start at ${origin}/llms.txt and ${origin}/api
@@ -10,6 +11,7 @@ User-agent: *
 Allow: /
 Allow: /api/
 Allow: /llms.txt
+Allow: /llms-full.txt
 Allow: /openapi.json
 Allow: /sitemap.xml
 Allow: /.well-known/
@@ -24,14 +26,28 @@ Sitemap: ${origin}/sitemap.xml
 # Search: ${origin}/api/search?q=
 # Skills with bodies: ${origin}/api/skills/{sdk}/{name}
 # Catalog MCP: ${origin}/api/mcp
+# Full slug index: ${origin}/llms-full.txt
 # Content Signals: https://contentsignals.org/
 `;
 }
 
-export function llmsTxt(origin: string): string {
+export function llmsTxt(
+  origin: string,
+  stats?: PublicAgentStats | null,
+): string {
+  const usage = stats
+    ? `${formatLookupProof(stats, origin)}
+`
+    : `Live lookup counts: ${origin}/api/stats
+`;
   return `# sdks.directory
 
 > Official SDKs, agent plugins, MCP servers, and skills. Skill responses include full SKILL.md content.
+
+## Agent usage
+
+${usage}
+Other agents already search and pull this catalog. Counts are API + MCP only — not human page views.
 
 ## For agents
 
@@ -46,7 +62,11 @@ Start here:
 - MCP card: ${origin}/.well-known/mcp.json
 - Auth: ${origin}/auth.md (public API; no OAuth)
 - Health: ${origin}/api/health
+- Lookup totals JSON: ${origin}/api/stats
 - Coverage: ${origin}/api/coverage
+- Full slug index: ${origin}/llms-full.txt
+
+Plain \`curl ${origin}/\` returns this catalog as markdown (no JavaScript). Browsers still get the SPA.
 
 ### Search everything
 
@@ -104,6 +124,7 @@ export function sitemapXml(origin: string): string {
   const urls: string[] = [
     `${origin}/`,
     `${origin}/llms.txt`,
+    `${origin}/llms-full.txt`,
     `${origin}/openapi.json`,
     `${origin}/api`,
     `${origin}/api/health`,
@@ -160,7 +181,50 @@ ${body}
 }
 
 export function wellKnownMcp(origin: string) {
-  return mcpServerCard(origin);
+  return {
+    name: "io.github.buddhsen-tripathi/sdks-directory",
+    description:
+      "Search official SDKs, agent plugins, MCP servers, and skill bodies from sdks.directory.",
+    version: "1.0.0",
+    remotes: [
+      {
+        type: "streamable-http",
+        url: `${origin}/api/mcp`,
+      },
+    ],
+  };
+}
+
+/** Compact slug index so an agent can see the whole catalog from one fetch. */
+export function llmsFullTxt(origin: string): string {
+  const sdkLines = sdks
+    .map((item) => `- ${item.slug} — ${item.name} — ${origin}/api/sdks/${item.slug}?view=agent`)
+    .join("\n");
+  const pluginLines = plugins
+    .map((item) => `- ${item.slug} — ${item.name} — ${origin}/api/plugins/${item.slug}`)
+    .join("\n");
+  const mcpLines = mcps
+    .map((item) => `- ${item.slug} — ${item.name} — ${origin}/api/mcps/${item.slug}`)
+    .join("\n");
+
+  return `# sdks.directory — full catalog
+
+> ${sdks.length} SDKs, ${plugins.length} plugins, ${mcps.length} MCP servers.
+
+Start at ${origin}/llms.txt. Retrieve structured records from the JSON URLs below. Missing optional fields are JSON \`null\`.
+
+## SDKs
+
+${sdkLines}
+
+## Plugins
+
+${pluginLines}
+
+## MCP servers
+
+${mcpLines}
+`;
 }
 
 function escapeXml(value: string): string {

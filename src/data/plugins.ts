@@ -257,6 +257,7 @@ export const plugins: SdkEntry[] = [
     languages: [],
     categories: ["devtools"],
     homepage: "https://github.com/atlassian/atlassian-mcp-server",
+    docsUrl: "https://www.atlassian.com/platform/remote-mcp-server",
     githubUrl: "https://github.com/atlassian/atlassian-mcp-server",
     platforms: ["claude", "cursor"],
     install: "/plugin install atlassian@claude-plugins-official",
@@ -493,6 +494,7 @@ export const plugins: SdkEntry[] = [
     languages: [],
     categories: ["auth"],
     homepage: "https://auth0.com",
+    docsUrl: "https://auth0.com/docs",
     githubUrl: "https://github.com/auth0/agent-skills",
     platforms: ["claude", "cursor"],
     install: "/plugin install auth0@claude-plugins-official",
@@ -792,7 +794,10 @@ export const plugins: SdkEntry[] = [
     languages: [],
     categories: ["cloud"],
     homepage: "https://cursor.com/marketplace/railway",
+    docsUrl: "https://docs.railway.com",
+    githubUrl: "https://github.com/railwayapp",
     platforms: ["cursor"],
+    install: "Install Railway from the Cursor Marketplace (cursor.com/marketplace/railway)",
     packages: [
       {
         registry: "other",
@@ -814,7 +819,10 @@ export const plugins: SdkEntry[] = [
     languages: [],
     categories: ["security"],
     homepage: "https://cursor.com/marketplace/runlayer",
+    docsUrl: "https://www.runlayer.com",
+    githubUrl: "https://github.com/runlayer",
     platforms: ["cursor"],
+    install: "Install Runlayer from the Cursor Marketplace (cursor.com/marketplace/runlayer)",
     packages: [
       {
         registry: "other",
@@ -934,6 +942,11 @@ export const plugins: SdkEntry[] = [
         name: "expo@claude-plugins-official",
         url: "https://claude.com/plugins",
       },
+      {
+        registry: "other",
+        name: "expo",
+        url: "https://cursor.com/marketplace/expo",
+      },
     ],
     tags: ["claude", "cursor", "react-native"],
     featured: true,
@@ -1008,8 +1021,10 @@ export const plugins: SdkEntry[] = [
     languages: [],
     categories: ["auth"],
     homepage: "https://cursor.com/marketplace/clerk",
+    docsUrl: "https://clerk.com/docs",
     githubUrl: "https://github.com/clerk/cursor-plugin",
     platforms: ["cursor"],
+    install: "Install Clerk from the Cursor Marketplace (cursor.com/marketplace/clerk)",
     packages: [
       {
         registry: "other",
@@ -1217,6 +1232,13 @@ export const plugins: SdkEntry[] = [
       },
     ],
     tags: ["claude", "cursor", "backend", "realtime"],
+    skills: [
+      {
+        name: "convex",
+        url: "https://github.com/get-convex/agent-skills/tree/main/skills/convex",
+        install: "npx skills add get-convex/agent-skills --skill convex",
+      },
+    ],
     official: true,
   },
   {
@@ -1260,6 +1282,9 @@ export const plugins: SdkEntry[] = [
     categories: ["comms"],
     homepage:
       "https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/discord",
+    githubUrl:
+      "https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/discord",
+    docsUrl: "https://discord.com/developers/docs",
     platforms: ["claude"],
     install: "/plugin install discord@claude-plugins-official",
     packages: [
@@ -1312,6 +1337,10 @@ export const plugins: SdkEntry[] = [
     languages: [],
     categories: ["devtools"],
     homepage:
+      "https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/gitlab",
+    docsUrl:
+      "https://docs.gitlab.com/user/gitlab_duo/model_context_protocol/mcp_server/",
+    githubUrl:
       "https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/gitlab",
     platforms: ["claude", "cursor"],
     install: "/plugin install gitlab@claude-plugins-official",
@@ -1447,7 +1476,7 @@ export const plugins: SdkEntry[] = [
     name: "Postman",
     slug: "postman",
     description:
-      "Postman plugin: collections, APIs, and workspace operations from Claude Code.",
+      "Postman plugin: collections, APIs, and workspace operations for Claude Code and Cursor.",
     vendor: "Postman",
     languages: [],
     categories: ["devtools"],
@@ -1497,6 +1526,13 @@ export const plugins: SdkEntry[] = [
       },
     ],
     tags: ["claude", "cursor", "cache", "search"],
+    skills: [
+      {
+        name: "redis-development",
+        url: "https://skills.sh/redis/agent-skills/redis-development",
+        install: "npx skills add redis/agent-skills --skill redis-development",
+      },
+    ],
     official: true,
   },
   {
@@ -1622,6 +1658,9 @@ export const plugins: SdkEntry[] = [
     categories: ["devtools"],
     homepage:
       "https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/asana",
+    githubUrl:
+      "https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/asana",
+    docsUrl: "https://developers.asana.com/docs",
     platforms: ["claude"],
     install: "/plugin install asana@claude-plugins-official",
     packages: [

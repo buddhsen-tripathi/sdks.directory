@@ -1,0 +1,190 @@
+# sdks.directory — full catalog
+
+> 68 SDKs, 58 plugins, 50 MCP servers.
+
+Start at https://sdks.directory/llms.txt. Retrieve structured records from the JSON URLs below. Missing optional fields are JSON `null`.
+
+## SDKs
+
+- stripe — Stripe — https://sdks.directory/api/sdks/stripe?view=agent
+- openai — OpenAI — https://sdks.directory/api/sdks/openai?view=agent
+- anthropic — Anthropic — https://sdks.directory/api/sdks/anthropic?view=agent
+- aws — AWS SDK — https://sdks.directory/api/sdks/aws?view=agent
+- google-cloud — Google Cloud Client Libraries — https://sdks.directory/api/sdks/google-cloud?view=agent
+- azure — Azure SDK — https://sdks.directory/api/sdks/azure?view=agent
+- cloudflare — Cloudflare — https://sdks.directory/api/sdks/cloudflare?view=agent
+- twilio — Twilio — https://sdks.directory/api/sdks/twilio?view=agent
+- supabase — Supabase — https://sdks.directory/api/sdks/supabase?view=agent
+- firebase — Firebase — https://sdks.directory/api/sdks/firebase?view=agent
+- vercel — Vercel SDK — https://sdks.directory/api/sdks/vercel?view=agent
+- ai-sdk — Vercel AI SDK — https://sdks.directory/api/sdks/ai-sdk?view=agent
+- sentry — Sentry — https://sdks.directory/api/sdks/sentry?view=agent
+- datadog — Datadog — https://sdks.directory/api/sdks/datadog?view=agent
+- auth0 — Auth0 — https://sdks.directory/api/sdks/auth0?view=agent
+- clerk — Clerk — https://sdks.directory/api/sdks/clerk?view=agent
+- better-auth — Better Auth — https://sdks.directory/api/sdks/better-auth?view=agent
+- resend — Resend — https://sdks.directory/api/sdks/resend?view=agent
+- sendgrid — SendGrid — https://sdks.directory/api/sdks/sendgrid?view=agent
+- posthog — PostHog — https://sdks.directory/api/sdks/posthog?view=agent
+- segment — Segment — https://sdks.directory/api/sdks/segment?view=agent
+- planetscale — PlanetScale — https://sdks.directory/api/sdks/planetscale?view=agent
+- neon — Neon — https://sdks.directory/api/sdks/neon?view=agent
+- prisma — Prisma — https://sdks.directory/api/sdks/prisma?view=agent
+- drizzle — Drizzle ORM — https://sdks.directory/api/sdks/drizzle?view=agent
+- mongodb — MongoDB Drivers — https://sdks.directory/api/sdks/mongodb?view=agent
+- redis — Redis Clients — https://sdks.directory/api/sdks/redis?view=agent
+- pinecone — Pinecone — https://sdks.directory/api/sdks/pinecone?view=agent
+- algolia — Algolia — https://sdks.directory/api/sdks/algolia?view=agent
+- mapbox — Mapbox — https://sdks.directory/api/sdks/mapbox?view=agent
+- google-maps — Google Maps Platform — https://sdks.directory/api/sdks/google-maps?view=agent
+- cloudinary — Cloudinary — https://sdks.directory/api/sdks/cloudinary?view=agent
+- mux — Mux — https://sdks.directory/api/sdks/mux?view=agent
+- github — GitHub — https://sdks.directory/api/sdks/github?view=agent
+- gitlab — GitLab — https://sdks.directory/api/sdks/gitlab?view=agent
+- docker — Docker Engine API — https://sdks.directory/api/sdks/docker?view=agent
+- kubernetes — Kubernetes Client — https://sdks.directory/api/sdks/kubernetes?view=agent
+- terraform — Terraform Provider SDK — https://sdks.directory/api/sdks/terraform?view=agent
+- pulumi — Pulumi — https://sdks.directory/api/sdks/pulumi?view=agent
+- langchain — LangChain — https://sdks.directory/api/sdks/langchain?view=agent
+- llamaindex — LlamaIndex — https://sdks.directory/api/sdks/llamaindex?view=agent
+- huggingface — Hugging Face — https://sdks.directory/api/sdks/huggingface?view=agent
+- google-genai — Google Gen AI — https://sdks.directory/api/sdks/google-genai?view=agent
+- plaid — Plaid — https://sdks.directory/api/sdks/plaid?view=agent
+- square — Square — https://sdks.directory/api/sdks/square?view=agent
+- shopify — Shopify — https://sdks.directory/api/sdks/shopify?view=agent
+- slack — Slack — https://sdks.directory/api/sdks/slack?view=agent
+- discord — Discord — https://sdks.directory/api/sdks/discord?view=agent
+- stripe-terminal — Stripe Terminal — https://sdks.directory/api/sdks/stripe-terminal?view=agent
+- launchdarkly — LaunchDarkly — https://sdks.directory/api/sdks/launchdarkly?view=agent
+- workos — WorkOS — https://sdks.directory/api/sdks/workos?view=agent
+- linear — Linear — https://sdks.directory/api/sdks/linear?view=agent
+- notion — Notion — https://sdks.directory/api/sdks/notion?view=agent
+- airtable — Airtable — https://sdks.directory/api/sdks/airtable?view=agent
+- openai-agents — OpenAI Agents SDK — https://sdks.directory/api/sdks/openai-agents?view=agent
+- crewai — CrewAI — https://sdks.directory/api/sdks/crewai?view=agent
+- meilisearch — Meilisearch — https://sdks.directory/api/sdks/meilisearch?view=agent
+- upstash — Upstash — https://sdks.directory/api/sdks/upstash?view=agent
+- turso — Turso — https://sdks.directory/api/sdks/turso?view=agent
+- convex — Convex — https://sdks.directory/api/sdks/convex?view=agent
+- expo — Expo — https://sdks.directory/api/sdks/expo?view=agent
+- firecrawl — Firecrawl — https://sdks.directory/api/sdks/firecrawl?view=agent
+- browserbase — Browserbase — https://sdks.directory/api/sdks/browserbase?view=agent
+- tavily — Tavily — https://sdks.directory/api/sdks/tavily?view=agent
+- mastra — Mastra — https://sdks.directory/api/sdks/mastra?view=agent
+- elevenlabs — ElevenLabs — https://sdks.directory/api/sdks/elevenlabs?view=agent
+- clickhouse — ClickHouse — https://sdks.directory/api/sdks/clickhouse?view=agent
+- grafana — Grafana — https://sdks.directory/api/sdks/grafana?view=agent
+
+## Plugins
+
+- stripe — Stripe — https://sdks.directory/api/plugins/stripe
+- github — GitHub — https://sdks.directory/api/plugins/github
+- notion — Notion — https://sdks.directory/api/plugins/notion
+- cloudflare — Cloudflare — https://sdks.directory/api/plugins/cloudflare
+- vercel — Vercel — https://sdks.directory/api/plugins/vercel
+- sentry — Sentry — https://sdks.directory/api/plugins/sentry
+- supabase — Supabase — https://sdks.directory/api/plugins/supabase
+- linear — Linear — https://sdks.directory/api/plugins/linear
+- atlassian — Atlassian — https://sdks.directory/api/plugins/atlassian
+- slack — Slack — https://sdks.directory/api/plugins/slack
+- figma — Figma — https://sdks.directory/api/plugins/figma
+- neon — Neon — https://sdks.directory/api/plugins/neon
+- mongodb — MongoDB — https://sdks.directory/api/plugins/mongodb
+- prisma — Prisma — https://sdks.directory/api/plugins/prisma
+- posthog — PostHog — https://sdks.directory/api/plugins/posthog
+- resend — Resend — https://sdks.directory/api/plugins/resend
+- auth0 — Auth0 — https://sdks.directory/api/plugins/auth0
+- playwright — Playwright — https://sdks.directory/api/plugins/playwright
+- firebase — Firebase — https://sdks.directory/api/plugins/firebase
+- terraform — Terraform — https://sdks.directory/api/plugins/terraform
+- huggingface-skills — Hugging Face Skills — https://sdks.directory/api/plugins/huggingface-skills
+- frontend-design — Frontend Design — https://sdks.directory/api/plugins/frontend-design
+- agent-sdk-dev — Agent SDK Dev — https://sdks.directory/api/plugins/agent-sdk-dev
+- mcp-server-dev — MCP Server Dev — https://sdks.directory/api/plugins/mcp-server-dev
+- code-review — Code Review — https://sdks.directory/api/plugins/code-review
+- feature-dev — Feature Dev — https://sdks.directory/api/plugins/feature-dev
+- skill-creator — Skill Creator — https://sdks.directory/api/plugins/skill-creator
+- railway — Railway — https://sdks.directory/api/plugins/railway
+- runlayer — Runlayer — https://sdks.directory/api/plugins/runlayer
+- aws — AWS Core — https://sdks.directory/api/plugins/aws
+- azure — Azure — https://sdks.directory/api/plugins/azure
+- shopify — Shopify AI Toolkit — https://sdks.directory/api/plugins/shopify
+- expo — Expo — https://sdks.directory/api/plugins/expo
+- netlify — Netlify — https://sdks.directory/api/plugins/netlify
+- workos — WorkOS — https://sdks.directory/api/plugins/workos
+- clerk — Clerk — https://sdks.directory/api/plugins/clerk
+- paypal — PayPal — https://sdks.directory/api/plugins/paypal
+- databricks — Databricks — https://sdks.directory/api/plugins/databricks
+- airtable — Airtable — https://sdks.directory/api/plugins/airtable
+- clickhouse — ClickHouse — https://sdks.directory/api/plugins/clickhouse
+- cloudinary — Cloudinary — https://sdks.directory/api/plugins/cloudinary
+- context7 — Context7 — https://sdks.directory/api/plugins/context7
+- convex — Convex — https://sdks.directory/api/plugins/convex
+- datadog — Datadog — https://sdks.directory/api/plugins/datadog
+- discord — Discord — https://sdks.directory/api/plugins/discord
+- firecrawl — Firecrawl — https://sdks.directory/api/plugins/firecrawl
+- gitlab — GitLab — https://sdks.directory/api/plugins/gitlab
+- grafana — Grafana — https://sdks.directory/api/plugins/grafana
+- mapbox — Mapbox — https://sdks.directory/api/plugins/mapbox
+- pinecone — Pinecone — https://sdks.directory/api/plugins/pinecone
+- planetscale — PlanetScale — https://sdks.directory/api/plugins/planetscale
+- postman — Postman — https://sdks.directory/api/plugins/postman
+- redis — Redis — https://sdks.directory/api/plugins/redis
+- tavily — Tavily — https://sdks.directory/api/plugins/tavily
+- twilio — Twilio — https://sdks.directory/api/plugins/twilio
+- zapier — Zapier — https://sdks.directory/api/plugins/zapier
+- chrome-devtools — Chrome DevTools — https://sdks.directory/api/plugins/chrome-devtools
+- asana — Asana — https://sdks.directory/api/plugins/asana
+
+## MCP servers
+
+- github — GitHub — https://sdks.directory/api/mcps/github
+- stripe — Stripe — https://sdks.directory/api/mcps/stripe
+- notion — Notion — https://sdks.directory/api/mcps/notion
+- linear — Linear — https://sdks.directory/api/mcps/linear
+- sentry — Sentry — https://sdks.directory/api/mcps/sentry
+- cloudflare — Cloudflare — https://sdks.directory/api/mcps/cloudflare
+- supabase — Supabase — https://sdks.directory/api/mcps/supabase
+- playwright — Playwright — https://sdks.directory/api/mcps/playwright
+- brave-search — Brave Search — https://sdks.directory/api/mcps/brave-search
+- filesystem — Filesystem — https://sdks.directory/api/mcps/filesystem
+- memory — Memory — https://sdks.directory/api/mcps/memory
+- figma — Figma — https://sdks.directory/api/mcps/figma
+- atlassian — Atlassian — https://sdks.directory/api/mcps/atlassian
+- slack — Slack — https://sdks.directory/api/mcps/slack
+- mongodb — MongoDB — https://sdks.directory/api/mcps/mongodb
+- neon — Neon — https://sdks.directory/api/mcps/neon
+- prisma — Prisma — https://sdks.directory/api/mcps/prisma
+- redis — Redis — https://sdks.directory/api/mcps/redis
+- vercel — Vercel — https://sdks.directory/api/mcps/vercel
+- context7 — Context7 — https://sdks.directory/api/mcps/context7
+- firecrawl — Firecrawl — https://sdks.directory/api/mcps/firecrawl
+- posthog — PostHog — https://sdks.directory/api/mcps/posthog
+- resend — Resend — https://sdks.directory/api/mcps/resend
+- huggingface — Hugging Face — https://sdks.directory/api/mcps/huggingface
+- auth0 — Auth0 — https://sdks.directory/api/mcps/auth0
+- terraform — Terraform — https://sdks.directory/api/mcps/terraform
+- docker — Docker — https://sdks.directory/api/mcps/docker
+- azure — Azure — https://sdks.directory/api/mcps/azure
+- aws — AWS — https://sdks.directory/api/mcps/aws
+- gitlab — GitLab — https://sdks.directory/api/mcps/gitlab
+- grafana — Grafana — https://sdks.directory/api/mcps/grafana
+- zapier — Zapier — https://sdks.directory/api/mcps/zapier
+- postman — Postman — https://sdks.directory/api/mcps/postman
+- airtable — Airtable — https://sdks.directory/api/mcps/airtable
+- workos — WorkOS — https://sdks.directory/api/mcps/workos
+- railway — Railway — https://sdks.directory/api/mcps/railway
+- planetscale — PlanetScale — https://sdks.directory/api/mcps/planetscale
+- clerk — Clerk — https://sdks.directory/api/mcps/clerk
+- paypal — PayPal — https://sdks.directory/api/mcps/paypal
+- mux — Mux — https://sdks.directory/api/mcps/mux
+- algolia — Algolia — https://sdks.directory/api/mcps/algolia
+- cloudinary — Cloudinary — https://sdks.directory/api/mcps/cloudinary
+- mapbox — Mapbox — https://sdks.directory/api/mcps/mapbox
+- firebase — Firebase — https://sdks.directory/api/mcps/firebase
+- clickhouse — ClickHouse — https://sdks.directory/api/mcps/clickhouse
+- browserbase — Browserbase — https://sdks.directory/api/mcps/browserbase
+- tavily — Tavily — https://sdks.directory/api/mcps/tavily
+- upstash — Upstash Redis — https://sdks.directory/api/mcps/upstash
+- chrome-devtools — Chrome DevTools — https://sdks.directory/api/mcps/chrome-devtools
+- kubernetes — Kubernetes — https://sdks.directory/api/mcps/kubernetes

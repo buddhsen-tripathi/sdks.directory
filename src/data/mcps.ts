@@ -763,7 +763,10 @@ export const mcps: SdkEntry[] = [
         url: "https://docs.docker.com/ai/mcp-catalog-and-toolkit/catalog/",
       },
     ],
-    tags: ["toolkit", "containers", "catalog", "gateway"],
+    install: "docker mcp gateway run",
+    transport: "stdio",
+    auth: "none",
+    tags: ["toolkit", "containers", "catalog", "gateway", "stdio"],
     official: true,
   },
   {

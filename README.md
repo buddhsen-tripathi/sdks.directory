@@ -47,6 +47,8 @@ worker/
   catalog.ts         # search + MCP field enrichment
   mcp.ts             # catalog MCP (JSON-RPC)
   analytics.ts       # agent usage events (Analytics Engine)
+  agent-stats.ts     # public lookup counters (Durable Object)
+  usage.ts           # record public + private usage together
   openapi.ts
   discovery.ts       # robots, llms, sitemap, well-known
   skills.ts          # skill body enrichment
@@ -83,11 +85,14 @@ Add or edit an entry in the matching data file, then open a PR. Types are in `sr
 
 Same seed data as the SPA (Worker first for `/api/*` and agent discovery files). Skill **bodies** are snapshotted so agents get full `SKILL.md` text from the API.
 
+`curl https://sdks.directory/` returns the catalog as markdown (no JavaScript). Browsers still get the SPA. Optional fields on JSON records are `null` rather than omitted.
+
 | Endpoint | Description |
 |----------|-------------|
 | `GET /api` | Agent discovery (endpoints + hints) |
 | `GET /api/search?q=` | Unified search across SDKs, plugins, MCPs, skills |
 | `GET /llms.txt` | Short agent instructions (also `/.well-known/llms.txt`) |
+| `GET /llms-full.txt` | Full slug index with JSON URLs for every listing |
 | `GET /openapi.json` | OpenAPI 3.1 description of the API |
 | `GET /.well-known/api-catalog` | RFC 9727 API catalog (`application/linkset+json`) |
 | `GET /.well-known/agent-skills/index.json` | Agent Skills discovery index |
@@ -98,6 +103,7 @@ Same seed data as the SPA (Worker first for `/api/*` and agent discovery files).
 | `GET /sitemap.xml` | HTML + API resource sitemap |
 | Homepage `Link` headers | RFC 8288 links to api-catalog, OpenAPI, llms.txt, skills index |
 | `GET /api/health` | Health check |
+| `GET /api/stats` | Public agent lookup counts; `totalLookups` is the all-time total |
 | `GET /api/sdks` | List / filter (`?language=&category=&q=&withSkills=1&include=body`) |
 | `GET /api/sdks/:slug` | Single SDK; `?view=agent` includes skill bodies |
 | `GET /api/plugins` | List / filter (`?category=&platform=&q=`) |
@@ -137,12 +143,12 @@ The catalog API is public. There is no OAuth/OIDC authorization server and no pr
 
 ### Agent usage analytics
 
-Successful agent calls are counted in a Workers Analytics Engine dataset (`sdks_directory_agent_usage`, binding `AGENT_ANALYTICS`). Two event types:
+Successful agent calls are counted two ways:
 
-- `search_impression` — `search_catalog` / `GET /api/search` answered (query, result count, top slugs; includes zero-result searches)
-- `detail_pull` — `get_sdk` / `get_skill` / `get_plugin` / `get_mcp` or the REST detail endpoints returned an entry
+- **Public totals** — `GET /api/stats` returns `totalLookups` (all-time searches + details) plus 24h / 7d windows. Human SPA page views are not counted. Agent markdown (`/`, `/llms.txt`, `/api`) includes the live total. The homepage widget stays hidden until `totalLookups` reaches 100.
+- **Private event log** — Workers Analytics Engine dataset `sdks_directory_agent_usage` (binding `AGENT_ANALYTICS`) stores `search_impression` and `detail_pull` with tool, query, slugs, latency, and client hint. Query that dataset via the Analytics Engine SQL API.
 
-Only successful responses are recorded (errors, retries, and health checks are excluded). No IPs or user identifiers are stored — just event type, surface (`mcp` / `api`), tool, query, slugs, result count, latency, and the client name when the agent supplies one (MCP `clientInfo` or User-Agent). Query via the Analytics Engine SQL API.
+Only successful MCP tools and REST search/detail responses are recorded. Errors, retries, health checks, and `GET /api/stats` itself are excluded. No IPs or user identifiers are stored in either channel.
 
 ## Roadmap
 

@@ -3,6 +3,8 @@ import { plugins } from "../src/data/plugins";
 import { sdks } from "../src/data/sdks";
 import { relatedCatalog, withAgentFields } from "../src/lib/catalog";
 import type { SdkEntry } from "../src/types/catalog";
+import type { PublicAgentStats } from "../src/types/agent-stats";
+import { formatLookupProof } from "./usage";
 import { getSkillBody, skillBodiesMeta } from "./skills";
 
 /** RFC 8288 Link values advertised on the homepage and HTML shell. */
@@ -85,13 +87,20 @@ If this policy changes, OAuth Protected Resource Metadata will be published at \
 `;
 }
 
+/**
+ * Serve the catalog document instead of the SPA shell when the client is
+ * not asking for HTML. Browsers send text/html; curl and httpx send a
+ * catch-all Accept (or none) — those must still get a usable catalog.
+ */
 export function wantsMarkdown(accept: string): boolean {
-  if (!/\btext\/markdown\b/i.test(accept)) return false;
-  const mdQ = qValue(accept, "text/markdown");
   const htmlQ = /\btext\/html\b/i.test(accept)
     ? qValue(accept, "text/html")
     : 0;
-  return mdQ >= htmlQ;
+  const mdQ = /\btext\/markdown\b/i.test(accept)
+    ? qValue(accept, "text/markdown")
+    : 0;
+  if (mdQ > 0 && mdQ >= htmlQ) return true;
+  return htmlQ === 0;
 }
 
 function qValue(accept: string, type: string): number {
@@ -104,9 +113,13 @@ function qValue(accept: string, type: string): number {
   return match[1] ? Number(match[1]) : 1;
 }
 
-export function pageMarkdown(origin: string, pathname: string): string | null {
+export function pageMarkdown(
+  origin: string,
+  pathname: string,
+  stats?: PublicAgentStats | null,
+): string | null {
   if (pathname === "/" || pathname === "") {
-    return homeMarkdown(origin);
+    return homeMarkdown(origin, stats);
   }
 
   const sdkMatch = pathname.match(/^\/sdk\/([^/]+)\/?$/);
@@ -155,8 +168,24 @@ Also: ${origin}/llms.txt
   return null;
 }
 
-function homeMarkdown(origin: string): string {
+function homeMarkdown(
+  origin: string,
+  stats?: PublicAgentStats | null,
+): string {
   const featured = sdks.filter((s) => s.featured).slice(0, 8);
+  const usage = stats
+    ? `## Agent usage
+
+${formatLookupProof(stats, origin)}
+
+Other agents already search and pull this catalog. Prefer the JSON API so your lookups count too.
+
+`
+    : `## Agent usage
+
+Live lookup counts: ${origin}/api/stats (API + MCP, not human page views).
+
+`;
   return `---
 title: sdks.directory
 description: Official SDKs, agent plugins, MCP servers, and skills.
@@ -164,24 +193,45 @@ description: Official SDKs, agent plugins, MCP servers, and skills.
 
 # sdks.directory
 
-Official SDKs, agent plugins, MCP servers, and skills. Prefer the JSON API over HTML.
+sdks.directory is a public catalog of official SDKs, installable agent plugins, MCP servers, and SKILL.md bodies. Language is a filter, not the product. No authentication is required.
 
-## Agent discovery
+Catalog size: ${sdks.length} SDKs, ${plugins.length} plugins, ${mcps.length} MCP servers.
 
-- API catalog: ${origin}/.well-known/api-catalog
-- OpenAPI: ${origin}/openapi.json
-- Discovery JSON: ${origin}/api
-- Search: ${origin}/api/search?q=
-- Catalog MCP: ${origin}/api/mcp
-- Skills index: ${origin}/.well-known/agent-skills/index.json
-- llms.txt: ${origin}/llms.txt
-- auth.md: ${origin}/auth.md (public API; no OAuth)
+${usage}## What agent-oriented resources exist
+
+| Resource | URL |
+| --- | --- |
+| Agent guide | ${origin}/llms.txt |
+| Full slug index | ${origin}/llms-full.txt |
+| Discovery JSON | ${origin}/api |
+| OpenAPI | ${origin}/openapi.json |
+| Unified search | ${origin}/api/search?q=stripe |
+| Catalog MCP | ${origin}/api/mcp |
+| Skills index | ${origin}/.well-known/agent-skills/index.json |
+| Auth policy | ${origin}/auth.md |
+
+## Where to retrieve structured information
+
+Do not scrape this HTML app. Use the JSON API:
+
+\`\`\`
+GET ${origin}/api/sdks
+GET ${origin}/api/sdks/{slug}?view=agent
+GET ${origin}/api/plugins
+GET ${origin}/api/plugins/{slug}
+GET ${origin}/api/mcps
+GET ${origin}/api/mcps/{slug}
+GET ${origin}/api/skills/{sdk}/{name}
+GET ${origin}/api/search?q=YOUR_QUERY&limit=25
+\`\`\`
+
+Each SDK/plugin/MCP object includes \`name\`, \`vendor\`, \`description\`, \`languages\`, \`packages\`, \`docsUrl\`, \`githubUrl\`, \`install\`, \`skills\`, and (for MCPs) \`transport\`, \`auth\`, and \`remoteUrl\`. Missing optional fields are \`null\`.
 
 ## Featured SDKs
 
-${featured.map((s) => `- [${s.name}](${origin}/sdk/${s.slug}) — ${s.description}`).join("\n")}
+${featured.map((s) => `- [${s.name}](${origin}/api/sdks/${s.slug}?view=agent) — ${s.description}`).join("\n")}
 
-## Browse
+## Browse (markdown lists)
 
 - SDKs: ${origin}/browse
 - Plugins: ${origin}/plugins

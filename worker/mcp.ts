@@ -2,7 +2,8 @@ import { mcps } from "../src/data/mcps";
 import { plugins } from "../src/data/plugins";
 import { sdks } from "../src/data/sdks";
 import type { AgentEvent } from "./analytics";
-import { clientHint, recordAgentEvent } from "./analytics";
+import { clientHint } from "./analytics";
+import { recordAgentUsage } from "./usage";
 import { searchCatalog, withAgentFields, relatedApiLinks } from "./catalog";
 import { enrichSkill } from "./skills";
 
@@ -16,7 +17,8 @@ type JsonRpcRequest = {
 };
 
 type McpSession = {
-  dataset?: AnalyticsEngineDataset;
+  env: Env;
+  ctx: ExecutionContext;
   client?: string;
 };
 
@@ -274,7 +276,7 @@ function handleMessage(
     const started = Date.now();
     const { result, analytics } = callTool(origin, name, args);
     if (analytics && !("isError" in result && result.isError)) {
-      recordAgentEvent(session.dataset, {
+      recordAgentUsage(session.env, session.ctx, {
         ...analytics,
         surface: "mcp",
         client: session.client,
@@ -295,25 +297,11 @@ function handleMessage(
   };
 }
 
-export function mcpServerCard(origin: string) {
-  return {
-    name: "io.github.buddhsen-tripathi/sdks-directory",
-    description:
-      "Search official SDKs, agent plugins, MCP servers, and skill bodies from sdks.directory.",
-    version: "1.0.0",
-    remotes: [
-      {
-        type: "streamable-http",
-        url: `${origin}/api/mcp`,
-      },
-    ],
-  };
-}
-
 export async function handleMcpRequest(
   request: Request,
   origin: string,
-  dataset?: AnalyticsEngineDataset,
+  env: Env,
+  ctx: ExecutionContext,
 ): Promise<Response> {
   if (request.method === "GET") {
     return Response.json(
@@ -353,7 +341,7 @@ export async function handleMcpRequest(
   }
 
   const messages = Array.isArray(payload) ? payload : [payload];
-  const session: McpSession = { dataset, client: clientHint(request) };
+  const session: McpSession = { env, ctx, client: clientHint(request) };
   const responses = messages
     .map((message) =>
       handleMessage(origin, message as JsonRpcRequest, session),
