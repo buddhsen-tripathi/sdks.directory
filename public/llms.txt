@@ -6,18 +6,20 @@
 
 Start here:
 
-- Discovery JSON: `/api`
-- API catalog: `/.well-known/api-catalog`
-- OpenAPI: `/openapi.json`
-- Unified search: `/api/search?q=`
-- Catalog MCP: `/api/mcp`
-- Skills index: `/.well-known/agent-skills/index.json`
-- MCP card: `/.well-known/mcp.json`
-- Auth: `/auth.md` (public API; no OAuth)
-- Health: `/api/health`
-- Coverage: `/api/coverage`
+- Discovery JSON: https://sdks.directory/api
+- API catalog: https://sdks.directory/.well-known/api-catalog
+- OpenAPI: https://sdks.directory/openapi.json
+- Unified search: https://sdks.directory/api/search?q=
+- Catalog MCP: https://sdks.directory/api/mcp
+- Skills index: https://sdks.directory/.well-known/agent-skills/index.json
+- MCP card: https://sdks.directory/.well-known/mcp.json
+- Auth: https://sdks.directory/auth.md (public API; no OAuth)
+- Health: https://sdks.directory/api/health
+- Agent lookups (public counts): https://sdks.directory/api/stats
+- Coverage: https://sdks.directory/api/coverage
+- Full slug index: https://sdks.directory/llms-full.txt
 
-HTML pages also honor `Accept: text/markdown` (Markdown for Agents).
+Plain `curl https://sdks.directory/` returns this catalog as markdown (no JavaScript). Browsers still get the SPA.
 
 ### Search everything
 
@@ -25,7 +27,7 @@ HTML pages also honor `Accept: text/markdown` (Markdown for Agents).
 GET /api/search?q=stripe&limit=20
 ```
 
-Returns ranked SDKs, plugins, MCPs, and skills in one payload.
+Returns ranked SDKs, plugins, MCPs, and skills in one payload. MCP hits include `transport`, `auth`, `remoteUrl`, and `install`. Every hit includes `related` slugs when a matching SDK, plugin, or MCP exists.
 
 ### Fetch a single skill (preferred)
 
@@ -33,12 +35,7 @@ Returns ranked SDKs, plugins, MCPs, and skills in one payload.
 GET /api/skills/stripe/stripe-best-practices
 ```
 
-Response fields:
-
-- `name`, `sdk`, `key` — identifiers
-- `content` — full SKILL.md (YAML frontmatter + body)
-- `url`, `install` — upstream source / install hint
-- `hasContent` — whether body is present
+Response includes `content` (full SKILL.md) when a snapshot exists, plus `url` / `install`.
 
 Raw markdown:
 
@@ -46,15 +43,6 @@ Raw markdown:
 GET /api/skills/stripe/stripe-best-practices.md
 Accept: text/markdown
 ```
-
-### List / search skills
-
-```
-GET /api/skills?q=redis&withContent=1
-GET /api/skills?sdk=neon&include=body
-```
-
-List endpoints omit bodies by default (smaller payloads). Pass `include=body` when you need them.
 
 ### SDKs / plugins / MCPs
 
@@ -66,17 +54,11 @@ GET /api/mcps?category=database
 GET /api/mcps/github
 ```
 
-`view=agent` on SDK detail includes skill bodies (one-shot happy path). MCP entries include derived `transport`, `auth`, and `remoteUrl` when known.
+`view=agent` on SDK detail includes skill bodies and related plugin/MCP links. MCP detail includes `transport`, `auth`, `remoteUrl`, and `install`.
 
 ### Catalog MCP tools
 
-POST JSON-RPC to `/api/mcp`:
-
-- `search_catalog`
-- `get_sdk`
-- `get_skill`
-- `get_plugin`
-- `get_mcp`
+POST JSON-RPC to `/api/mcp`: `search_catalog`, `get_sdk`, `get_skill`, `get_plugin`, `get_mcp`.
 
 ## Human site
 
@@ -86,4 +68,5 @@ POST JSON-RPC to `/api/mcp`:
 
 ## Notes
 
-Skill bodies are snapshotted from upstream (skills.sh / GitHub). Use `/api/skills/{sdk}/{name}` for the SKILL.md text; `url` is the upstream source. Plugins and MCPs are curated seeds — not a raw registry dump.
+Skill bodies are snapshotted from upstream (skills.sh / GitHub). Attribution: skill.url. Plugins and MCPs are curated seeds, not a raw registry dump.
+Generated: 2026-07-28T23:15:45.680Z

@@ -7,6 +7,9 @@
     <loc>https://sdks.directory/llms.txt</loc>
   </url>
   <url>
+    <loc>https://sdks.directory/llms-full.txt</loc>
+  </url>
+  <url>
     <loc>https://sdks.directory/openapi.json</loc>
   </url>
   <url>
@@ -416,9 +419,6 @@
   </url>
   <url>
     <loc>https://sdks.directory/api/skills/gitlab/glab</loc>
-  </url>
-  <url>
-    <loc>https://sdks.directory/api/skills/gitlab/gitlab-cli-skills</loc>
   </url>
   <url>
     <loc>https://sdks.directory/api/sdks/docker</loc>
