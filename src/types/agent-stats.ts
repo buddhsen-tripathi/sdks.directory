@@ -1,3 +1,6 @@
+/** Homepage proof stays hidden until all-time lookups reach this floor. */
+export const MIN_PUBLIC_LOOKUP_PROOF = 100;
+
 /** Public agent-lookup aggregates. Counts only — no queries, slugs, or clients. */
 export type WindowCounts = {
   last24h: number;

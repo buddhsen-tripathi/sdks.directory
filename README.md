@@ -145,7 +145,7 @@ The catalog API is public. There is no OAuth/OIDC authorization server and no pr
 
 Successful agent calls are counted two ways:
 
-- **Public totals** — `GET /api/stats` returns `totalLookups` (all-time searches + details) plus 24h / 7d windows. Human SPA page views are not counted. The homepage and agent markdown (`/`, `/llms.txt`, `/api`) show the all-time total.
+- **Public totals** — `GET /api/stats` returns `totalLookups` (all-time searches + details) plus 24h / 7d windows. Human SPA page views are not counted. Agent markdown (`/`, `/llms.txt`, `/api`) includes the live total. The homepage widget stays hidden until `totalLookups` reaches 100.
 - **Private event log** — Workers Analytics Engine dataset `sdks_directory_agent_usage` (binding `AGENT_ANALYTICS`) stores `search_impression` and `detail_pull` with tool, query, slugs, latency, and client hint. Query that dataset via the Analytics Engine SQL API.
 
 Only successful MCP tools and REST search/detail responses are recorded. Errors, retries, health checks, and `GET /api/stats` itself are excluded. No IPs or user identifiers are stored in either channel.

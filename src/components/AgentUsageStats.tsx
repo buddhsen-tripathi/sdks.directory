@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import type { PublicAgentStats } from "../types/agent-stats";
+import {
+  MIN_PUBLIC_LOOKUP_PROOF,
+  type PublicAgentStats,
+} from "../types/agent-stats";
 
 function formatCount(value: number): string {
   if (value >= 1_000_000) {
@@ -50,9 +53,9 @@ export function AgentUsageStats() {
     return () => controller.abort();
   }, []);
 
-  const total = stats?.totalLookups ?? stats?.lookups.allTime;
-  const label =
-    total === 1 ? "catalog lookup all time" : "catalog lookups all time";
+  if (!stats) return null;
+  const total = stats.totalLookups ?? stats.lookups.allTime;
+  if (total < MIN_PUBLIC_LOOKUP_PROOF) return null;
 
   return (
     <div
@@ -62,29 +65,27 @@ export function AgentUsageStats() {
       <p className="text-caption-uppercase text-muted">Used by agents</p>
       <p className="mt-2 text-sm leading-snug text-body md:text-[15px]">
         <span className="font-mono text-lg tabular-nums text-ink md:text-xl">
-          {total === undefined ? "—" : formatCount(total)}
+          {formatCount(total)}
         </span>{" "}
-        {label}
+        catalog lookups all time
       </p>
       <div className="mt-4 grid grid-cols-3 gap-3">
         <StatCell
           label="This week"
-          value={stats ? formatCount(stats.lookups.last7d) : "—"}
+          value={formatCount(stats.lookups.last7d)}
         />
         <StatCell
           label="Last 24 hours"
-          value={stats ? formatCount(stats.lookups.last24h) : "—"}
+          value={formatCount(stats.lookups.last24h)}
         />
         <StatCell
           label="Searches all time"
-          value={stats ? formatCount(stats.searches.allTime) : "—"}
+          value={formatCount(stats.searches.allTime)}
         />
       </div>
       <p className="mt-3 text-[11px] leading-relaxed text-muted-soft">
         Counted from the catalog API and MCP — not human page views.
-        {stats
-          ? ` ${formatCount(stats.details.allTime)} detail pulls all time.`
-          : null}
+        {` ${formatCount(stats.details.allTime)} detail pulls all time.`}
       </p>
     </div>
   );
