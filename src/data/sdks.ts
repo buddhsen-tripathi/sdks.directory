@@ -161,6 +161,16 @@ export const sdks: SdkEntry[] = [
         name: "boto3",
         url: "https://pypi.org/project/boto3/",
       },
+      {
+        registry: "go",
+        name: "github.com/aws/aws-sdk-go-v2",
+        url: "https://pkg.go.dev/github.com/aws/aws-sdk-go-v2",
+      },
+      {
+        registry: "maven",
+        name: "software.amazon.awssdk:s3",
+        url: "https://central.sonatype.com/artifact/software.amazon.awssdk/s3",
+      },
     ],
     tags: ["aws", "boto3", "cloud"],
     skills: [
@@ -226,7 +236,8 @@ export const sdks: SdkEntry[] = [
     kind: "sdk",
     name: "Azure SDK",
     slug: "azure",
-    description: "Microsoft Azure SDKs for cloud services across languages.",
+    description:
+      "Official Azure client libraries (Identity, Storage, and the rest of the Azure SDK surface) across languages.",
     vendor: "Microsoft",
     languages: [
       "python",
@@ -252,10 +263,25 @@ export const sdks: SdkEntry[] = [
         url: "https://www.npmjs.com/package/@azure/identity",
       },
       {
+        registry: "npm",
+        name: "@azure/storage-blob",
+        url: "https://www.npmjs.com/package/@azure/storage-blob",
+      },
+      {
         registry: "pypi",
         name: "azure-identity",
         url: "https://pypi.org/project/azure-identity/",
-      }
+      },
+      {
+        registry: "pypi",
+        name: "azure-storage-blob",
+        url: "https://pypi.org/project/azure-storage-blob/",
+      },
+      {
+        registry: "go",
+        name: "github.com/Azure/azure-sdk-for-go",
+        url: "https://pkg.go.dev/github.com/Azure/azure-sdk-for-go",
+      },
     ],
     skills: [
       {
@@ -681,6 +707,16 @@ export const sdks: SdkEntry[] = [
         name: "@clerk/clerk-js",
         url: "https://www.npmjs.com/package/@clerk/clerk-js",
       },
+      {
+        registry: "npm",
+        name: "@clerk/backend",
+        url: "https://www.npmjs.com/package/@clerk/backend",
+      },
+      {
+        registry: "pypi",
+        name: "clerk-backend-api",
+        url: "https://pypi.org/project/clerk-backend-api/",
+      },
     ],
     tags: ["auth", "sessions"],
     skills: [
@@ -852,7 +888,8 @@ export const sdks: SdkEntry[] = [
     kind: "sdk",
     name: "Segment",
     slug: "segment",
-    description: "Customer data platform SDKs for collecting and routing events.",
+    description:
+      "Twilio Segment collection SDKs (analytics.js, analytics-node, analytics-python) for routing product events.",
     vendor: "Twilio Segment",
     languages: [
       "javascript",
@@ -896,7 +933,8 @@ export const sdks: SdkEntry[] = [
     kind: "sdk",
     name: "PlanetScale",
     slug: "planetscale",
-    description: "Serverless MySQL platform databases and driver libraries.",
+    description:
+      "Serverless MySQL and Postgres with branching. HTTP drivers plus PlanetScale platform APIs.",
     vendor: "PlanetScale",
     languages: ["typescript", "javascript", "nodejs", "python", "go", "java", "php", "ruby"],
     categories: ["database"],
@@ -910,7 +948,7 @@ export const sdks: SdkEntry[] = [
         url: "https://www.npmjs.com/package/@planetscale/database",
       }
     ],
-    tags: ["mysql", "serverless"],
+    tags: ["mysql", "postgres", "serverless"],
     skills: [
       {
         name: "postgres",
@@ -1061,7 +1099,17 @@ export const sdks: SdkEntry[] = [
         registry: "pypi",
         name: "pymongo",
         url: "https://pypi.org/project/pymongo/",
-      }
+      },
+      {
+        registry: "go",
+        name: "go.mongodb.org/mongo-driver",
+        url: "https://pkg.go.dev/go.mongodb.org/mongo-driver",
+      },
+      {
+        registry: "maven",
+        name: "org.mongodb:mongodb-driver-sync",
+        url: "https://central.sonatype.com/artifact/org.mongodb/mongodb-driver-sync",
+      },
     ],
     skills: [
       {
@@ -1401,6 +1449,16 @@ export const sdks: SdkEntry[] = [
         name: "@octokit/rest",
         url: "https://www.npmjs.com/package/@octokit/rest",
       },
+      {
+        registry: "pypi",
+        name: "PyGithub",
+        url: "https://pypi.org/project/PyGithub/",
+      },
+      {
+        registry: "go",
+        name: "github.com/google/go-github",
+        url: "https://pkg.go.dev/github.com/google/go-github",
+      },
     ],
     tags: ["git", "api"],
     skills: [
@@ -1449,13 +1507,8 @@ export const sdks: SdkEntry[] = [
         url: "https://skills.sh/gitlab-org/ai/glab",
         install: "npx skills add gitlab-org/ai --skill glab"
       },
-      {
-        name: "gitlab-cli-skills",
-        url: "https://skills.sh/vince-winkintel/gitlab-cli-skills/gitlab-cli-skills",
-        install: "npx skills add vince-winkintel/gitlab-cli-skills"
-      }
     ],
-    official: true,
+    official: false,
   },
   {
     id: "docker",
@@ -1696,6 +1749,16 @@ export const sdks: SdkEntry[] = [
         name: "transformers",
         url: "https://pypi.org/project/transformers/",
       },
+      {
+        registry: "pypi",
+        name: "huggingface_hub",
+        url: "https://pypi.org/project/huggingface-hub/",
+      },
+      {
+        registry: "npm",
+        name: "@huggingface/inference",
+        url: "https://www.npmjs.com/package/@huggingface/inference",
+      },
     ],
     tags: ["transformers", "models"],
     skills: [
@@ -1731,12 +1794,19 @@ export const sdks: SdkEntry[] = [
         name: "@google/genai",
         url: "https://www.npmjs.com/package/@google/genai",
       },
+      {
+        registry: "go",
+        name: "google.golang.org/genai",
+        url: "https://pkg.go.dev/google.golang.org/genai",
+      },
     ],
     tags: ["gemini", "llm"],
     skills: [
       {
         name: "gemini-api-dev",
-        url: "https://ai.google.dev/gemini-api/docs",
+        url: "https://github.com/googleapis/python-genai",
+        install:
+          "pip install google-genai  # skill body pending; use official SDK docs at https://ai.google.dev/gemini-api/docs",
       },
     ],
     featured: true,
@@ -1764,7 +1834,12 @@ export const sdks: SdkEntry[] = [
         registry: "pypi",
         name: "plaid-python",
         url: "https://pypi.org/project/plaid-python/",
-      }
+      },
+      {
+        registry: "go",
+        name: "github.com/plaid/plaid-go",
+        url: "https://pkg.go.dev/github.com/plaid/plaid-go",
+      },
     ],
     tags: ["fintech", "banking"],
     official: true,
@@ -1914,7 +1989,7 @@ export const sdks: SdkEntry[] = [
       }
     ],
     tags: ["bots", "chat"],
-    official: true,
+    official: false,
   },
   {
     id: "stripe-terminal",
@@ -1933,7 +2008,17 @@ export const sdks: SdkEntry[] = [
         registry: "npm",
         name: "@stripe/terminal-js",
         url: "https://www.npmjs.com/package/@stripe/terminal-js",
-      }
+      },
+      {
+        registry: "other",
+        name: "stripe-terminal-ios",
+        url: "https://github.com/stripe/stripe-terminal-ios",
+      },
+      {
+        registry: "other",
+        name: "stripe-terminal-android",
+        url: "https://github.com/stripe/stripe-terminal-android",
+      },
     ],
     tags: ["pos", "hardware"],
     skills: [
@@ -2212,7 +2297,8 @@ export const sdks: SdkEntry[] = [
     kind: "sdk",
     name: "Meilisearch",
     slug: "meilisearch",
-    description: "Lightning-fast, open-source search engine client SDKs.",
+    description:
+      "Official REST clients for the Meilisearch search engine (typo-tolerant full-text search).",
     vendor: "Meilisearch",
     languages: [
       "javascript",
@@ -2242,7 +2328,12 @@ export const sdks: SdkEntry[] = [
         registry: "pypi",
         name: "meilisearch",
         url: "https://pypi.org/project/meilisearch/",
-      }
+      },
+      {
+        registry: "go",
+        name: "github.com/meilisearch/meilisearch-go",
+        url: "https://pkg.go.dev/github.com/meilisearch/meilisearch-go",
+      },
     ],
     tags: ["search"],
     official: true,
@@ -2669,12 +2760,17 @@ export const sdks: SdkEntry[] = [
     categories: ["observability"],
     homepage: "https://grafana.com",
     docsUrl: "https://grafana.com/docs",
-    githubUrl: "https://github.com/grafana/skills",
+    githubUrl: "https://github.com/grafana/grafana",
     packages: [
       {
-        registry: "npm",
-        name: "@grafana/data",
-        url: "https://www.npmjs.com/package/@grafana/data",
+        registry: "pypi",
+        name: "grafana-client",
+        url: "https://pypi.org/project/grafana-client/",
+      },
+      {
+        registry: "go",
+        name: "github.com/grafana/grafana-openapi-client-go",
+        url: "https://pkg.go.dev/github.com/grafana/grafana-openapi-client-go",
       },
     ],
     tags: ["dashboards", "metrics", "logs"],

@@ -226,3 +226,22 @@ export function catalogStats() {
     skillBodies: skillBodiesMeta(),
   };
 }
+
+/** JSON catalog records omit nothing: absent optional fields are null. */
+export function publicCatalogEntry(entry: SdkEntry) {
+  const item = withAgentFields(entry);
+  return {
+    ...item,
+    docsUrl: item.docsUrl ?? null,
+    githubUrl: item.githubUrl ?? null,
+    install: item.install ?? null,
+    registryName: item.registryName ?? null,
+    transport: item.transport ?? null,
+    auth: item.auth ?? null,
+    remoteUrl: item.remoteUrl ?? null,
+    platforms: item.platforms ?? null,
+    packages: item.packages ?? [],
+    skills: item.skills ?? [],
+    tags: item.tags ?? [],
+  };
+}

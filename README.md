@@ -85,11 +85,14 @@ Add or edit an entry in the matching data file, then open a PR. Types are in `sr
 
 Same seed data as the SPA (Worker first for `/api/*` and agent discovery files). Skill **bodies** are snapshotted so agents get full `SKILL.md` text from the API.
 
+`curl https://sdks.directory/` returns the catalog as markdown (no JavaScript). Browsers still get the SPA. Optional fields on JSON records are `null` rather than omitted.
+
 | Endpoint | Description |
 |----------|-------------|
 | `GET /api` | Agent discovery (endpoints + hints) |
 | `GET /api/search?q=` | Unified search across SDKs, plugins, MCPs, skills |
 | `GET /llms.txt` | Short agent instructions (also `/.well-known/llms.txt`) |
+| `GET /llms-full.txt` | Full slug index with JSON URLs for every listing |
 | `GET /openapi.json` | OpenAPI 3.1 description of the API |
 | `GET /.well-known/api-catalog` | RFC 9727 API catalog (`application/linkset+json`) |
 | `GET /.well-known/agent-skills/index.json` | Agent Skills discovery index |

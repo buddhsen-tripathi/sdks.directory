@@ -9,6 +9,7 @@ User-agent: *
 Allow: /
 Allow: /api/
 Allow: /llms.txt
+Allow: /llms-full.txt
 Allow: /openapi.json
 Allow: /sitemap.xml
 Allow: /.well-known/
@@ -23,6 +24,7 @@ Sitemap: ${origin}/sitemap.xml
 # Search: ${origin}/api/search?q=
 # Skills with bodies: ${origin}/api/skills/{sdk}/{name}
 # Catalog MCP: ${origin}/api/mcp
+# Full slug index: ${origin}/llms-full.txt
 # Content Signals: https://contentsignals.org/
 `;
 }
@@ -47,6 +49,9 @@ Start here:
 - Health: ${origin}/api/health
 - Agent lookups (public counts): ${origin}/api/stats
 - Coverage: ${origin}/api/coverage
+- Full slug index: ${origin}/llms-full.txt
+
+Plain \`curl ${origin}/\` returns this catalog as markdown (no JavaScript). Browsers still get the SPA.
 
 ### Search everything
 
@@ -104,6 +109,7 @@ export function sitemapXml(origin: string): string {
   const urls: string[] = [
     `${origin}/`,
     `${origin}/llms.txt`,
+    `${origin}/llms-full.txt`,
     `${origin}/openapi.json`,
     `${origin}/api`,
     `${origin}/api/health`,
@@ -172,6 +178,38 @@ export function wellKnownMcp(origin: string) {
       },
     ],
   };
+}
+
+/** Compact slug index so an agent can see the whole catalog from one fetch. */
+export function llmsFullTxt(origin: string): string {
+  const sdkLines = sdks
+    .map((item) => `- ${item.slug} — ${item.name} — ${origin}/api/sdks/${item.slug}?view=agent`)
+    .join("\n");
+  const pluginLines = plugins
+    .map((item) => `- ${item.slug} — ${item.name} — ${origin}/api/plugins/${item.slug}`)
+    .join("\n");
+  const mcpLines = mcps
+    .map((item) => `- ${item.slug} — ${item.name} — ${origin}/api/mcps/${item.slug}`)
+    .join("\n");
+
+  return `# sdks.directory — full catalog
+
+> ${sdks.length} SDKs, ${plugins.length} plugins, ${mcps.length} MCP servers.
+
+Start at ${origin}/llms.txt. Retrieve structured records from the JSON URLs below. Missing optional fields are JSON \`null\`.
+
+## SDKs
+
+${sdkLines}
+
+## Plugins
+
+${pluginLines}
+
+## MCP servers
+
+${mcpLines}
+`;
 }
 
 function escapeXml(value: string): string {

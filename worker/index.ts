@@ -16,8 +16,9 @@ import {
 import { clientHint } from "./analytics";
 import { AgentStats } from "./agent-stats";
 import { emptyAgentStats, recordAgentUsage } from "./usage";
-import { searchCatalog, withAgentFields, relatedApiLinks } from "./catalog";
+import { searchCatalog, relatedApiLinks, publicCatalogEntry } from "./catalog";
 import {
+  llmsFullTxt,
   llmsTxt,
   robotsTxt,
   sitemapXml,
@@ -55,6 +56,9 @@ export default {
     }
     if (url.pathname === "/llms.txt" || url.pathname === "/.well-known/llms.txt") {
       return text(llmsTxt(origin), "text/plain; charset=utf-8");
+    }
+    if (url.pathname === "/llms-full.txt") {
+      return text(llmsFullTxt(origin), "text/plain; charset=utf-8");
     }
     if (url.pathname === "/sitemap.xml") {
       return text(sitemapXml(origin), "application/xml; charset=utf-8");
@@ -144,7 +148,7 @@ export default {
     }
 
     if (url.pathname === "/api/plugins") {
-      return json(listCatalog(plugins, url, { language: false, enrichAgent: true }));
+      return json(listCatalog(plugins, url, { language: false }));
     }
 
     if (url.pathname.startsWith("/api/plugins/")) {
@@ -152,7 +156,7 @@ export default {
     }
 
     if (url.pathname === "/api/mcps") {
-      return json(listCatalog(mcps, url, { language: false, enrichAgent: true }));
+      return json(listCatalog(mcps, url, { language: false }));
     }
 
     if (url.pathname.startsWith("/api/mcps/")) {
@@ -354,7 +358,7 @@ function withDiscoveryHeaders(response: Response, pathname: string): Response {
 function listCatalog(
   items: SdkEntry[],
   url: URL,
-  opts: { language?: boolean; enrichAgent?: boolean } = {},
+  opts: { language?: boolean } = {},
 ) {
   const language = url.searchParams.get("language");
   const category = url.searchParams.get("category");
@@ -407,11 +411,10 @@ function listCatalog(
     count: results.length,
     generatedAt: skillBodiesMeta().generatedAt,
     items: results.map((item) => {
-      const base =
-        opts.enrichAgent || item.kind === "mcp" ? withAgentFields(item) : item;
+      const base = publicCatalogEntry(item);
       return {
         ...base,
-        skills: base.skills?.map((skill) =>
+        skills: (item.skills ?? []).map((skill) =>
           enrichSkill(skill, item.slug, { includeBody }),
         ),
       };
@@ -442,15 +445,14 @@ function detailCatalog(
   if (!item) {
     return json({ error: "not_found" }, 404);
   }
-  const agent = wantsAgentView(url) || kind !== "sdk";
   const includeBody =
     wantsBody(url, true) || (kind === "sdk" && wantsAgentView(url));
-  const base = agent ? withAgentFields(item) : item;
+  const base = publicCatalogEntry(item);
   const payload = {
     ...base,
     generatedAt: skillBodiesMeta().generatedAt,
     related: relatedApiLinks(url.origin, item),
-    skills: base.skills?.map((skill) =>
+    skills: (item.skills ?? []).map((skill) =>
       enrichSkill(skill, item.slug, { includeBody }),
     ),
   };
@@ -519,10 +521,11 @@ function agentDiscovery(origin: string) {
       "Use GET /api/sdks/{slug}?view=agent for one-shot SDK + skill bodies + related plugin/MCP.",
       "GET /api/mcps/{slug} and get_mcp return transport, auth, remoteUrl, install, and related SDK/plugin.",
       "Connect the catalog MCP at POST /api/mcp (tools: search_catalog, get_sdk, get_skill, get_plugin, get_mcp).",
-      "Use Accept: text/markdown on HTML pages for Markdown-for-Agents responses.",
+      "Plain curl of / (no Accept: text/html) returns the catalog as markdown. /llms-full.txt lists every slug.",
       "Attribution: skill.url is the upstream source; content is a snapshot for agent use.",
       "Auth: public API — see /auth.md. No OAuth required.",
       "GET /api/stats returns public agent lookup counts only (no queries or clients).",
+      "Plain curl of / (no Accept: text/html) returns the catalog as markdown. /llms-full.txt lists every slug.",
     ],
     skillBodies: skillBodiesMeta(),
   };
