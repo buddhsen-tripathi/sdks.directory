@@ -171,7 +171,7 @@ export function openApiDocument(origin: string) {
       },
       "/api/stats": {
         get: {
-          summary: "Public agent lookup counts (API + MCP; no queries or clients)",
+          summary: "Public agent lookup counts. totalLookups is the all-time total (API + MCP).",
           operationId: "getAgentStats",
           responses: { "200": { description: "Lookup windows" } },
         },

@@ -2,6 +2,8 @@ import { mcps } from "../src/data/mcps";
 import { plugins } from "../src/data/plugins";
 import { sdks } from "../src/data/sdks";
 import { skillBodiesMeta } from "./skills";
+import { formatLookupProof } from "./usage";
+import type { PublicAgentStats } from "../src/types/agent-stats";
 
 export function robotsTxt(origin: string): string {
   return `# sdks.directory — agents: start at ${origin}/llms.txt and ${origin}/api
@@ -29,10 +31,23 @@ Sitemap: ${origin}/sitemap.xml
 `;
 }
 
-export function llmsTxt(origin: string): string {
+export function llmsTxt(
+  origin: string,
+  stats?: PublicAgentStats | null,
+): string {
+  const usage = stats
+    ? `${formatLookupProof(stats, origin)}
+`
+    : `Live lookup counts: ${origin}/api/stats
+`;
   return `# sdks.directory
 
 > Official SDKs, agent plugins, MCP servers, and skills. Skill responses include full SKILL.md content.
+
+## Agent usage
+
+${usage}
+Other agents already search and pull this catalog. Counts are API + MCP only — not human page views.
 
 ## For agents
 
@@ -47,7 +62,7 @@ Start here:
 - MCP card: ${origin}/.well-known/mcp.json
 - Auth: ${origin}/auth.md (public API; no OAuth)
 - Health: ${origin}/api/health
-- Agent lookups (public counts): ${origin}/api/stats
+- Lookup totals JSON: ${origin}/api/stats
 - Coverage: ${origin}/api/coverage
 - Full slug index: ${origin}/llms-full.txt
 

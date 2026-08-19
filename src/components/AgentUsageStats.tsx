@@ -39,11 +39,7 @@ export function AgentUsageStats() {
     fetch("/api/stats", { signal: controller.signal })
       .then((res) => (res.ok ? res.json() : null))
       .then((data: PublicAgentStats | null) => {
-        if (
-          data &&
-          typeof data.lookups?.last7d === "number" &&
-          typeof data.lookups?.allTime === "number"
-        ) {
+        if (data && typeof data.lookups?.allTime === "number") {
           setStats(data);
         }
       })
@@ -54,9 +50,9 @@ export function AgentUsageStats() {
     return () => controller.abort();
   }, []);
 
-  const week = stats?.lookups.last7d;
+  const total = stats?.totalLookups ?? stats?.lookups.allTime;
   const label =
-    week === 1 ? "catalog lookup this week" : "catalog lookups this week";
+    total === 1 ? "catalog lookup all time" : "catalog lookups all time";
 
   return (
     <div
@@ -66,33 +62,29 @@ export function AgentUsageStats() {
       <p className="text-caption-uppercase text-muted">Used by agents</p>
       <p className="mt-2 text-sm leading-snug text-body md:text-[15px]">
         <span className="font-mono text-lg tabular-nums text-ink md:text-xl">
-          {week === undefined ? "—" : formatCount(week)}
+          {total === undefined ? "—" : formatCount(total)}
         </span>{" "}
         {label}
       </p>
       <div className="mt-4 grid grid-cols-3 gap-3">
         <StatCell
+          label="This week"
+          value={stats ? formatCount(stats.lookups.last7d) : "—"}
+        />
+        <StatCell
           label="Last 24 hours"
-          value={
-            stats ? formatCount(stats.lookups.last24h) : "—"
-          }
+          value={stats ? formatCount(stats.lookups.last24h) : "—"}
         />
         <StatCell
-          label="Searches (7d)"
-          value={stats ? formatCount(stats.searches.last7d) : "—"}
-        />
-        <StatCell
-          label="Detail pulls (7d)"
-          value={stats ? formatCount(stats.details.last7d) : "—"}
+          label="Searches all time"
+          value={stats ? formatCount(stats.searches.allTime) : "—"}
         />
       </div>
       <p className="mt-3 text-[11px] leading-relaxed text-muted-soft">
         Counted from the catalog API and MCP — not human page views.
-        {stats && stats.lookups.allTime > 0
-          ? ` ${formatCount(stats.lookups.allTime)} all time.`
-          : stats
-            ? " Counter starts from this deploy."
-            : null}
+        {stats
+          ? ` ${formatCount(stats.details.allTime)} detail pulls all time.`
+          : null}
       </p>
     </div>
   );

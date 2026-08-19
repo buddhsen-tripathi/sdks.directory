@@ -72,12 +72,14 @@ export class AgentStats extends DurableObject {
     const last24h = this.sumSince(utcHour(new Date(now - DAY_MS)));
     const last7d = this.sumSince(utcHour(new Date(now - 7 * DAY_MS)));
 
+    const allTime = totals.searches + totals.details;
     return {
       generatedAt: new Date().toISOString(),
+      totalLookups: allTime,
       lookups: windows(
         last24h.searches + last24h.details,
         last7d.searches + last7d.details,
-        totals.searches + totals.details,
+        allTime,
       ),
       searches: windows(last24h.searches, last7d.searches, totals.searches),
       details: windows(last24h.details, last7d.details, totals.details),

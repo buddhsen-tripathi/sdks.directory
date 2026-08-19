@@ -7,6 +7,8 @@ export type WindowCounts = {
 
 export type PublicAgentStats = {
   generatedAt: string;
+  /** All-time catalog lookups (searches + details). Same as `lookups.allTime`. */
+  totalLookups: number;
   lookups: WindowCounts;
   searches: WindowCounts;
   details: WindowCounts;

@@ -15,7 +15,7 @@ import {
 } from "./agent-readiness";
 import { clientHint } from "./analytics";
 import { AgentStats } from "./agent-stats";
-import { emptyAgentStats, recordAgentUsage } from "./usage";
+import { readPublicStats, recordAgentUsage } from "./usage";
 import { searchCatalog, relatedApiLinks, publicCatalogEntry } from "./catalog";
 import {
   llmsFullTxt,
@@ -33,6 +33,7 @@ import {
   skillKey,
 } from "./skills";
 import type { SdkEntry } from "../src/types/catalog";
+import type { PublicAgentStats } from "../src/types/agent-stats";
 
 /**
  * Edge API for the catalog. Seed data mirrors the SPA; skill bodies are
@@ -55,7 +56,8 @@ export default {
       return text(robotsTxt(origin), "text/plain; charset=utf-8");
     }
     if (url.pathname === "/llms.txt" || url.pathname === "/.well-known/llms.txt") {
-      return text(llmsTxt(origin), "text/plain; charset=utf-8");
+      const stats = await readPublicStats(env);
+      return text(llmsTxt(origin, stats), "text/plain; charset=utf-8");
     }
     if (url.pathname === "/llms-full.txt") {
       return text(llmsFullTxt(origin), "text/plain; charset=utf-8");
@@ -99,7 +101,8 @@ export default {
     }
 
     if (url.pathname === "/api" || url.pathname === "/api/") {
-      return json(agentDiscovery(origin));
+      const stats = await readPublicStats(env);
+      return json(agentDiscovery(origin, stats));
     }
 
     if (url.pathname === "/api/health") {
@@ -107,11 +110,7 @@ export default {
     }
 
     if (url.pathname === "/api/stats") {
-      try {
-        return json(await env.AGENT_STATS.getByName("public").snapshot());
-      } catch {
-        return json(emptyAgentStats());
-      }
+      return json(await readPublicStats(env));
     }
 
     if (url.pathname === "/api/search") {
@@ -311,7 +310,11 @@ export default {
 
     // Markdown-for-agents content negotiation on HTML catalog pages
     if (request.method === "GET" && wantsMarkdown(accept)) {
-      const markdown = pageMarkdown(origin, url.pathname);
+      const stats =
+        url.pathname === "/" || url.pathname === ""
+          ? await readPublicStats(env)
+          : null;
+      const markdown = pageMarkdown(origin, url.pathname, stats);
       if (markdown) {
         return new Response(markdown, {
           headers: {
@@ -481,7 +484,7 @@ function wantsAgentView(url: URL): boolean {
   return view === "agent" || view === "1";
 }
 
-function agentDiscovery(origin: string) {
+function agentDiscovery(origin: string, stats: PublicAgentStats) {
   return {
     name: "sdks.directory",
     description:
@@ -492,6 +495,8 @@ function agentDiscovery(origin: string) {
     agentSkills: `${origin}/.well-known/agent-skills/index.json`,
     auth: `${origin}/auth.md`,
     mcp: `${origin}/api/mcp`,
+    totalLookups: stats.totalLookups,
+    stats,
     endpoints: {
       discovery: `${origin}/api`,
       health: `${origin}/api/health`,
@@ -524,8 +529,7 @@ function agentDiscovery(origin: string) {
       "Plain curl of / (no Accept: text/html) returns the catalog as markdown. /llms-full.txt lists every slug.",
       "Attribution: skill.url is the upstream source; content is a snapshot for agent use.",
       "Auth: public API — see /auth.md. No OAuth required.",
-      "GET /api/stats returns public agent lookup counts only (no queries or clients).",
-      "Plain curl of / (no Accept: text/html) returns the catalog as markdown. /llms-full.txt lists every slug.",
+      "GET /api/stats returns public agent lookup counts. `totalLookups` is the all-time total (API + MCP, not human page views).",
     ],
     skillBodies: skillBodiesMeta(),
   };

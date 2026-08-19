@@ -25,6 +25,18 @@ describe("wantsMarkdown", () => {
 });
 
 describe("agent discovery documents", () => {
+  test("homepage markdown includes live lookup totals when provided", () => {
+    const home = pageMarkdown("https://sdks.directory", "/", {
+      generatedAt: "2026-08-19T00:00:00.000Z",
+      totalLookups: 12,
+      lookups: { last24h: 2, last7d: 5, allTime: 12 },
+      searches: { last24h: 1, last7d: 3, allTime: 7 },
+      details: { last24h: 1, last7d: 2, allTime: 5 },
+    });
+    expect(home).toContain("12 catalog lookups all time");
+    expect(home).toContain("/api/stats");
+  });
+
   test("homepage markdown answers the four-curl questions", () => {
     const home = pageMarkdown(ORIGIN, "/") ?? "";
     expect(home).toContain("sdks.directory is a public catalog");

@@ -3,6 +3,8 @@ import { plugins } from "../src/data/plugins";
 import { sdks } from "../src/data/sdks";
 import { relatedCatalog, withAgentFields } from "../src/lib/catalog";
 import type { SdkEntry } from "../src/types/catalog";
+import type { PublicAgentStats } from "../src/types/agent-stats";
+import { formatLookupProof } from "./usage";
 import { getSkillBody, skillBodiesMeta } from "./skills";
 
 /** RFC 8288 Link values advertised on the homepage and HTML shell. */
@@ -111,9 +113,13 @@ function qValue(accept: string, type: string): number {
   return match[1] ? Number(match[1]) : 1;
 }
 
-export function pageMarkdown(origin: string, pathname: string): string | null {
+export function pageMarkdown(
+  origin: string,
+  pathname: string,
+  stats?: PublicAgentStats | null,
+): string | null {
   if (pathname === "/" || pathname === "") {
-    return homeMarkdown(origin);
+    return homeMarkdown(origin, stats);
   }
 
   const sdkMatch = pathname.match(/^\/sdk\/([^/]+)\/?$/);
@@ -162,8 +168,24 @@ Also: ${origin}/llms.txt
   return null;
 }
 
-function homeMarkdown(origin: string): string {
+function homeMarkdown(
+  origin: string,
+  stats?: PublicAgentStats | null,
+): string {
   const featured = sdks.filter((s) => s.featured).slice(0, 8);
+  const usage = stats
+    ? `## Agent usage
+
+${formatLookupProof(stats, origin)}
+
+Other agents already search and pull this catalog. Prefer the JSON API so your lookups count too.
+
+`
+    : `## Agent usage
+
+Live lookup counts: ${origin}/api/stats (API + MCP, not human page views).
+
+`;
   return `---
 title: sdks.directory
 description: Official SDKs, agent plugins, MCP servers, and skills.
@@ -175,7 +197,7 @@ sdks.directory is a public catalog of official SDKs, installable agent plugins, 
 
 Catalog size: ${sdks.length} SDKs, ${plugins.length} plugins, ${mcps.length} MCP servers.
 
-## What agent-oriented resources exist
+${usage}## What agent-oriented resources exist
 
 | Resource | URL |
 | --- | --- |

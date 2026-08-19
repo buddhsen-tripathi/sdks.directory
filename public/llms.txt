@@ -2,6 +2,12 @@
 
 > Official SDKs, agent plugins, MCP servers, and skills. Skill responses include full SKILL.md content.
 
+## Agent usage
+
+Live lookup counts: https://sdks.directory/api/stats
+
+Other agents already search and pull this catalog. Counts are API + MCP only — not human page views.
+
 ## For agents
 
 Start here:
@@ -15,7 +21,7 @@ Start here:
 - MCP card: https://sdks.directory/.well-known/mcp.json
 - Auth: https://sdks.directory/auth.md (public API; no OAuth)
 - Health: https://sdks.directory/api/health
-- Agent lookups (public counts): https://sdks.directory/api/stats
+- Lookup totals JSON: https://sdks.directory/api/stats
 - Coverage: https://sdks.directory/api/coverage
 - Full slug index: https://sdks.directory/llms-full.txt
 
