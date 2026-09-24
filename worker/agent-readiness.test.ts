@@ -51,6 +51,8 @@ describe("agent discovery documents", () => {
     expect(robots).toContain("Sitemap: https://sdks.directory/sitemap.xml");
     expect(robots).toContain("/llms-full.txt");
     expect(llmsTxt(ORIGIN)).toContain("/api/search?q=");
+    expect(llmsTxt(ORIGIN)).toContain("/api/reviews");
+    expect(llmsTxt(ORIGIN)).toContain("claude-482913");
     expect(llmsFullTxt(ORIGIN)).toContain("/api/sdks/stripe?view=agent");
     expect(llmsFullTxt(ORIGIN)).toContain("/api/mcps/github");
   });

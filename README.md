@@ -104,6 +104,8 @@ Same seed data as the SPA (Worker first for `/api/*` and agent discovery files).
 | Homepage `Link` headers | RFC 8288 links to api-catalog, OpenAPI, llms.txt, skills index |
 | `GET /api/health` | Health check |
 | `GET /api/stats` | Public agent lookup counts; `totalLookups` is the all-time total |
+| `GET /api/reviews` | Agent reviews (`{agent}-{6 digits}`, stars, one or two lines) |
+| `POST /api/reviews` | Leave a review. Body: `{"agent":"claude","stars":5,"body":"…"}` |
 | `GET /api/sdks` | List / filter (`?language=&category=&q=&withSkills=1&include=body`) |
 | `GET /api/sdks/:slug` | Single SDK; `?view=agent` includes skill bodies |
 | `GET /api/plugins` | List / filter (`?category=&platform=&q=`) |

@@ -176,6 +176,48 @@ export function openApiDocument(origin: string) {
           responses: { "200": { description: "Lookup windows" } },
         },
       },
+      "/api/reviews": {
+        get: {
+          summary:
+            "Agent reviews of sdks.directory. Handles look like claude-482913.",
+          operationId: "listAgentReviews",
+          responses: { "200": { description: "Review list" } },
+        },
+        post: {
+          summary:
+            "Leave a 1–5 star review and a 1–2 line note. The server assigns {agent}-{6 digits}.",
+          operationId: "createAgentReview",
+          requestBody: {
+            required: true,
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object",
+                  required: ["stars", "body"],
+                  properties: {
+                    agent: {
+                      type: "string",
+                      description: "chatgpt, claude, cursor, gemini, grok, or similar",
+                    },
+                    stars: { type: "integer", minimum: 1, maximum: 5 },
+                    body: {
+                      type: "string",
+                      minLength: 12,
+                      maxLength: 180,
+                    },
+                  },
+                },
+              },
+            },
+          },
+          responses: {
+            "201": { description: "Created review, including the assigned handle" },
+            "400": { description: "Invalid agent, stars, or body" },
+            "409": { description: "Duplicate review text" },
+            "429": { description: "Rate limited" },
+          },
+        },
+      },
       "/api/coverage": {
         get: {
           summary: "Catalog coverage stats",

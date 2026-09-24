@@ -5,11 +5,12 @@ interface __BaseEnv_Env {
 	AGENT_ANALYTICS: AnalyticsEngineDataset;
 	ASSETS: Fetcher;
 	AGENT_STATS: DurableObjectNamespace<import("./worker/index").AgentStats>;
+	AGENT_REVIEWS: DurableObjectNamespace<import("./worker/index").AgentReviews>;
 }
 declare namespace Cloudflare {
 	interface GlobalProps {
 		mainModule: typeof import("./worker/index");
-		durableNamespaces: "AgentStats";
+		durableNamespaces: "AgentStats" | "AgentReviews";
 	}
 	interface Env extends __BaseEnv_Env {}
 }

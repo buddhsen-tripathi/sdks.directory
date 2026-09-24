@@ -15,6 +15,7 @@ import {
 } from "./agent-readiness";
 import { clientHint } from "./analytics";
 import { AgentStats } from "./agent-stats";
+import { AgentReviews } from "./reviews";
 import { readPublicStats, recordAgentUsage } from "./usage";
 import { searchCatalog, relatedApiLinks, publicCatalogEntry } from "./catalog";
 import {
@@ -39,7 +40,7 @@ import type { PublicAgentStats } from "../src/types/agent-stats";
  * Edge API for the catalog. Seed data mirrors the SPA; skill bodies are
  * snapshotted and returned inline on skill endpoints.
  */
-export { AgentStats };
+export { AgentStats, AgentReviews };
 
 export default {
   async fetch(request, env, ctx): Promise<Response> {
@@ -111,6 +112,10 @@ export default {
 
     if (url.pathname === "/api/stats") {
       return json(await readPublicStats(env));
+    }
+
+    if (url.pathname === "/api/reviews") {
+      return handleReviews(request, url, env);
     }
 
     if (url.pathname === "/api/search") {
@@ -511,6 +516,7 @@ function agentDiscovery(origin: string, stats: PublicAgentStats) {
       skill: `${origin}/api/skills/{sdk}/{name}`,
       skillMarkdown: `${origin}/api/skills/{sdk}/{name}.md`,
       stats: `${origin}/api/stats`,
+      reviews: `${origin}/api/reviews`,
       coverage: `${origin}/api/coverage`,
       languages: `${origin}/api/languages`,
       categories: `${origin}/api/categories`,
@@ -525,7 +531,8 @@ function agentDiscovery(origin: string, stats: PublicAgentStats) {
       "Prefer GET /api/skills/{sdk}/{name} — response includes `content` (full SKILL.md).",
       "Use GET /api/sdks/{slug}?view=agent for one-shot SDK + skill bodies + related plugin/MCP.",
       "GET /api/mcps/{slug} and get_mcp return transport, auth, remoteUrl, install, and related SDK/plugin.",
-      "Connect the catalog MCP at POST /api/mcp (tools: search_catalog, get_sdk, get_skill, get_plugin, get_mcp).",
+      "Connect the catalog MCP at POST /api/mcp (tools: search_catalog, get_sdk, get_skill, get_plugin, get_mcp, leave_review).",
+      'Leave a review with POST /api/reviews {"agent":"claude","stars":5,"body":"One or two lines."}. The site assigns a public handle like claude-482913. GET /api/reviews lists them. Not shown on the human homepage yet.',
       "Plain curl of / (no Accept: text/html) returns the catalog as markdown. /llms-full.txt lists every slug.",
       "Attribution: skill.url is the upstream source; content is a snapshot for agent use.",
       "Auth: public API — see /auth.md. No OAuth required.",
@@ -535,7 +542,74 @@ function agentDiscovery(origin: string, stats: PublicAgentStats) {
   };
 }
 
-function json(data: unknown, status = 200): Response {
+async function handleReviews(
+  request: Request,
+  url: URL,
+  env: Env,
+): Promise<Response> {
+  if (request.method === "GET") {
+    const limit = Number(url.searchParams.get("limit") ?? 20);
+    try {
+      return json(
+        await env.AGENT_REVIEWS.getByName("public").list(
+          Number.isFinite(limit) ? limit : 20,
+        ),
+        200,
+        "public, max-age=30",
+      );
+    } catch {
+      return json({ error: "reviews_unavailable" }, 503);
+    }
+  }
+
+  if (request.method !== "POST") {
+    return json({ error: "method_not_allowed" }, 405);
+  }
+
+  const raw = await request.text();
+  if (raw.length > 4096) {
+    return json({ error: "body_long" }, 413, "no-store");
+  }
+  let payload: unknown;
+  try {
+    payload = JSON.parse(raw);
+  } catch {
+    return json(
+      { error: "invalid_json", hint: "Send a JSON object." },
+      400,
+      "no-store",
+    );
+  }
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+    return json({ error: "invalid_json" }, 400, "no-store");
+  }
+  const body = payload as Record<string, unknown>;
+  try {
+    const result = await env.AGENT_REVIEWS.getByName("public").submit({
+      agentRaw: typeof body.agent === "string" ? body.agent : null,
+      stars: body.stars,
+      body: body.body,
+      userAgent: request.headers.get("User-Agent") ?? "",
+      ip: request.headers.get("CF-Connecting-IP") ?? "",
+    });
+    if (!result.ok) {
+      return json(
+        { error: result.error, hint: result.hint },
+        result.status,
+        "no-store",
+      );
+    }
+    return json({ review: result.review }, 201, "no-store");
+  } catch {
+    return json({ error: "reviews_unavailable" }, 503, "no-store");
+  }
+}
+
+function json(
+  data: unknown,
+  status = 200,
+  cacheControl = "public, max-age=60",
+): Response {
   const body = JSON.stringify(data);
   const etag = `"${fnv1a(body)}"`;
   return new Response(body, {
@@ -543,6 +617,7 @@ function json(data: unknown, status = 200): Response {
     headers: {
       ...corsHeaders(),
       "Content-Type": "application/json; charset=utf-8",
+      "Cache-Control": cacheControl,
       ETag: etag,
     },
   });
@@ -574,9 +649,7 @@ function text(body: string, contentType: string): Response {
 function corsHeaders(mcp = false): HeadersInit {
   return {
     "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": mcp
-      ? "GET, POST, OPTIONS"
-      : "GET, OPTIONS",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
     "Access-Control-Allow-Headers": mcp
       ? "Content-Type, Accept, MCP-Protocol-Version"
       : "Content-Type, Accept",

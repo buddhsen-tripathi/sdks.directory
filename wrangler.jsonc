@@ -34,6 +34,10 @@
 			{
 				"name": "AGENT_STATS",
 				"class_name": "AgentStats"
+			},
+			{
+				"name": "AGENT_REVIEWS",
+				"class_name": "AgentReviews"
 			}
 		]
 	},
@@ -41,6 +45,10 @@
 		{
 			"tag": "v1",
 			"new_sqlite_classes": ["AgentStats"]
+		},
+		{
+			"tag": "v2",
+			"new_sqlite_classes": ["AgentReviews"]
 		}
 	]
 	/**

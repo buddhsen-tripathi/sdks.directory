@@ -6,6 +6,7 @@ import { clientHint } from "./analytics";
 import { recordAgentUsage } from "./usage";
 import { searchCatalog, withAgentFields, relatedApiLinks } from "./catalog";
 import { enrichSkill } from "./skills";
+import { inferAgent, normalizeAgent } from "./review-input";
 
 type JsonRpcId = string | number | null;
 
@@ -20,6 +21,7 @@ type McpSession = {
   env: Env;
   ctx: ExecutionContext;
   client?: string;
+  ip?: string;
 };
 
 type ToolOutcome = {
@@ -94,6 +96,27 @@ const TOOLS = [
       required: ["slug"],
     },
   },
+  {
+    name: "leave_review",
+    description:
+      "Leave a 1–5 star review and a one or two line note about sdks.directory. The server assigns a public handle like claude-482913.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        agent: {
+          type: "string",
+          description:
+            "Your agent name: chatgpt, claude, cursor, gemini, grok, or similar.",
+        },
+        stars: { type: "number", description: "Integer from 1 to 5" },
+        body: {
+          type: "string",
+          description: "One or two lines, 12–180 characters.",
+        },
+      },
+      required: ["stars", "body"],
+    },
+  },
 ] as const;
 
 function textResult(data: unknown) {
@@ -115,11 +138,12 @@ function toolError(message: string) {
   };
 }
 
-function callTool(
+async function callTool(
   origin: string,
   name: string,
   args: Record<string, unknown>,
-): ToolOutcome {
+  session: McpSession,
+): Promise<ToolOutcome> {
   switch (name) {
     case "search_catalog": {
       const q = String(args.q ?? "").trim();
@@ -219,12 +243,46 @@ function callTool(
         },
       };
     }
+    case "leave_review": {
+      const explicit = typeof args.agent === "string" ? args.agent.trim() : "";
+      const agent = explicit
+        ? normalizeAgent(explicit)
+        : inferAgent(session.client ?? "");
+      if (explicit && !agent) {
+        return {
+          result: toolError(
+            'invalid_agent: pass agent as chatgpt, claude, cursor, gemini, grok, or similar',
+          ),
+        };
+      }
+      try {
+        const result = await session.env.AGENT_REVIEWS.getByName(
+          "public",
+        ).submit({
+          agentRaw: agent,
+          stars: args.stars,
+          body: args.body,
+          userAgent: session.client ?? "",
+          ip: session.ip ?? "",
+        });
+        if (!result.ok) {
+          return {
+            result: toolError(
+              result.hint ? `${result.error}: ${result.hint}` : result.error,
+            ),
+          };
+        }
+        return { result: textResult({ review: result.review }) };
+      } catch {
+        return { result: toolError("reviews_unavailable") };
+      }
+    }
     default:
       return { result: toolError(`Unknown tool: ${name}`) };
   }
 }
 
-function handleMessage(
+async function handleMessage(
   origin: string,
   message: JsonRpcRequest,
   session: McpSession,
@@ -249,7 +307,7 @@ function handleMessage(
         capabilities: { tools: {} },
         serverInfo: SERVER_INFO,
         instructions:
-          "sdks.directory catalog MCP. Prefer get_skill for full SKILL.md. Use search_catalog to discover SDKs, plugins, MCPs, and skills.",
+          "sdks.directory catalog MCP. Prefer get_skill for full SKILL.md. Use search_catalog to discover SDKs, plugins, MCPs, and skills. leave_review posts a 1–5 star note; the server names you {agent}-{6 digits}, for example claude-482913.",
       },
     };
   }
@@ -274,7 +332,7 @@ function handleMessage(
     const name = String(params.name ?? "");
     const args = (params.arguments ?? {}) as Record<string, unknown>;
     const started = Date.now();
-    const { result, analytics } = callTool(origin, name, args);
+    const { result, analytics } = await callTool(origin, name, args, session);
     if (analytics && !("isError" in result && result.isError)) {
       recordAgentUsage(session.env, session.ctx, {
         ...analytics,
@@ -341,12 +399,19 @@ export async function handleMcpRequest(
   }
 
   const messages = Array.isArray(payload) ? payload : [payload];
-  const session: McpSession = { env, ctx, client: clientHint(request) };
-  const responses = messages
-    .map((message) =>
-      handleMessage(origin, message as JsonRpcRequest, session),
+  const session: McpSession = {
+    env,
+    ctx,
+    client: clientHint(request),
+    ip: request.headers.get("CF-Connecting-IP") ?? "",
+  };
+  const responses = (
+    await Promise.all(
+      messages.map((message) =>
+        handleMessage(origin, message as JsonRpcRequest, session),
+      ),
     )
-    .filter((message) => message !== null);
+  ).filter((message) => message !== null);
 
   const body = Array.isArray(payload) ? responses : responses[0] ?? {};
   return Response.json(body, {

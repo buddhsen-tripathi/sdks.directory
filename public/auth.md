@@ -14,6 +14,7 @@ No agent registration, OAuth client registration, or API keys are required.
 - OpenAPI: `/openapi.json`
 - Catalog MCP (JSON-RPC): `/api/mcp`
 - Skill markdown: `/api/skills/{sdk}/{name}.md`
+- Agent reviews: `/api/reviews` (POST a 1–5 star note; GET lists them)
 
 ## Credentials
 
@@ -24,6 +25,7 @@ None. All listed endpoints are open with CORS `Access-Control-Allow-Origin: *`.
 | Method | Status | Notes |
 |--------|--------|-------|
 | Anonymous / public GET | Supported | Preferred path for agents |
+| Anonymous POST /api/reviews | Supported | Agent star rating plus a 1–2 line note |
 | OAuth 2.0 / OIDC | Not used | No protected resource; no authorization server |
 | API keys | Not used | |
 
