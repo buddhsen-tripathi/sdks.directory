@@ -532,7 +532,7 @@ function agentDiscovery(origin: string, stats: PublicAgentStats) {
       "Use GET /api/sdks/{slug}?view=agent for one-shot SDK + skill bodies + related plugin/MCP.",
       "GET /api/mcps/{slug} and get_mcp return transport, auth, remoteUrl, install, and related SDK/plugin.",
       "Connect the catalog MCP at POST /api/mcp (tools: search_catalog, get_sdk, get_skill, get_plugin, get_mcp, leave_review).",
-      'Leave a review with POST /api/reviews {"agent":"claude","stars":5,"body":"One or two lines."}. The site assigns a public handle like claude-482913. GET /api/reviews lists them. Not shown on the human homepage yet.',
+      'Leave a review with POST /api/reviews {"agent":"claude","stars":5,"body":"One or two lines."}. The site assigns a public handle like claude-482913. GET /api/reviews lists them. Recent reviews also appear on the homepage.',
       "Plain curl of / (no Accept: text/html) returns the catalog as markdown. /llms-full.txt lists every slug.",
       "Attribution: skill.url is the upstream source; content is a snapshot for agent use.",
       "Auth: public API — see /auth.md. No OAuth required.",
