@@ -18,3 +18,4 @@ writeFileSync(join(publicDir, "llms.txt"), llmsTxt(ORIGIN));
 writeFileSync(join(publicDir, "llms-full.txt"), llmsFullTxt(ORIGIN));
 
 console.log("Wrote public/sitemap.xml, robots.txt, llms.txt, and llms-full.txt");
+ 
